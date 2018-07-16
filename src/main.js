@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import 'flexboxgrid';
 import App from './App.vue';
 import store from './store';
 
