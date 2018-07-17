@@ -8,7 +8,7 @@
               :icon="['fab', 'github']"
               title="GitHub Trending">
           <template slot="card-body">
-            <div style="height: 250px; background-color: #f3f3f3"></div>
+            <div style="height: 250px; background-color: #fff"></div>
           </template>
         </card>
       </div>
@@ -18,7 +18,7 @@
               :icon="['fab', 'hacker-news-square']"
               title-font-color="ffffff">
           <template slot="card-body">
-            <div style="height: 250px; background-color: #f3f3f3"></div>
+            <div style="height: 250px; background-color: #fff"></div>
           </template>
         </card>
       </div>
@@ -40,6 +40,9 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+  background-color: #f5f7fa;
+}
 #app {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -48,5 +51,12 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.card {
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px 0 rgba(70, 73, 77, 0.16);
 }
 </style>
