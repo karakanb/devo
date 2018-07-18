@@ -1,0 +1,103 @@
+<template>
+  <div class="hn-item">
+    <div class="row title-row">
+      <div>
+        <div class="site-string">
+          <a :href="item.siteString"> ({{item.siteString}}) </a>
+        </div>
+        <div class="title truncate">
+          <a :href="item.link">{{item.title}}</a>
+        </div>
+      </div>
+    </div>
+    <div class="row meta-data">
+      {{item.score}} by
+      <a :href="userLink"> {{item.user.name}}</a> | {{item.age}} |
+      <a :href="threadLink"> {{item.commentCount}}</a>
+    </div>
+
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'HackerNewsRow',
+  props: {
+    item: {
+      required: true,
+    },
+  },
+  data() {
+    return {
+      baseUrl: 'https://news.ycombinator.com/',
+    };
+  },
+
+  computed: {
+    userLink() {
+      return `${this.baseUrl}${this.item.user.link}`;
+    },
+    threadLink() {
+      return `${this.baseUrl}${this.item.threadLink}`;
+    },
+  },
+};
+</script>
+
+<style>
+.hn-item .row {
+  margin: 0;
+}
+
+.hn-item a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.hn-item .meta-data a {
+  margin: 0 2.5px;
+}
+
+.hn-item a:hover {
+  text-decoration: underline;
+  text-decoration-line: underline;
+  text-decoration-style: initial;
+  text-decoration-color: initial;
+}
+
+.hn-item .title {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.hn-item .title-row {
+  margin-bottom: 4px;
+}
+
+.hn-item .site-string {
+  color: rgb(130, 130, 130);
+  font-size: 10.667px;
+  float: right;
+  white-space: nowrap;
+  margin-top: 3px;
+  padding-left: 4px;
+}
+
+.hn-item {
+  font-size: 16px;
+  padding: 8px 8px;
+  text-align: left;
+  border-bottom: 1px solid #dfe3e8a8;
+}
+
+.meta-data {
+  color: rgb(130, 130, 130);
+  font-size: 9.33333px;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>

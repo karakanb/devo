@@ -12,13 +12,13 @@
           </template>
         </card>
       </div>
-      <div class="col-lg-4 col-lg-offset-2">
+      <div class="col-lg-5 col-lg-offset-1">
         <card title="Hacker News"
               title-background-color="fe6501"
               :icon="['fab', 'hacker-news-square']"
               title-font-color="ffffff">
           <template slot="card-body">
-            <div style="height: 250px; background-color: #fff"></div>
+              <hacker-news></hacker-news>
           </template>
         </card>
       </div>
@@ -29,12 +29,14 @@
 <script>
 import HelloWorld from './components/HelloWorld.vue';
 import Card from './components/Card.vue';
+import HackerNews from './components/HackerNews/HackerNews.vue';
 
 export default {
   name: 'app',
   components: {
     HelloWorld,
     Card,
+    HackerNews,
   },
 };
 </script>
