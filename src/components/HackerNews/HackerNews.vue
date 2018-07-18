@@ -27,7 +27,7 @@ export default {
 
 <style>
 .hn-list {
-  max-height: 75vh;
-  overflow-x: scroll;
+  height: 75vh;
+  overflow-x: hidden;
 }
 </style>
