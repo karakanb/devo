@@ -1,14 +1,28 @@
 <template>
   <div class="spinner">
-    <div class="bounce1"></div>
-    <div class="bounce2"></div>
-    <div class="bounce3"></div>
+    <div :style="spinnerStyle"
+         class="bounce1"></div>
+    <div :style="spinnerStyle"
+         class="bounce2"></div>
+    <div :style="spinnerStyle"
+         class="bounce3"></div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Loading',
+  props: {
+    color: {
+      type: String,
+      default: '333',
+    },
+  },
+  computed: {
+    spinnerStyle() {
+      return `background-color: #${this.color};`;
+    },
+  },
 };
 </script>
 
