@@ -8,7 +8,7 @@
               :icon="['fab', 'github']"
               title="GitHub Trending">
           <template slot="card-body">
-            <div style="height: 250px; background-color: #fff"></div>
+            <git-hub></git-hub>
           </template>
         </card>
       </div>
@@ -18,7 +18,7 @@
               :icon="['fab', 'hacker-news-square']"
               title-font-color="ffffff">
           <template slot="card-body">
-              <hacker-news></hacker-news>
+            <hacker-news></hacker-news>
           </template>
         </card>
       </div>
@@ -30,6 +30,7 @@
 import HelloWorld from './components/HelloWorld.vue';
 import Card from './components/Card.vue';
 import HackerNews from './components/HackerNews/HackerNews.vue';
+import GitHub from '@/components/GitHub.vue';
 
 export default {
   name: 'app',
@@ -37,6 +38,7 @@ export default {
     HelloWorld,
     Card,
     HackerNews,
+    GitHub,
   },
 };
 </script>
