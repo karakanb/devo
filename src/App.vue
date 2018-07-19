@@ -1,36 +1,41 @@
 <template>
   <div id="app">
     <div class="row">
-      <div class="col-lg-4 col-lg-offset-1">
-        <card class="github-card"
-              title-background-color="25292f"
-              title-font-color="ffffff"
-              :icon="['fab', 'github']"
-              title="GitHub Trending">
-          <template slot="card-body">
-            <git-hub></git-hub>
-          </template>
-        </card>
+      <div class="col-lg-10 col-lg-offset-1">
+        <div class="row">
+          <div class="col-lg">
+            <card class="github-card"
+                  title-background-color="25292f"
+                  title-font-color="ffffff"
+                  :icon="['fab', 'github']"
+                  title="GitHub Trending">
+              <template slot="card-body">
+                <git-hub></git-hub>
+              </template>
+            </card>
+          </div>
+          <div class="col-lg">
+            <card title="Hacker News"
+                  title-background-color="fe6501"
+                  :icon="['fab', 'hacker-news-square']"
+                  title-font-color="ffffff">
+              <template slot="card-body">
+                <hacker-news></hacker-news>
+              </template>
+            </card>
+          </div>
+        </div>
       </div>
-      <div class="col-lg-5 col-lg-offset-1">
-        <card title="Hacker News"
-              title-background-color="fe6501"
-              :icon="['fab', 'hacker-news-square']"
-              title-font-color="ffffff">
-          <template slot="card-body">
-            <hacker-news></hacker-news>
-          </template>
-        </card>
-      </div>
+
     </div>
   </div>
 </template>
 
 <script>
+import GitHub from '@/components/GitHub.vue';
 import HelloWorld from './components/HelloWorld.vue';
 import Card from './components/Card.vue';
 import HackerNews from './components/HackerNews/HackerNews.vue';
-import GitHub from '@/components/GitHub.vue';
 
 export default {
   name: 'app',
