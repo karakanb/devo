@@ -46,15 +46,15 @@ export default {
     };
   },
   computed: {
-    repoLink(){
+    repoLink() {
       return `${this.baseLink}${this.item.repo.link}`;
     },
-    starsLink(){
+    starsLink() {
       return `${this.baseLink}${this.item.stars.link}`;
     },
-    forksLink(){
+    forksLink() {
       return `${this.baseLink}${this.item.forks.link}`;
-    }
+    },
   },
 };
 </script>

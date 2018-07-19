@@ -6,7 +6,8 @@
           <a :href="siteStringLink"> ({{item.siteString}}) </a>
         </div>
         <div class="title truncate">
-          <a :href="item.link">{{item.title}}</a>
+          <a :href="item.link"
+             :title="item.title">{{item.title}}</a>
         </div>
       </div>
     </div>
