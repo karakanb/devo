@@ -1,15 +1,16 @@
 <template>
   <div class="gh-list">
-    <loading></loading>
+    <git-hub-row></git-hub-row>
   </div>
 </template>
 
 <script>
 import Loading from '@/components/Loading.vue';
+import GitHubRow from '@/components/GitHub/GitHubRow.vue';
 
 export default {
   name: 'GitHub',
-  components: { Loading },
+  components: { Loading, GitHubRow },
   data() {
     return {
       lines: [],

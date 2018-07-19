@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import GitHub from '@/components/GitHub.vue';
+import GitHub from '@/components/GitHub/GitHub.vue';
 import HelloWorld from './components/HelloWorld.vue';
 import Card from './components/Card.vue';
 import HackerNews from './components/HackerNews/HackerNews.vue';
@@ -57,7 +57,6 @@ body {
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
