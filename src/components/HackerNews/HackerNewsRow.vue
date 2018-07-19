@@ -48,6 +48,13 @@ export default {
 </script>
 
 <style>
+.hn-item {
+  font-size: 16px;
+  padding: 8px 8px;
+  text-align: left;
+  border-bottom: 1px solid #dfe3e8a8;
+}
+
 .hn-item .row {
   margin: 0;
 }
@@ -84,13 +91,6 @@ export default {
   white-space: nowrap;
   margin-top: 3px;
   padding-left: 4px;
-}
-
-.hn-item {
-  font-size: 16px;
-  padding: 8px 8px;
-  text-align: left;
-  border-bottom: 1px solid #dfe3e8a8;
 }
 
 .meta-data {

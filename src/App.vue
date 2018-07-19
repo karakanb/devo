@@ -67,4 +67,8 @@ body {
   overflow: hidden;
   box-shadow: 0 2px 8px 0 rgba(70, 73, 77, 0.16);
 }
+
+.pull-right {
+  float: right;
+}
 </style>
