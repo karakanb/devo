@@ -2,7 +2,7 @@
   <div class="gh-item">
     <div class="row title">
       <h3 class="repo-name">
-        <a :href="item.repo.link">
+        <a :href="repoLink">
           <span class="text-normal"> {{item.repo.owner}} /</span> {{item.repo.name}}
         </a>
       </h3>
@@ -12,12 +12,16 @@
     </div>
     <div class="row meta-row text-grey">
       <div class="icon-with-text m-r-16">
-        <font-awesome-icon :icon="['fas', 'star']"></font-awesome-icon>
-        <span>{{Number(item.stars.count).toLocaleString()}}</span>
+        <a :href="starsLink">
+          <font-awesome-icon :icon="['fas', 'star']"></font-awesome-icon>
+          <span>{{Number(item.stars.count).toLocaleString()}}</span>
+        </a>
       </div>
       <div class="icon-with-text m-r-16">
-        <font-awesome-icon :icon="['fas', 'code-branch']"></font-awesome-icon>
-        <span>{{Number(item.forks.count).toLocaleString()}}</span>
+        <a :href="forksLink">
+          <font-awesome-icon :icon="['fas', 'code-branch']"></font-awesome-icon>
+          <span>{{Number(item.forks.count).toLocaleString()}}</span>
+        </a>
       </div>
       <div class="icon-with-text pull-right">
         <font-awesome-icon :icon="['fas', 'star']"></font-awesome-icon>
@@ -35,6 +39,22 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      baseLink: 'https://github.com/',
+    };
+  },
+  computed: {
+    repoLink(){
+      return `${this.baseLink}${this.item.repo.link}`;
+    },
+    starsLink(){
+      return `${this.baseLink}${this.item.stars.link}`;
+    },
+    forksLink(){
+      return `${this.baseLink}${this.item.forks.link}`;
+    }
   },
 };
 </script>
@@ -100,6 +120,21 @@ h3.repo-name {
 .icon-with-text svg {
   margin-right: 4px;
   vertical-align: 20% !important;
+}
+
+.icon-with-text a {
+  text-decoration: none;
+  text-decoration-line: none;
+  text-decoration-style: initial;
+  text-decoration-color: initial;
+  color: inherit;
+}
+
+.gh-item a:hover {
+  text-decoration: underline;
+  text-decoration-line: underline;
+  text-decoration-style: initial;
+  text-decoration-color: initial;
 }
 
 .m-r-16 {
