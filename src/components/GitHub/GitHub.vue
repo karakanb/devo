@@ -1,6 +1,8 @@
 <template>
   <div class="gh-list">
-    <git-hub-row v-for="(item, index) in lines"
+    <loading v-if="loading"></loading>
+    <git-hub-row v-else
+                 v-for="(item, index) in lines"
                  :key="index"
                  :item="item"></git-hub-row>
   </div>
@@ -16,6 +18,7 @@ export default {
   components: { Loading, GitHubRow },
   data() {
     return {
+      loading: true,
       lines: [],
     };
   },
