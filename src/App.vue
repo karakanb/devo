@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-lg-10 col-lg-offset-1">
         <div class="row">
-          <div class="col-lg">
+          <div class="col-lg-6">
             <card class="github-card"
                   title-background-color="25292f"
                   title-font-color="ffffff"
@@ -14,7 +14,7 @@
               </template>
             </card>
           </div>
-          <div class="col-lg">
+          <div class="col-lg-6">
             <card title="Hacker News"
                   title-background-color="fe6501"
                   :icon="['fab', 'hacker-news-square']"

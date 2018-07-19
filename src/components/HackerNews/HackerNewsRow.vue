@@ -50,7 +50,7 @@ export default {
 <style>
 .hn-item {
   font-size: 16px;
-  padding: 8px 8px;
+  padding: 8px 16px 8px 8px;
   text-align: left;
   border-bottom: 1px solid #dfe3e8a8;
 }
@@ -82,6 +82,10 @@ export default {
 
 .hn-item .title-row {
   margin-bottom: 4px;
+}
+
+.hn-item .title-row > div {
+  max-width: 100%;
 }
 
 .hn-item .site-string {
