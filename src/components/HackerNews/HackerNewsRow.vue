@@ -3,7 +3,7 @@
     <div class="row title-row">
       <div>
         <div class="site-string">
-          <a :href="item.siteString"> ({{item.siteString}}) </a>
+          <a :href="siteStringLink"> ({{item.siteString}}) </a>
         </div>
         <div class="title truncate">
           <a :href="item.link">{{item.title}}</a>
@@ -39,6 +39,9 @@ export default {
     },
     threadLink() {
       return `${this.baseUrl}${this.item.threadLink}`;
+    },
+    siteStringLink() {
+      return `http://${this.item.siteString}`;
     },
   },
 };
