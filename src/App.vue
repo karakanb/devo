@@ -3,6 +3,16 @@
     <div class="row">
       <div class="col-lg-10 col-lg-offset-1">
         <div class="row">
+          <div class="col-lg-2 date-time">
+            <div class="row time">
+              {{now}}
+            </div>
+            <div class="row date">
+              {{today}}
+            </div>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-lg-6">
             <card class="github-card"
                   title-background-color="25292f"
@@ -45,6 +55,53 @@ export default {
     HackerNews,
     GitHub,
   },
+  data() {
+    return {
+      nowTime: new Date(),
+    };
+  },
+  created() {
+    setInterval(() => {
+      this.nowTime = new Date();
+    }, 1000);
+  },
+  computed: {
+    now() {
+      return `${this.nowTime
+        .getHours()
+        .toString()
+        .padStart(2, '0')}:${this.nowTime
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}`;
+    },
+    today() {
+      return this.formatDate(this.nowTime);
+    },
+  },
+  methods: {
+    formatDate(date) {
+      const monthNames = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ];
+
+      const day = date.getDate();
+      const monthIndex = date.getMonth();
+      const year = date.getFullYear();
+      return `${day} ${monthNames[monthIndex]} ${year}`;
+    },
+  },
 };
 </script>
 
@@ -57,8 +114,6 @@ body {
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 
 .card {
@@ -70,5 +125,23 @@ body {
 
 .pull-right {
   float: right;
+}
+
+.date-time {
+  color: #484b4f;
+  text-align: center;
+}
+
+.date-time .row {
+  margin: 0;
+}
+
+.date-time .time {
+  font-size: 48px;
+  font-weight: 200;
+}
+
+.date-time .date {
+  font-weight: 100;
 }
 </style>
