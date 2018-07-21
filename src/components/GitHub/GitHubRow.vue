@@ -11,19 +11,28 @@
       {{item.repo.description}}
     </div>
     <div class="row meta-row text-grey">
-      <div class="icon-with-text m-r-16">
+      <span v-if="item.language"
+            class="language m-r-16">
+        <span class="language-color inline-block"
+              :style="{backgroundColor: item.language.color}"></span>
+        <span class="language-text">{{item.language.is}}</span>
+      </span>
+
+      <div v-if="item.stars"
+           class="icon-with-text inline-block m-r-16">
         <a :href="starsLink">
           <font-awesome-icon :icon="['fas', 'star']"></font-awesome-icon>
           <span>{{Number(item.stars.count).toLocaleString()}}</span>
         </a>
       </div>
-      <div class="icon-with-text m-r-16">
+      <div v-if="item.forks"
+           class="icon-with-text inline-block m-r-16">
         <a :href="forksLink">
           <font-awesome-icon :icon="['fas', 'code-branch']"></font-awesome-icon>
           <span>{{Number(item.forks.count).toLocaleString()}}</span>
         </a>
       </div>
-      <div class="icon-with-text pull-right">
+      <div class="icon-with-text inline-block pull-right">
         <font-awesome-icon :icon="['fas', 'star']"></font-awesome-icon>
         <span>{{Number(item.todayStars).toLocaleString()}} stars today</span>
       </div>
@@ -113,10 +122,6 @@ h3.repo-name {
   display: block;
 }
 
-.icon-with-text {
-  display: inline-block;
-}
-
 .icon-with-text svg {
   margin-right: 4px;
   vertical-align: 20% !important;
@@ -135,6 +140,14 @@ h3.repo-name {
   text-decoration-line: underline;
   text-decoration-style: initial;
   text-decoration-color: initial;
+}
+
+.gh-item .language-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: -10%;
 }
 
 .m-r-16 {

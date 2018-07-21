@@ -2,14 +2,10 @@
   <div id="app">
     <div class="row">
       <div class="col-lg-10 col-lg-offset-1">
-        <div class="row">
-          <div class="col-lg-2 date-time">
-            <div class="row time">
-              {{now}}
-            </div>
-            <div class="row date">
-              {{today}}
-            </div>
+        <div class="row date-time-wrapper">
+          <div class="col-lg date-time">
+            <div class="time inline-block">{{now}}</div> |
+            <div class="date inline-block">{{today}}</div>
           </div>
         </div>
         <div class="row">
@@ -127,18 +123,26 @@ body {
   float: right;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
+.m-b-16 {
+  margin-bottom: 16px;
+}
+
+.date-time-wrapper {
+  padding: 8px 0 16px 0;
+}
+
 .date-time {
   color: #484b4f;
-  text-align: center;
+  font-size: 32px;
+  font-weight: 200;
 }
 
 .date-time .row {
   margin: 0;
-}
-
-.date-time .time {
-  font-size: 48px;
-  font-weight: 200;
 }
 
 .date-time .date {
