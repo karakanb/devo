@@ -4,8 +4,8 @@
       <div class="col-lg-10 col-lg-offset-1">
         <div class="row date-time-wrapper">
           <div class="col-lg date-time">
-            <div class="time inline-block">{{now}}</div> |
-            <div class="date inline-block">{{today}}</div>
+            <div class="time inline-block">{{now}}</div>
+            <div class="date inline-block pull-right">{{today}}</div>
           </div>
         </div>
         <div class="row">
@@ -92,10 +92,19 @@ export default {
         'December',
       ];
 
+      const days = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+      ];
+
       const day = date.getDate();
       const monthIndex = date.getMonth();
-      const year = date.getFullYear();
-      return `${day} ${monthNames[monthIndex]} ${year}`;
+      return `${days[date.getDay()]}, ${monthNames[monthIndex]} ${day}`;
     },
   },
 };
