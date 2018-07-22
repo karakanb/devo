@@ -10,25 +10,10 @@
         </div>
         <div class="row">
           <div class="col-lg-6">
-            <card class="github-card"
-                  title-background-color="25292f"
-                  title-font-color="ffffff"
-                  :icon="['fab', 'github']"
-                  title="GitHub Trending">
-              <template slot="card-body">
-                <git-hub></git-hub>
-              </template>
-            </card>
+            <git-hub></git-hub>
           </div>
           <div class="col-lg-6">
-            <card title="Hacker News"
-                  title-background-color="fe6501"
-                  :icon="['fab', 'hacker-news-square']"
-                  title-font-color="ffffff">
-              <template slot="card-body">
-                <hacker-news></hacker-news>
-              </template>
-            </card>
+            <hacker-news></hacker-news>
           </div>
         </div>
       </div>
