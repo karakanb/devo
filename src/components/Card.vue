@@ -5,8 +5,10 @@
       <font-awesome-icon class="custom-icon"
                          :icon="icon"></font-awesome-icon>
       <div class="card-title-text">{{title}}</div>
-      <div class="pull-right refresh-icon" :style="refreshIconStyle">
-        <font-awesome-icon :icon="['fas', 'sync-alt']"></font-awesome-icon>
+      <div class="pull-right refresh-icon"
+           :style="refreshIconStyle">
+        <font-awesome-icon :icon="['fas', 'sync-alt']"
+                           @click="iconOnClick"></font-awesome-icon>
       </div>
     </div>
     <slot name="card-body"></slot>
@@ -31,6 +33,10 @@ export default {
     },
     icon: {
       type: Array,
+      required: true,
+    },
+    iconOnClick: {
+      type: Function,
       required: true,
     },
   },
@@ -75,7 +81,12 @@ svg,
   vertical-align: middle !important;
 }
 
+.refresh-icon:hover {
+  cursor: pointer;
+  color: #ffffff !important;
+}
+
 .pull-right {
-  float:right;
+  float: right;
 }
 </style>

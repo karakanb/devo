@@ -3,6 +3,7 @@
         title-background-color="25292f"
         title-font-color="ffffff"
         :icon="['fab', 'github']"
+        :iconOnClick="updateData"
         title="GitHub Trending">
     <template slot="card-body">
       <div class="gh-list">

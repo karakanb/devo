@@ -2,6 +2,7 @@
   <card title="Hacker News"
         title-background-color="fe6501"
         :icon="['fab', 'hacker-news-square']"
+        :iconOnClick="updateData"
         title-font-color="ffffff">
     <template slot="card-body">
       <div class="hn-list">
@@ -32,9 +33,15 @@ export default {
     };
   },
   async created() {
-    const response = await axios.get('https://hn-api.now.sh/');
-    this.lines = response.data;
-    this.loading = false;
+    this.updateData();
+  },
+  methods: {
+    async updateData() {
+      this.loading = true;
+      const response = await axios.get('https://hn-api.now.sh/');
+      this.lines = response.data;
+      this.loading = false;
+    },
   },
 };
 </script>
