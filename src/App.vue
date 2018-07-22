@@ -2,13 +2,13 @@
   <div id="app">
     <div class="row">
       <div class="col-lg-10 col-lg-offset-1">
-        <div class="row date-time-wrapper">
+        <div class="row date-time-wrapper middle-lg">
           <div class="col-lg date-time">
             <div class="time inline-block">{{now}}</div>
             <div class="date inline-block pull-right">{{today}}</div>
           </div>
         </div>
-        <div class="row">
+        <div class="row cards-wrapper">
           <div class="col-lg-6">
             <git-hub></git-hub>
           </div>
@@ -16,8 +16,10 @@
             <hacker-news></hacker-news>
           </div>
         </div>
+        <div class="row footer-row middle-lg">
+          <footer class="col-lg">devo is an <a href="/asd">open source extension</a>.</footer>
+        </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -98,6 +100,7 @@ export default {
 <style lang="scss">
 body {
   background-color: #f5f7fa;
+  margin: 0;
 }
 #app {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
@@ -126,7 +129,7 @@ body {
 }
 
 .date-time-wrapper {
-  padding: 8px 0 16px 0;
+  height: 10vh;
 }
 
 .date-time {
@@ -141,5 +144,13 @@ body {
 
 .date-time .date {
   font-weight: 100;
+}
+
+.cards-wrapper {
+  height: 80vh;
+}
+
+.footer-row {
+  height: 10vh;
 }
 </style>

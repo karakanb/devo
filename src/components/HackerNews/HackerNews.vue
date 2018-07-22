@@ -48,7 +48,7 @@ export default {
 
 <style>
 .hn-list {
-  height: 75vh;
+  height: 100%;
   overflow-x: hidden;
 }
 </style>

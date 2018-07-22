@@ -49,7 +49,7 @@ export default {
 
 <style>
 .gh-list {
-  height: 75vh;
   overflow-x: hidden;
+  height: 100%;
 }
 </style>

@@ -11,7 +11,9 @@
                            @click="iconOnClick"></font-awesome-icon>
       </div>
     </div>
-    <slot name="card-body"></slot>
+    <div class="card-body">
+      <slot name="card-body"></slot>
+    </div>
   </div>
 
 </template>
@@ -55,10 +57,18 @@ export default {
 </script>
 
 <style>
+.card {
+  height: 100%;
+}
+
 .card-title {
   font-size: 16px;
   text-align: left;
   padding: 12px;
+}
+
+.card-body {
+  height: calc( 100% - 48px);;
 }
 
 .card-title-text {
