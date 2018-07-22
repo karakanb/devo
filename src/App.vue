@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-lg-10 col-lg-offset-1">
         <div class="row date-time-wrapper middle-lg">
-          <div class="col-lg date-time">
+          <div class="col-lg date-time grey-text">
             <div class="time inline-block">{{now}}</div>
             <div class="date inline-block pull-right">{{today}}</div>
           </div>
@@ -17,7 +17,8 @@
           </div>
         </div>
         <div class="row footer-row middle-lg">
-          <footer class="col-lg">devo is an <a href="/asd">open source extension</a>.</footer>
+          <footer class="col-lg grey-text light"><span class="semi-bold">devo</span> is an
+            <a href="/asd">open source extension</a>.</footer>
         </div>
       </div>
     </div>
@@ -128,12 +129,23 @@ body {
   margin-bottom: 16px;
 }
 
+.grey-text {
+  color: #484b4f;
+}
+
+.light {
+  font-weight: 100;
+}
+
+.semi-bold {
+  font-weight: 400;
+}
+
 .date-time-wrapper {
   height: 10vh;
 }
 
 .date-time {
-  color: #484b4f;
   font-size: 32px;
   font-weight: 200;
 }
@@ -152,5 +164,17 @@ body {
 
 .footer-row {
   height: 10vh;
+}
+
+footer a {
+  text-decoration: none;
+  color: inherit;
+}
+
+footer a:hover {
+  text-decoration: underline;
+  text-decoration-line: underline;
+  text-decoration-style: initial;
+  text-decoration-color: initial;
 }
 </style>
