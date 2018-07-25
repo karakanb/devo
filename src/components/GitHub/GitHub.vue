@@ -43,7 +43,6 @@ export default {
     },
     ...mapActions(['updateGithub']),
   },
-
   computed: mapState({
     lines: state => state.github,
   }),

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { mapState, mapActions } from 'vuex';
 import Loading from '@/components/Loading';
 import Card from '@/components/Card.vue';
 import HackerNewsRow from './HackerNewsRow.vue';
@@ -29,7 +29,6 @@ export default {
   data() {
     return {
       loading: true,
-      lines: [],
     };
   },
   async created() {
@@ -38,11 +37,14 @@ export default {
   methods: {
     async updateData() {
       this.loading = true;
-      const response = await axios.get('https://hn-api.now.sh/');
-      this.lines = response.data;
+      await this.updateHackernews();
       this.loading = false;
     },
+    ...mapActions(['updateHackernews']),
   },
+  computed: mapState({
+    lines: state => state.hackernews,
+  }),
 };
 </script>
 
