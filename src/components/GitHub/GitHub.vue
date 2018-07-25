@@ -33,16 +33,17 @@ export default {
     };
   },
   async created() {
-    this.updateData();
+    this.updateData(false);
   },
   methods: {
-    async updateData() {
+    async updateData(forced = true) {
       this.loading = true;
-      await this.updateGithub();
+      await this.updateGithub(forced);
       this.loading = false;
     },
     ...mapActions(['updateGithub']),
   },
+
   computed: mapState({
     lines: state => state.github,
   }),

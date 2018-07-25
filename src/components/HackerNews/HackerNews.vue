@@ -32,12 +32,12 @@ export default {
     };
   },
   async created() {
-    this.updateData();
+    this.updateData(false);
   },
   methods: {
-    async updateData() {
+    async updateData(forced = true) {
       this.loading = true;
-      await this.updateHackernews();
+      await this.updateHackernews(forced);
       this.loading = false;
     },
     ...mapActions(['updateHackernews']),
