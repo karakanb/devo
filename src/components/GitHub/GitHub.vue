@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { mapState, mapActions } from 'vuex';
 import Loading from '@/components/Loading.vue';
 import GitHubRow from '@/components/GitHub/GitHubRow.vue';
 import Card from '@/components/Card.vue';
@@ -30,7 +30,6 @@ export default {
   data() {
     return {
       loading: true,
-      lines: [],
     };
   },
   async created() {
@@ -39,11 +38,15 @@ export default {
   methods: {
     async updateData() {
       this.loading = true;
-      const response = await axios.get('https://gh-api.now.sh/');
-      this.lines = response.data;
+      await this.updateGithub();
       this.loading = false;
     },
+    ...mapActions(['updateGithub']),
   },
+
+  computed: mapState({
+    lines: state => state.github,
+  }),
 };
 </script>
 

@@ -6,8 +6,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    github: localStorage.getItem('github'),
-    hackernews: localStorage.getItem('hackernews'),
+    github: [],
+    hackernews: [],
     updated_at: {
       github: '',
       hackernews: '',
@@ -18,12 +18,10 @@ export default new Vuex.Store({
     setGithubData(state, data) {
       state.github = data;
       state.updated_at.github = new Date();
-      localStorage.setItem('github', data);
     },
     setHackernewsData(state, data) {
       state.hackernews = data;
       state.updated_at.hackernews = new Date();
-      localStorage.setItem('hackernews', data);
     },
   },
   actions: {
