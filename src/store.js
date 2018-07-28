@@ -30,15 +30,15 @@ export default new Vuex.Store({
     async updateHackernews(context, forced = false) {
       const { threshold } = context.state.updated_at;
       if ((new Date()) - context.state.updated_at.hackernews > threshold || forced) {
-        const response = await axios.get('https://hn-api.now.sh/');
-        context.commit('setHackernewsData', response.data);
+        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URI}/hackernews`);
+        context.commit('setHackernewsData', response.data.data);
       }
     },
     async updateGithub(context, forced = false) {
       const { threshold } = context.state.updated_at;
       if ((new Date()) - context.state.updated_at.hackernews > threshold || forced) {
-        const response = await axios.get('https://gh-api.now.sh/');
-        context.commit('setGithubData', response.data);
+        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URI}/github`);
+        context.commit('setGithubData', response.data.data);
       }
     },
   },
