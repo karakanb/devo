@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import 'flexboxgrid';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faGithub, faHackerNewsSquare } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faHackerNewsSquare, faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { faSyncAlt, faCodeBranch, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import App from './App.vue';
 import store from './store';
 
-library.add([faGithub, faHackerNewsSquare, faSyncAlt, faCodeBranch, faStar]);
+library.add([faGithub, faHackerNewsSquare, faProductHunt, faSyncAlt, faCodeBranch, faStar]);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.config.productionTip = false;

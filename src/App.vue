@@ -13,11 +13,20 @@
             <git-hub></git-hub>
           </div>
           <div class="col-lg-6">
-            <hacker-news></hacker-news>
+            <div class="row"
+                 style="height: 38vh; margin-bottom: 2vh;">
+              <hacker-news></hacker-news>
+            </div>
+            <div class="row"
+                 style="height: 40vh;">
+              <product-hunt></product-hunt>
+            </div>
+
           </div>
         </div>
         <div class="row footer-row middle-lg">
-          <footer class="col-lg grey-text light"><span class="semi-bold">devo</span> is an
+          <footer class="col-lg grey-text light">
+            <span class="semi-bold">devo</span> is an
             <a href="/asd">open source extension</a>.</footer>
         </div>
       </div>
@@ -30,6 +39,7 @@ import GitHub from '@/components/GitHub/GitHub.vue';
 import HelloWorld from './components/HelloWorld.vue';
 import Card from './components/Card.vue';
 import HackerNews from './components/HackerNews/HackerNews.vue';
+import ProductHunt from './components/ProductHunt/ProductHunt.vue';
 
 export default {
   name: 'app',
@@ -38,6 +48,7 @@ export default {
     Card,
     HackerNews,
     GitHub,
+    ProductHunt,
   },
   data() {
     return {
