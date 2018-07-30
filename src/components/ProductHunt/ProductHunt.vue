@@ -36,9 +36,7 @@ export default {
   },
   methods: {
     async updateData(forced = true) {
-      this.loading = true;
-      await this.updateHackernews(forced);
-      this.loading = false;
+      //
     },
     ...mapActions(['updateHackernews']),
   },

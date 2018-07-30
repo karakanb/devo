@@ -28,7 +28,7 @@ export default {
   components: { HackerNewsRow, Loading, Card },
   data() {
     return {
-      loading: true,
+      loading: false,
     };
   },
   async created() {
@@ -42,6 +42,7 @@ export default {
     },
     ...mapActions(['updateHackernews']),
   },
+
   computed: mapState({
     lines: state => state.hackernews,
   }),
