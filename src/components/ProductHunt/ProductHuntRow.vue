@@ -12,9 +12,9 @@
         <h3 class="row description">
           {{item.tagline}}
         </h3>
-        <div class="row meta">
+        <div class="row meta between-lg">
           <span class="ph-tag-wrapper">
-            <span class="ph-tag"
+            <span class="small-info-box"
                   v-if="topicExists">
               <a :href="item.topics[0].slug">
                 {{item.topics[0].name}}
@@ -23,6 +23,21 @@
             <span class="remaining-topic-count"
                   v-if="remainingTopicCount > 0">+{{remainingTopicCount}}</span>
           </span>
+          <span class="ph-action-wrapper">
+            <span class="small-info-box">
+              <span>
+                <font-awesome-icon :icon="['fas', 'chevron-up']"></font-awesome-icon>
+                {{item.votes_count}}
+              </span>
+            </span>
+            <span class="small-info-box">
+              <span>
+                <font-awesome-icon :icon="['fas', 'comment']"></font-awesome-icon>
+                {{item.comments_count}}
+              </span>
+            </span>
+          </span>
+
         </div>
       </div>
     </div>
@@ -109,7 +124,7 @@ export default {
   margin-bottom: 5px;
 }
 
-.ph-item .ph-tag {
+.ph-item .small-info-box {
   color: rgb(153, 153, 153);
   background: #f8f8f8;
   border-radius: 3px;
@@ -127,12 +142,14 @@ export default {
   white-space: nowrap;
 }
 
-.ph-item .ph-tag-wrapper {
+.ph-item .ph-tag-wrapper,
+.ph-item .ph-action-wrapper {
   display: flex;
   align-items: center;
 }
 
-.ph-item .ph-tag a {
+.ph-item .small-info-box a,
+.ph-item .small-info-box span {
   line-height: 16px;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -147,6 +164,11 @@ export default {
   text-decoration-line: none;
   text-decoration-style: solid;
   text-transform: uppercase;
+}
+
+.ph-item .small-info-box svg {
+  margin: -4px 2px -2px 0px;
+  font-size: 12px !important;
 }
 
 .ph-item .remaining-topic-count {

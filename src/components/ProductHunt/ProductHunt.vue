@@ -8,7 +8,8 @@
       <div class="ph-list">
         <loading v-if="loading"
                  color="fe6501"></loading>
-        <product-hunt-row v-for="(item, index) in lines"
+        <product-hunt-row v-else
+                          v-for="(item, index) in lines"
                           :key="index"
                           :item="item"></product-hunt-row>
       </div>
