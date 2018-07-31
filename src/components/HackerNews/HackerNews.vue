@@ -52,6 +52,5 @@ export default {
 <style>
 .hn-list {
   height: 100%;
-  overflow-x: hidden;
 }
 </style>

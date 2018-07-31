@@ -51,7 +51,7 @@ export default {
 <style>
 .hn-item {
   font-size: 16px;
-  padding: 8px 16px 8px 8px;
+  padding: 8px 0;
   text-align: left;
   border-bottom: 1px solid #dfe3e8a8;
 }

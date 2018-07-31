@@ -1,9 +1,12 @@
 <template>
   <div class="ph-item">
     <div class="row">
-      <div class="col-lg-2">
-        <div class="image-container"
-             :style="imageStyle"></div>
+      <div class="thumbnail">
+        <div class="image-container">
+          <img :src="thumbnailLink"
+               width="80"
+               height="80">
+        </div>
       </div>
       <div class="col-lg-10">
         <div class="row title-row">
@@ -60,10 +63,8 @@ export default {
     };
   },
   computed: {
-    imageStyle() {
-      return {
-        backgroundImage: `url("${this.item.thumbnail.image_url}&h=80&w=80")`,
-      };
+    thumbnailLink() {
+      return `${this.item.thumbnail.image_url}&h=80&w=80`;
     },
     topicExists() {
       return this.item.topics.length !== 0;
@@ -84,7 +85,7 @@ export default {
 <style>
 .ph-item {
   font-size: 16px;
-  padding: 16px 16px 16px 8px;
+  padding: 16px 0;
   text-align: left;
   border-bottom: 1px solid #dfe3e8a8;
 }
@@ -93,15 +94,22 @@ export default {
   margin: 0;
 }
 
+.ph-item .row .col-lg-2 {
+  padding: 0;
+}
+
 .ph-item a {
   text-decoration: none;
   color: inherit;
 }
 
+.ph-item .thumbnail {
+  width: 80px;
+  height: 80px;
+  margin-right: 8px;
+}
+
 .ph-item .image-container {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
   width: 80px;
   height: 80px;
 }

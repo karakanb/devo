@@ -71,7 +71,7 @@ export default {
 <style>
 .gh-item {
   font-size: 16px;
-  padding: 16px;
+  padding: 16px 0;
   text-align: left;
   border-bottom: 1px solid #dfe3e8a8;
 }

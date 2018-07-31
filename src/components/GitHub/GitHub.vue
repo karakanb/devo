@@ -52,7 +52,6 @@ export default {
 
 <style>
 .gh-list {
-  overflow-x: hidden;
   height: 100%;
 }
 </style>

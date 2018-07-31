@@ -7,7 +7,7 @@
     <template slot="card-body">
       <div class="ph-list">
         <loading v-if="loading"
-                 color="fe6501"></loading>
+                 color="da5430"></loading>
         <product-hunt-row v-else
                           v-for="(item, index) in lines"
                           :key="index"
@@ -51,6 +51,5 @@ export default {
 <style>
 .ph-list {
   height: 100%;
-  overflow-x: auto;
 }
 </style>

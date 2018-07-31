@@ -71,6 +71,8 @@ export default {
 .card-body {
   height: calc( 100% - 48px);
   background-color: white;
+  padding: 0 16px;
+  overflow-x: auto;
 }
 
 .card-title-text {
