@@ -13,13 +13,15 @@
           {{item.tagline}}
         </h3>
         <div class="row meta">
-
-          <span v-for="(topic, index) in item.topics"
-                :key="index"
-                class="ph-tag">
-            <a :href="topic.slug">
-              {{topic.name}}
-            </a>
+          <span class="ph-tag-wrapper">
+            <span class="ph-tag"
+                  v-if="topicExists">
+              <a :href="item.topics[0].slug">
+                {{item.topics[0].name}}
+              </a>
+            </span>
+            <span class="remaining-topic-count"
+                  v-if="remainingTopicCount > 0">+{{remainingTopicCount}}</span>
           </span>
         </div>
       </div>
@@ -49,6 +51,12 @@ export default {
         backgroundImage: `url("${this.item.thumbnail.image_url}")`,
       };
     },
+    topicExists() {
+      return this.item.topics.length !== 0;
+    },
+    remainingTopicCount() {
+      return this.item.topics.length - 1;
+    },
   },
 };
 </script>
@@ -56,7 +64,7 @@ export default {
 <style>
 .ph-item {
   font-size: 16px;
-  padding: 8px 16px 8px 8px;
+  padding: 16px 16px 16px 8px;
   text-align: left;
   border-bottom: 1px solid #dfe3e8a8;
 }
@@ -108,6 +116,7 @@ export default {
   border: 1px solid #e8e8e8;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  margin-right: 4px;
   height: 24px;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
@@ -116,6 +125,11 @@ export default {
   cursor: pointer;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.ph-item .ph-tag-wrapper {
+  display: flex;
+  align-items: center;
 }
 
 .ph-item .ph-tag a {
@@ -133,6 +147,28 @@ export default {
   text-decoration-line: none;
   text-decoration-style: solid;
   text-transform: uppercase;
+}
+
+.ph-item .remaining-topic-count {
+  background-color: rgba(0, 0, 0, 0);
+  color: rgb(153, 153, 153);
+  font-size: 11px;
+  font-weight: 400;
+  height: auto;
+  line-height: 16px;
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  margin-left: 3.85px;
+  text-align: left;
+  text-decoration-color: rgb(153, 153, 153);
+  text-decoration-line: none;
+  text-decoration-style: solid;
+  text-size-adjust: 100%;
+  text-transform: uppercase;
+  white-space: nowrap;
+  width: auto;
+  -webkit-box-direction: normal;
 }
 
 .hn-item .title {
