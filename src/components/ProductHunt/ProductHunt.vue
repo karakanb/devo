@@ -3,6 +3,7 @@
         title-background-color="da5430"
         :icon="['fab', 'product-hunt']"
         :iconOnClick="updateData"
+        externalLink="https://www.producthunt.com"
         title-font-color="ffffff">
     <template slot="card-body">
       <div class="ph-list">

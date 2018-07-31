@@ -3,6 +3,7 @@
         title-background-color="fe6501"
         :icon="['fab', 'hacker-news-square']"
         :iconOnClick="updateData"
+        externalLink="https://news.ycombinator.com"
         title-font-color="ffffff">
     <template slot="card-body">
       <div class="hn-list">

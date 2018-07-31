@@ -51,7 +51,7 @@ export default {
   },
   data() {
     return {
-      baseLink: 'https://github.com/',
+      baseLink: 'https://github.com',
     };
   },
   computed: {

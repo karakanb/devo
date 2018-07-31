@@ -4,6 +4,7 @@
         title-font-color="ffffff"
         :icon="['fab', 'github']"
         :iconOnClick="updateData"
+        externalLink="https://github.com/trending"
         title="GitHub Trending">
     <template slot="card-body">
       <div class="gh-list">
