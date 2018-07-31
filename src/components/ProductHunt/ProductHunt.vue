@@ -5,11 +5,10 @@
         :iconOnClick="updateData"
         title-font-color="ffffff">
     <template slot="card-body">
-      <div class="hn-list">
+      <div class="ph-list">
         <loading v-if="loading"
                  color="fe6501"></loading>
-        <product-hunt-row v-else
-                          v-for="(item, index) in lines"
+        <product-hunt-row v-for="(item, index) in lines"
                           :key="index"
                           :item="item"></product-hunt-row>
       </div>
@@ -28,27 +27,29 @@ export default {
   components: { ProductHuntRow, Loading, Card },
   data() {
     return {
-      loading: true,
+      loading: false,
     };
   },
   async created() {
-    this.updateData();
+    this.updateData(false);
   },
   methods: {
-    async updateData() {
-      //
+    async updateData(forced = true) {
+      this.loading = true;
+      await this.updateProductHunt(forced);
+      this.loading = false;
     },
-    ...mapActions(['updateHackernews']),
+    ...mapActions(['updateProductHunt']),
   },
   computed: mapState({
-    lines: state => state.hackernews.data,
+    lines: state => state.producthunt.data,
   }),
 };
 </script>
 
 <style>
-.hn-list {
+.ph-list {
   height: 100%;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 </style>

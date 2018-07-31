@@ -1,20 +1,28 @@
 <template>
-  <div class="hn-item">
-    <div class="row title-row">
-      <div>
-        <div class="site-string">
-          <a :href="siteStringLink"> ({{item.siteString}}) </a>
+  <div class="ph-item">
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="image-container"
+             :style="imageStyle"></div>
+      </div>
+      <div class="col-lg-10">
+        <div class="row title-row">
+          {{item.name}}
         </div>
-        <div class="title truncate">
-          <a :href="item.link"
-             :title="item.title">{{item.title}}</a>
+        <h3 class="row description">
+          {{item.tagline}}
+        </h3>
+        <div class="row meta">
+
+          <span v-for="(topic, index) in item.topics"
+                :key="index"
+                class="ph-tag">
+            <a :href="topic.slug">
+              {{topic.name}}
+            </a>
+          </span>
         </div>
       </div>
-    </div>
-    <div class="row meta-data">
-      {{item.score}} by
-      <a :href="userLink"> {{item.user.name}}</a> | {{item.age}} |
-      <a :href="threadLink"> {{item.commentCount}}</a>
     </div>
 
   </div>
@@ -26,6 +34,7 @@ export default {
   props: {
     item: {
       required: true,
+      type: Object,
     },
   },
   data() {
@@ -35,45 +44,95 @@ export default {
   },
 
   computed: {
-    userLink() {
-      return `${this.baseUrl}${this.item.user.link}`;
-    },
-    threadLink() {
-      return `${this.baseUrl}${this.item.threadLink}`;
-    },
-    siteStringLink() {
-      return `http://${this.item.siteString}`;
+    imageStyle() {
+      return {
+        backgroundImage: `url("${this.item.thumbnail.image_url}")`,
+      };
     },
   },
 };
 </script>
 
 <style>
-.hn-item {
+.ph-item {
   font-size: 16px;
   padding: 8px 16px 8px 8px;
   text-align: left;
   border-bottom: 1px solid #dfe3e8a8;
 }
 
-.hn-item .row {
+.ph-item .row {
   margin: 0;
 }
 
-.hn-item a {
+.ph-item a {
   text-decoration: none;
   color: inherit;
 }
 
-.hn-item .meta-data a {
-  margin: 0 2.5px;
+.ph-item .image-container {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  width: 80px;
+  height: 80px;
 }
 
-.hn-item a:hover {
+.ph-item a:hover {
   text-decoration: underline;
   text-decoration-line: underline;
   text-decoration-style: initial;
   text-decoration-color: initial;
+}
+
+.ph-item .title-row {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 32px;
+}
+
+.ph-item .description {
+  align-items: center;
+  color: rgb(153, 153, 153);
+  font-size: 13px;
+  font-weight: 400;
+  height: 20px;
+  line-height: 20px;
+  margin-bottom: 5px;
+}
+
+.ph-item .ph-tag {
+  color: rgb(153, 153, 153);
+  background: #f8f8f8;
+  border-radius: 3px;
+  border: 1px solid #e8e8e8;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 24px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  outline: 0;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ph-item .ph-tag a {
+  line-height: 16px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: inherit;
+  text-decoration: none !important;
+  padding: 0 8px;
+  font-weight: 400;
+  font-size: 11px;
+  text-align: left;
+  text-decoration-color: rgb(153, 153, 153);
+  text-decoration-line: none;
+  text-decoration-style: solid;
+  text-transform: uppercase;
 }
 
 .hn-item .title {
@@ -87,20 +146,6 @@ export default {
 
 .hn-item .title-row > div {
   max-width: 100%;
-}
-
-.hn-item .site-string {
-  color: rgb(130, 130, 130);
-  font-size: 10.667px;
-  float: right;
-  white-space: nowrap;
-  margin-top: 3px;
-  padding-left: 4px;
-}
-
-.meta-data {
-  color: rgb(130, 130, 130);
-  font-size: 9.33333px;
 }
 
 .truncate {

@@ -32,8 +32,8 @@ export default new Vuex.Store({
       state.hackernews.updated_at = Date.now();
     },
     setProductHuntData(state, data) {
-      state.hackernews.data = data;
-      state.hackernews.updated_at = Date.now();
+      state.producthunt.data = data;
+      state.producthunt.updated_at = Date.now();
     },
   },
   actions: {
@@ -63,8 +63,8 @@ export default new Vuex.Store({
       const now = new Date();
 
       if (!lastUpdate || now - lastUpdate > threshold || forced) {
-        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URI}/github`);
-        context.commit('setGitHubData', response.data.data);
+        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URI}/producthunt`);
+        context.commit('setProductHuntData', response.data.data);
       }
     },
   },
