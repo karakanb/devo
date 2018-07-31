@@ -45,7 +45,7 @@ export default {
   },
 
   computed: mapState({
-    lines: state => state.github,
+    lines: state => state.github.data,
   }),
 };
 </script>

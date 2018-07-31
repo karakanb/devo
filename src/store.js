@@ -5,44 +5,42 @@ import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
-const distanceInMinutes = (dateInstance) => {
-  const now = new Date();
-  const diffMs = (now - dateInstance); // milliseconds between now & Christmas
-  return Math.round(((diffMs % 86400000) % 3600000) / 60000);
-};
-
 export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
-    github: [],
-    hackernews: [],
-    updated_at: {
-      github: 0,
-      hackernews: 0,
-      threshold: 1 * 60000, // 1s = 60000ms
+    github: {
+      updated_at: 0,
+      data: [],
     },
+    hackernews: {
+      updated_at: 0,
+      data: [],
+    },
+    updated_at_threshold: 1 * 60000,
   },
   mutations: {
     setGithubData(state, data) {
-      state.github = data;
-      state.updated_at.github = Date.now();
+      state.github.data = data;
+      state.github.updated_at = Date.now();
     },
     setHackernewsData(state, data) {
-      state.hackernews = data;
-      state.updated_at.hackernews = Date.now();
+      state.hackernews.data = data;
+      state.hackernews.updated_at = Date.now();
     },
   },
   actions: {
     async updateHackernews(context, forced) {
-      const { threshold } = context.state.updated_at;
-      if ((new Date()) - context.state.updated_at.hackernews > threshold || forced) {
+      const threshold = context.state.updated_at_threshold;
+      const now = new Date();
+      if (now - context.state.hackernews.updated_at > threshold || forced) {
         const response = await axios.get(`${process.env.VUE_APP_API_BASE_URI}/hackernews`);
         context.commit('setHackernewsData', response.data.data);
       }
     },
     async updateGithub(context, forced = false) {
-      const { threshold } = context.state.updated_at;
-      if ((new Date()) - context.state.updated_at.github > threshold || forced) {
+      const threshold = context.state.updated_at_threshold;
+      const now = new Date();
+      if (now - context.state.github.updated_at > threshold || forced) {
         const response = await axios.get(`${process.env.VUE_APP_API_BASE_URI}/github`);
         context.commit('setGithubData', response.data.data);
       }

@@ -44,7 +44,7 @@ export default {
   },
 
   computed: mapState({
-    lines: state => state.hackernews,
+    lines: state => state.hackernews.data,
   }),
 };
 </script>

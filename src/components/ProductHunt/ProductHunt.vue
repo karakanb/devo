@@ -32,16 +32,16 @@ export default {
     };
   },
   async created() {
-    this.updateData(false);
+    this.updateData();
   },
   methods: {
-    async updateData(forced = true) {
+    async updateData() {
       //
     },
     ...mapActions(['updateHackernews']),
   },
   computed: mapState({
-    lines: state => state.hackernews,
+    lines: state => state.hackernews.data,
   }),
 };
 </script>
