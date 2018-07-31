@@ -38,10 +38,10 @@ export default {
   methods: {
     async updateData(forced = true) {
       this.loading = true;
-      await this.updateGithub(forced);
+      await this.updateGitHub(forced);
       this.loading = false;
     },
-    ...mapActions(['updateGithub']),
+    ...mapActions(['updateGitHub']),
   },
 
   computed: mapState({
