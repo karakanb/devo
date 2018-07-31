@@ -69,7 +69,8 @@ export default {
 }
 
 .card-body {
-  height: calc( 100% - 48px);;
+  height: calc( 100% - 48px);
+  background-color: white;
 }
 
 .card-title-text {

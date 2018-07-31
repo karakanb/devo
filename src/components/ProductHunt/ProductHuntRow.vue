@@ -7,16 +7,16 @@
       </div>
       <div class="col-lg-10">
         <div class="row title-row">
-          {{item.name}}
+          <a :href="itemLink"> {{item.name}}</a>
         </div>
         <h3 class="row description">
           {{item.tagline}}
         </h3>
         <div class="row meta between-lg">
           <span class="ph-tag-wrapper">
-            <span class="small-info-box"
+            <span class="small-info-box link-box"
                   v-if="topicExists">
-              <a :href="item.topics[0].slug">
+              <a :href="firstTopicLink">
                 {{item.topics[0].name}}
               </a>
             </span>
@@ -24,13 +24,13 @@
                   v-if="remainingTopicCount > 0">+{{remainingTopicCount}}</span>
           </span>
           <span class="ph-action-wrapper">
-            <span class="small-info-box">
+            <span class="small-info-box action vote-count white-background">
               <span>
                 <font-awesome-icon :icon="['fas', 'chevron-up']"></font-awesome-icon>
                 {{item.votes_count}}
               </span>
             </span>
-            <span class="small-info-box">
+            <span class="small-info-box action white-background">
               <span>
                 <font-awesome-icon :icon="['fas', 'comment']"></font-awesome-icon>
                 {{item.comments_count}}
@@ -56,21 +56,26 @@ export default {
   },
   data() {
     return {
-      baseUrl: 'https://news.ycombinator.com/',
+      baseUrl: 'https://www.producthunt.com',
     };
   },
-
   computed: {
     imageStyle() {
       return {
-        backgroundImage: `url("${this.item.thumbnail.image_url}")`,
+        backgroundImage: `url("${this.item.thumbnail.image_url}&h=80&w=80")`,
       };
     },
     topicExists() {
       return this.item.topics.length !== 0;
     },
+    firstTopicLink() {
+      return `${this.baseUrl}/topics/${this.item.topics[0].slug}`;
+    },
     remainingTopicCount() {
       return this.item.topics.length - 1;
+    },
+    itemLink() {
+      return `${this.baseUrl}/posts/${this.item.slug}`;
     },
   },
 };
@@ -137,7 +142,6 @@ export default {
   -ms-flex-pack: center;
   justify-content: center;
   outline: 0;
-  cursor: pointer;
   overflow: hidden;
   white-space: nowrap;
 }
@@ -166,9 +170,31 @@ export default {
   text-transform: uppercase;
 }
 
+.ph-item .link-box:hover {
+  background-color: #ebebeb;
+  cursor: pointer;
+}
+
 .ph-item .small-info-box svg {
   margin: -4px 2px -2px 0px;
   font-size: 12px !important;
+}
+
+.ph-item .white-background {
+  background-color: white;
+}
+
+.ph-item .vote-count {
+  color: black;
+}
+
+.ph-item .vote-count {
+  color: black;
+  background-color: white;
+}
+
+.ph-item .action span {
+  font-weight: 600 !important;
 }
 
 .ph-item .remaining-topic-count {
