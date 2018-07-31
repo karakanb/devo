@@ -14,7 +14,7 @@
           </div>
           <div class="col-lg-6">
             <div class="row"
-                 style="height: 38vh; margin-bottom: 2vh;">
+                 style="height: 39vh; margin-bottom: 1vh;">
               <hacker-news></hacker-news>
             </div>
             <div class="row"
