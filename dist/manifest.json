@@ -1,0 +1,11 @@
+{
+  "name": "Devo",
+  "description": "GitHub Trending, Hacker News and Product Hunt, on every new tab!",
+  "author": "Burak Karakan",
+  "short_name": "Devo",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  }
+}
