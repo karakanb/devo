@@ -2,11 +2,11 @@
   <div class="hn-item">
     <div class="row title-row">
       <div>
-        <div class="site-string">
+        <div class="site-string" v-if="item.siteString">
           <a :href="siteStringLink"> ({{item.siteString}}) </a>
         </div>
         <div class="title truncate">
-          <a :href="item.link"
+          <a :href="itemLink"
              :title="item.title">{{item.title}}</a>
         </div>
       </div>
@@ -43,6 +43,11 @@ export default {
     },
     siteStringLink() {
       return `http://${this.item.siteString}`;
+    },
+    itemLink() {
+      return this.item.link.startsWith('http')
+        ? this.item.link
+        : `${this.baseUrl}${this.item.link}`;
     },
   },
 };
