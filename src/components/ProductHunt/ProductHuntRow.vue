@@ -24,7 +24,8 @@
               </a>
             </span>
             <span class="remaining-topic-count"
-                  v-if="remainingTopicCount > 0">+{{remainingTopicCount}}</span>
+                  v-if="remainingTopicCount > 0"
+                  :title="remainingTopics">+{{remainingTopicCount}}</span>
           </span>
           <span class="ph-action-wrapper">
             <span class="small-info-box action vote-count white-background">
@@ -75,8 +76,21 @@ export default {
     remainingTopicCount() {
       return this.item.topics.length - 1;
     },
+    remainingTopics() {
+      const topics = this.item.topics.slice(1);
+      return topics.map(e => this.toTitleCase(e.name)).join(', ');
+    },
     itemLink() {
       return `${this.baseUrl}/posts/${this.item.slug}`;
+    },
+  },
+  methods: {
+    toTitleCase(str) {
+      str = str.toLowerCase().split(' ');
+      for (var i = 0; i < str.length; i++) {
+        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+      }
+      return str.join(' ');
     },
   },
 };
@@ -225,6 +239,13 @@ export default {
   white-space: nowrap;
   width: auto;
   -webkit-box-direction: normal;
+  cursor: pointer;
+}
+.ph-item .remaining-topic-count:hover {
+  text-decoration: underline;
+  text-decoration-line: underline;
+  text-decoration-style: initial;
+  text-decoration-color: initial;
 }
 
 .hn-item .title {
