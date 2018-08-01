@@ -27,7 +27,7 @@
         <div class="row footer-row middle-lg">
           <footer class="col-lg grey-text light">
             <span class="semi-bold">devo</span> is an
-            <a href="/asd">open source extension</a>.</footer>
+            <a href="https://github.com/karakanb/devo">open source extension</a>.</footer>
         </div>
       </div>
     </div>

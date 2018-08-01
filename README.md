@@ -1,11 +1,12 @@
 # devo
+Devo is a Google Chrome extension that displays GitHub Trending, Hacker News and Product Hunt on every new tab. It caches the information for 30 minutes, so that there is no extra calls to the external services, hence allowing a faster experience.
 
-## Project setup
+## Development
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Run the development server
 ```
 npm run serve
 ```
