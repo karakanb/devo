@@ -4,6 +4,7 @@
       <div class="thumbnail">
         <div class="image-container">
           <img :src="thumbnailLink"
+          :srcset="`${thumbnailLink}&dpr=2 2x`"
                width="80"
                height="80">
         </div>
