@@ -9,7 +9,7 @@
           </div>
         </div>
         <div class="row cards-wrapper">
-          <div class="col-lg-6">
+          <div class="col-lg-6" style="height: 100%">
             <git-hub></git-hub>
           </div>
           <div class="col-lg-6">
@@ -158,15 +158,11 @@ body {
 
 .date-time {
   font-size: 32px;
-  font-weight: 200;
+  font-weight: 100;
 }
 
 .date-time .row {
   margin: 0;
-}
-
-.date-time .date {
-  font-weight: 100;
 }
 
 .cards-wrapper {
