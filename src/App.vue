@@ -36,7 +36,6 @@
 
 <script>
 import GitHub from '@/components/GitHub/GitHub.vue';
-import HelloWorld from './components/HelloWorld.vue';
 import Card from './components/Card.vue';
 import HackerNews from './components/HackerNews/HackerNews.vue';
 import ProductHunt from './components/ProductHunt/ProductHunt.vue';
@@ -44,7 +43,6 @@ import ProductHunt from './components/ProductHunt/ProductHunt.vue';
 export default {
   name: 'app',
   components: {
-    HelloWorld,
     Card,
     HackerNews,
     GitHub,
