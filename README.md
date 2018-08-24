@@ -4,27 +4,10 @@ Devo is a Google Chrome and Mozilla Firefox extension that displays GitHub Trend
 ## Demo
 [Demo can be found here.](https://burakkarakan.com/devo/)
 
-## Development
-```
-npm install
-```
+## How to build?
 
-### Run the development server
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Run your unit tests
-```
-npm run test:unit
+First of all, you need to install the npm dependencies. After that, you can run the build command and the optimized bundle will be created in `dist/` directory:
+```sh
+npm install # install the dependencies.
+npm run build # build the optimized bundle.
 ```
