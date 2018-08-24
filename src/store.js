@@ -20,7 +20,7 @@ export default new Vuex.Store({
       updated_at: 0,
       data: [],
     },
-    updated_at_threshold: 1 * 60000,
+    updated_at_threshold: 5 * 60000,
   },
   mutations: {
     setGitHubData(state, data) {
