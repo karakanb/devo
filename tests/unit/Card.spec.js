@@ -6,17 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
-// const wrapper = shallowMount(Card, {
-//   propsData: {
-//     titleBackgroundColor: "25292f",
-//     titleFontColor: "ffffff",
-//     icon: ['fab', 'github'],
-//     iconOnClick: "updateData",
-//     externalLink: "https://github.com/trending",
-//     title,
-//   },
-// });
-
 const dummyOnClick = () => { };
 const objectProps = {
   icon: ['fab', 'github'],

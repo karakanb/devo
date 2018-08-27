@@ -1,5 +1,14 @@
 # devo
+<p align="center">
+  <img width="500" src="./logo.png">
+</p>
+<p align="center">
+  GitHub Trending, Hacker News and Product Hunt, on every new tab!
+</p>
 Devo is a Google Chrome and Mozilla Firefox extension that displays GitHub Trending, Hacker News and Product Hunt on every new tab. It caches the information for 30 minutes, so that there is no extra calls to the external services, hence allowing a faster experience.
+
+## Installation
+Devo can be installed for [Chrome here](https://chrome.google.com/webstore/detail/devo/elkhalpmbmbaeoemecpcfdcoekmpgmdm), and [Firefox here](https://addons.mozilla.org/en-US/firefox/addon/devo-new-tab/).
 
 ## Demo
 [Demo can be found here.](https://burakkarakan.com/devo/)
