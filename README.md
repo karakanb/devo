@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="./logo.png">
+  <img width="250" src="./logo.png">
 </p>
-<p align="center" style="    font-weight: bold;">
+<p align="center">
   GitHub Trending, Hacker News and Product Hunt, on every new tab!
 </p>
 
