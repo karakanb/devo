@@ -14,7 +14,7 @@
         </div>
         <div class="title-icon refresh-icon"
              :style="iconStyle">
-          <font-awesome-icon :icon="['fas', 'sync-alt']"
+          <font-awesome-icon class='fa-refresh-icon' :icon="['fas', 'sync-alt']"
                              @click="iconOnClick"></font-awesome-icon>
         </div>
       </div>
