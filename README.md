@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="500" src="./logo.png">
+  <img src="./logo.png">
 </p>
 <p align="center" style="    font-weight: bold;">
   GitHub Trending, Hacker News and Product Hunt, on every new tab!
