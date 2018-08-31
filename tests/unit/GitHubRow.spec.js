@@ -65,11 +65,24 @@ describe('GitHubRow.vue', () => {
   });
 
   it('description is rendered', () => {
+    expect(wrapper.find('.description').text()).to.equal(objectProps.item.repo.description);
+  });
+
+  it('language is rendered', () => {
     expect(wrapper.find('.language-text').text()).to.equal(objectProps.item.language.is);
   });
 
   it('star count is rendered', () => {
-    expect(wrapper.find('.meta-row > .icon-with-text').text()).to.equal(objectProps.item.stars.count.toString());
-    expect(wrapper.find('.meta-row > .icon-with-text > a').attributes('href').href).to.include(objectProps.item.stars.link);
+    expect(wrapper.find('.stars').text()).to.equal(objectProps.item.stars.count.toString());
+    expect(wrapper.find('.stars > a').attributes('href').href).to.include(objectProps.item.stars.link);
+  });
+
+  it('fork count is rendered', () => {
+    expect(wrapper.find('.forks').text()).to.equal(objectProps.item.forks.count.toString());
+    expect(wrapper.find('.forks > a').attributes('href').href).to.include(objectProps.item.forks.link);
+  });
+
+  it('stars today is rendered', () => {
+    expect(wrapper.find('.stars-today').text()).to.equal(`${objectProps.item.todayStars.toString()} stars today`);
   });
 });
