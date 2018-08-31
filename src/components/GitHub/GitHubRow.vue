@@ -19,20 +19,20 @@
       </span>
 
       <div v-if="item.stars"
-           class="icon-with-text inline-block m-r-16">
+           class="icon-with-text inline-block m-r-16 stars">
         <a :href="starsLink">
           <font-awesome-icon :icon="['fas', 'star']"></font-awesome-icon>
           <span>{{Number(item.stars.count).toLocaleString()}}</span>
         </a>
       </div>
       <div v-if="item.forks"
-           class="icon-with-text inline-block m-r-16">
+           class="icon-with-text inline-block m-r-16 forks">
         <a :href="forksLink">
           <font-awesome-icon :icon="['fas', 'code-branch']"></font-awesome-icon>
           <span>{{Number(item.forks.count).toLocaleString()}}</span>
         </a>
       </div>
-      <div class="icon-with-text inline-block pull-right">
+      <div class="icon-with-text inline-block pull-right stars-today">
         <font-awesome-icon :icon="['fas', 'star']"></font-awesome-icon>
         <span>{{Number(item.todayStars).toLocaleString()}} stars today</span>
       </div>
