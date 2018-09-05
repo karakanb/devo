@@ -8,6 +8,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
+    settings: {
+      is_night_mode: true,
+    },
     github: {
       updated_at: 0,
       data: [],
