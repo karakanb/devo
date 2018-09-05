@@ -1,5 +1,6 @@
 <template>
-  <div id="app" :class="{'night-mode': isNightMode}">
+  <div id="app"
+      :class="{'night-mode': isNightMode}">
     <div class="row">
       <div class="col-lg-10 col-lg-offset-1">
         <div class="row date-time-wrapper middle-lg">
@@ -13,18 +14,30 @@
             <git-hub></git-hub>
           </div>
           <div class="col-lg-6 col-xs-10 col-xs-offset-1 col-lg-offset-0">
-            <div class="row" style="height: 39vh; margin-bottom: 1vh;">
+            <div class="row"
+                style="height: 39vh; margin-bottom: 1vh;">
               <hacker-news></hacker-news>
             </div>
-            <div class="row" style="height: 40vh;">
+            <div class="row"
+                style="height: 40vh;">
               <product-hunt></product-hunt>
             </div>
           </div>
         </div>
-        <div class="row footer-row middle-lg">
+        <div class="row date-time-wrapper middle-lg">
           <footer class="col-xs grey-text light">
-            <span class="semi-bold">devo</span> is an
-            <a href="https://github.com/karakanb/devo">open source extension</a>.</footer>
+            <span class="pull-left">
+              <span class="semi-bold">devo</span> is an
+              <a href="https://github.com/karakanb/devo">open source extension</a>.
+            </span>
+            <span class="pull-right day-night-toggle">
+              <font-awesome-icon :icon="['fas', 'sun']"></font-awesome-icon>
+              <toggle-switch v-model="nightModeToggle"
+                  style="margin-right: 8px"></toggle-switch>
+              <font-awesome-icon :icon="['fas', 'moon']"
+                  style="margin: 0;"></font-awesome-icon>
+            </span>
+          </footer>
         </div>
       </div>
     </div>
@@ -32,11 +45,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import GitHub from '@/components/GitHub/GitHub.vue';
 import Card from './components/Card.vue';
 import HackerNews from './components/HackerNews/HackerNews.vue';
 import ProductHunt from './components/ProductHunt/ProductHunt.vue';
+import ToggleSwitch from './components/ToggleSwitch.vue';
 
 export default {
   name: 'app',
@@ -45,6 +59,7 @@ export default {
     HackerNews,
     GitHub,
     ProductHunt,
+    ToggleSwitch,
   },
   data() {
     return {
@@ -72,6 +87,15 @@ export default {
     ...mapState({
       isNightMode: state => state.settings.is_night_mode,
     }),
+
+    nightModeToggle: {
+      get() {
+        return this.isNightMode;
+      },
+      set(value) {
+        this.setNightMode(value);
+      },
+    },
   },
   methods: {
     formatDate(date) {
@@ -104,6 +128,8 @@ export default {
       const monthIndex = date.getMonth();
       return `${days[date.getDay()]}, ${monthNames[monthIndex]} ${day}`;
     },
+
+    ...mapActions(['setNightMode']),
   },
 };
 </script>
@@ -130,6 +156,11 @@ body {
   -webkit-border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 2px 8px 0 rgba(70, 73, 77, 0.16);
+}
+
+.day-night-toggle {
+  display: flex;
+  align-items: center;
 }
 
 .pull-right {
@@ -172,6 +203,12 @@ body {
 
 .date-time .row {
   margin: 0;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .footer-row {

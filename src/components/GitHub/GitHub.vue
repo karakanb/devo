@@ -1,18 +1,18 @@
 <template>
   <card class="github-card"
-        title-background-color="25292f"
-        title-font-color="ffffff"
-        :icon="['fab', 'github']"
-        :iconOnClick="updateData"
-        externalLink="https://github.com/trending"
-        title="GitHub Trending">
+      :title-background-color="titleBackgroundColor"
+      title-font-color="ffffff"
+      :icon="['fab', 'github']"
+      :iconOnClick="updateData"
+      externalLink="https://github.com/trending"
+      title="GitHub Trending">
     <template slot="card-body">
       <div class="gh-list">
         <loading v-if="loading"></loading>
         <git-hub-row v-else
-                     v-for="(item, index) in lines"
-                     :key="index"
-                     :item="item"></git-hub-row>
+            v-for="(item, index) in lines"
+            :key="index"
+            :item="item"></git-hub-row>
       </div>
     </template>
   </card>
@@ -45,9 +45,16 @@ export default {
     ...mapActions(['updateGitHub']),
   },
 
-  computed: mapState({
-    lines: state => state.github.data,
-  }),
+  computed: {
+    titleBackgroundColor() {
+      return this.isNightMode ? '31363e' : '25292f';
+    },
+
+    ...mapState({
+      lines: state => state.github.data,
+      isNightMode: state => state.settings.is_night_mode,
+    }),
+  },
 };
 </script>
 

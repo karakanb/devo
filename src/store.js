@@ -38,8 +38,16 @@ export default new Vuex.Store({
       state.producthunt.data = data;
       state.producthunt.updated_at = Date.now();
     },
+    setNightMode(state, isNightMode) {
+      state.settings.is_night_mode = isNightMode;
+    },
   },
   actions: {
+
+    setNightMode(context, isNightMode) {
+      context.commit('setNightMode', isNightMode);
+    },
+
     async updateHackerNews(context, forced) {
       const threshold = context.state.updated_at_threshold;
       const lastUpdate = context.state.hackernews.updated_at;

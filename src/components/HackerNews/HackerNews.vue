@@ -47,7 +47,7 @@ export default {
 
   computed: {
     titleBackgroundColor() {
-      return this.isNightMode ? '25292e' : 'fe6501';
+      return this.isNightMode ? '31363e' : 'fe6501';
     },
 
     titleFontColor() {

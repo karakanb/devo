@@ -168,6 +168,15 @@ export default {
   white-space: nowrap;
 }
 
+.night-mode .ph-item .small-info-box {
+  color: rgb(153, 153, 153);
+  background: #31363e;
+}
+
+.night-mode .ph-item .link-box:hover {
+  background-color: #25292e;
+}
+
 .ph-item .ph-tag-wrapper,
 .ph-item .ph-action-wrapper {
   display: flex;
