@@ -55,4 +55,14 @@ export default {
 .gh-list {
   height: 100%;
 }
+
+.github-card {
+  max-height: 80vh;
+}
+
+@media only screen and (min-width: 1200px) {
+  .github-card {
+    max-height: initial;
+  }
+}
 </style>

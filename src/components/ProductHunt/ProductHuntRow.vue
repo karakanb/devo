@@ -1,6 +1,6 @@
 <template>
   <div class="ph-item">
-    <div class="row">
+    <div class="row" style="display:flex">
       <div class="thumbnail">
         <div class="image-container">
           <img :src="thumbnailLink"
@@ -9,7 +9,7 @@
                height="80">
         </div>
       </div>
-      <div class="col-lg-10">
+      <div class="product-info">
         <div class="row title-row">
           <a :href="itemLink"> {{item.name}}</a>
         </div>
@@ -147,7 +147,6 @@ export default {
   color: rgb(153, 153, 153);
   font-size: 13px;
   font-weight: 400;
-  height: 20px;
   line-height: 20px;
   margin-bottom: 5px;
 }
@@ -266,5 +265,11 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.product-info {
+  flex: 1;
+  padding-left: .5rem;
+  padding-right: .5rem;
 }
 </style>
