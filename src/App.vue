@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="{'night-mode': isNightMode}" >
+  <div id="app" :class="{'night-mode': isNightMode}">
     <div class="row">
       <div class="col-lg-10 col-lg-offset-1">
         <div class="row date-time-wrapper middle-lg">
@@ -110,15 +110,19 @@ export default {
 
 <style lang="scss">
 body {
-  background-color: #f5f7fa;
   margin: 0;
 }
 #app {
+  background-color: #f5f7fa;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+}
+
+#app.night-mode {
+  background-color: #25292f;
 }
 
 .card {
@@ -142,6 +146,10 @@ body {
 
 .grey-text {
   color: #484b4f;
+}
+
+.night-mode .grey-text {
+  color: #949494;
 }
 
 .light {
@@ -205,8 +213,8 @@ footer a:hover {
   }
 
   .left-pane {
-    padding-left: .5rem;
-    padding-right: .5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 }
 </style>

@@ -1,18 +1,19 @@
 <template>
   <card title="Hacker News"
-        title-background-color="fe6501"
-        :icon="['fab', 'hacker-news-square']"
-        :iconOnClick="updateData"
-        externalLink="https://news.ycombinator.com"
-        title-font-color="ffffff">
+      :title-background-color="titleBackgroundColor"
+      :icon="['fab', 'hacker-news-square']"
+      :iconOnClick="updateData"
+      externalLink="https://news.ycombinator.com"
+      :title-font-color="titleFontColor">
     <template slot="card-body">
       <div class="hn-list">
         <loading v-if="loading"
-                 color="fe6501"></loading>
+            color="fe6501"></loading>
         <hacker-news-row v-else
-                         v-for="(item, index) in lines"
-                         :key="index"
-                         :item="item"></hacker-news-row>
+            v-for="(item, index) in lines"
+            :key="index"
+            :item="item">
+        </hacker-news-row>
       </div>
     </template>
   </card>
@@ -44,9 +45,20 @@ export default {
     ...mapActions(['updateHackerNews']),
   },
 
-  computed: mapState({
-    lines: state => state.hackernews.data,
-  }),
+  computed: {
+    titleBackgroundColor() {
+      return this.isNightMode ? '25292e' : 'fe6501';
+    },
+
+    titleFontColor() {
+      return this.isNightMode ? 'fe6501' : 'ffffff';
+    },
+
+    ...mapState({
+      lines: state => state.hackernews.data,
+      isNightMode: state => state.settings.is_night_mode,
+    }),
+  },
 };
 </script>
 

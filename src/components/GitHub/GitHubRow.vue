@@ -12,21 +12,21 @@
     </div>
     <div class="row meta-row text-grey">
       <span v-if="item.language"
-            class="language m-r-16">
+          class="language m-r-16">
         <span class="language-color inline-block"
-              :style="{backgroundColor: item.language.color}"></span>
+            :style="{backgroundColor: item.language.color}"></span>
         <span class="language-text">{{item.language.is}}</span>
       </span>
 
       <div v-if="item.stars"
-           class="icon-with-text inline-block m-r-16 stars">
+          class="icon-with-text inline-block m-r-16 stars">
         <a :href="starsLink">
           <font-awesome-icon :icon="['fas', 'star']"></font-awesome-icon>
           <span>{{Number(item.stars.count).toLocaleString()}}</span>
         </a>
       </div>
       <div v-if="item.forks"
-           class="icon-with-text inline-block m-r-16 forks">
+          class="icon-with-text inline-block m-r-16 forks">
         <a :href="forksLink">
           <font-awesome-icon :icon="['fas', 'code-branch']"></font-awesome-icon>
           <span>{{Number(item.forks.count).toLocaleString()}}</span>
@@ -90,6 +90,18 @@ export default {
   color: #586069 !important;
   margin-bottom: 8px;
   padding: 4px 0;
+}
+
+.night-mode .gh-item .description {
+  color: #999999 !important;
+}
+
+.night-mode .text-grey {
+  color: #999999 !important;
+}
+
+.night-mode .repo-name a {
+  color: #7aace4;
 }
 
 .text-grey {
