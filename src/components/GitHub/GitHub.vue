@@ -8,7 +8,7 @@
       title="GitHub Trending">
     <template slot="card-body">
       <div class="gh-list">
-        <loading v-if="loading"></loading>
+        <loading :color="loadingColor" v-if="loading"></loading>
         <git-hub-row v-else
             v-for="(item, index) in lines"
             :key="index"
@@ -48,6 +48,10 @@ export default {
   computed: {
     titleBackgroundColor() {
       return this.isNightMode ? '31363e' : '25292f';
+    },
+
+    loadingColor() {
+      return this.isNightMode ? 'ffffff' : '25292f';
     },
 
     ...mapState({
