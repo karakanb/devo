@@ -1,18 +1,19 @@
 <template>
   <card title="Product Hunt"
-        title-background-color="da5430"
-        :icon="['fab', 'product-hunt']"
-        :iconOnClick="updateData"
-        externalLink="https://www.producthunt.com"
-        title-font-color="ffffff">
+      :title-background-color="titleBackgroundColor"
+      :icon="['fab', 'product-hunt']"
+      :iconOnClick="updateData"
+      externalLink="https://www.producthunt.com"
+      :title-font-color="titleFontColor">
     <template slot="card-body">
       <div class="ph-list">
         <loading v-if="loading"
-                 color="da5430"></loading>
+            color="da5430"></loading>
         <product-hunt-row v-else
-                          v-for="(item, index) in lines"
-                          :key="index"
-                          :item="item"></product-hunt-row>
+            v-for="(item, index) in lines"
+            :key="index"
+            :item="item">
+        </product-hunt-row>
       </div>
     </template>
   </card>
@@ -43,9 +44,20 @@ export default {
     },
     ...mapActions(['updateProductHunt']),
   },
-  computed: mapState({
-    lines: state => state.producthunt.data,
-  }),
+  computed: {
+    titleBackgroundColor() {
+      return this.isNightMode ? '31363e' : 'da5430';
+    },
+
+    titleFontColor() {
+      return this.isNightMode ? 'da5430' : 'ffffff';
+    },
+
+    ...mapState({
+      lines: state => state.producthunt.data,
+      isNightMode: state => state.settings.is_night_mode,
+    }),
+  },
 };
 </script>
 

@@ -87,6 +87,14 @@ export default {
   overflow-x: auto;
 }
 
+.night-mode .card-body {
+  height: calc(100% - 48px);
+  background-color: #31363e;
+  color: #c5c8ca;
+  padding: 0 16px;
+  overflow-x: auto;
+}
+
 .card-title-text {
   font-weight: 600;
 }
