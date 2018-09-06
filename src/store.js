@@ -9,7 +9,7 @@ export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
     settings: {
-      is_night_mode: true,
+      is_night_mode: false,
     },
     github: {
       updated_at: 0,
