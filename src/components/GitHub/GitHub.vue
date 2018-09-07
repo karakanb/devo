@@ -67,12 +67,12 @@ export default {
   height: 100%;
 }
 
-.github-card {
+.github-card .card-body {
   max-height: 80vh;
 }
 
 @media only screen and (min-width: 1200px) {
-  .github-card {
+  .github-card .card-body {
     max-height: initial;
   }
 }
