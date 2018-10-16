@@ -1,6 +1,5 @@
 <template>
-  <div id="app"
-      :class="{'night-mode': isNightMode}">
+  <div id="app" :class="{'night-mode': isNightMode}">
     <div class="row">
       <div class="col-lg-10 col-lg-offset-1">
         <div class="row date-time-wrapper middle-lg">
@@ -14,12 +13,10 @@
             <git-hub></git-hub>
           </div>
           <div class="col-lg-6 col-xs-10 col-xs-offset-1 col-lg-offset-0">
-            <div class="row"
-                style="height: 39vh; margin-bottom: 1vh;">
+            <div class="row" style="height: 39vh; margin-bottom: 1vh;">
               <hacker-news></hacker-news>
             </div>
-            <div class="row"
-                style="height: 40vh;">
+            <div class="row" style="height: 40vh;">
               <product-hunt></product-hunt>
             </div>
           </div>
@@ -32,10 +29,8 @@
             </span>
             <span class="pull-right day-night-toggle">
               <font-awesome-icon :icon="['fas', 'sun']"></font-awesome-icon>
-              <toggle-switch v-model="nightModeToggle"
-                  style="margin-right: 8px"></toggle-switch>
-              <font-awesome-icon :icon="['fas', 'moon']"
-                  style="margin: 0;"></font-awesome-icon>
+              <toggle-switch v-model="nightModeToggle" style="margin-right: 8px"></toggle-switch>
+              <font-awesome-icon :icon="['fas', 'moon']" style="margin: 0;"></font-awesome-icon>
             </span>
           </footer>
         </div>

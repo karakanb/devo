@@ -23,7 +23,11 @@ export default new Vuex.Store({
       updated_at: 0,
       data: [],
     },
-    updated_at_threshold: 5 * 60000,
+    updated_at_threshold: {
+      github: 5 * 60000,
+      hackernews: 5 * 60000,
+      producthunt: 30 * 60000,
+    },
   },
   mutations: {
     setGitHubData(state, data) {
@@ -48,8 +52,14 @@ export default new Vuex.Store({
       context.commit('setNightMode', isNightMode);
     },
 
-    async updateHackerNews(context, forced) {
-      const threshold = context.state.updated_at_threshold;
+    /**
+     * Update the Hacker News response content.
+     * Respects the memoization a threshold TTL, and can be forced. 
+     * @param {any} context context instance.
+     * @param {boolean} forced - whether this update is forced.
+     */
+    async updateHackerNews(context, forced = false) {
+      const threshold = context.state.updated_at_threshold.hackernews;
       const lastUpdate = context.state.hackernews.updated_at;
       const now = new Date();
 
@@ -58,8 +68,15 @@ export default new Vuex.Store({
         context.commit('setHackerNewsData', response.data.data);
       }
     },
+
+    /**
+     * Update the GitHub Trending response content.
+     * Respects the memoization a threshold TTL, and can be forced.
+     * @param {any} context context instance.
+     * @param {boolean} forced - whether this update is forced.
+     */
     async updateGitHub(context, forced = false) {
-      const threshold = context.state.updated_at_threshold;
+      const threshold = context.state.updated_at_threshold.github;
       const lastUpdate = context.state.github.updated_at;
       const now = new Date();
 
@@ -68,8 +85,15 @@ export default new Vuex.Store({
         context.commit('setGitHubData', response.data.data);
       }
     },
+
+    /**
+     * Update the Product Hunt response content.
+     * Respects the memoization a threshold TTL, and can be forced.
+     * @param {any} context context instance.
+     * @param {boolean} forced - whether this update is forced.
+     */
     async updateProductHunt(context, forced = false) {
-      const threshold = context.state.updated_at_threshold;
+      const threshold = context.state.updated_at_threshold.producthunt;
       const lastUpdate = context.state.producthunt.updated_at;
       const now = new Date();
 
