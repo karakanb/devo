@@ -23,7 +23,7 @@ export default new Vuex.Store({
       updated_at: 0,
       data: [],
     },
-    updated_at_threshold: {
+    updated_at_thresholds: {
       github: 5 * 60000,
       hackernews: 5 * 60000,
       producthunt: 30 * 60000,
@@ -59,7 +59,7 @@ export default new Vuex.Store({
      * @param {boolean} forced - whether this update is forced.
      */
     async updateHackerNews(context, forced = false) {
-      const threshold = context.state.updated_at_threshold.hackernews;
+      const threshold = context.state.updated_at_thresholds.hackernews;
       const lastUpdate = context.state.hackernews.updated_at;
       const now = new Date();
 
@@ -76,7 +76,7 @@ export default new Vuex.Store({
      * @param {boolean} forced - whether this update is forced.
      */
     async updateGitHub(context, forced = false) {
-      const threshold = context.state.updated_at_threshold.github;
+      const threshold = context.state.updated_at_thresholds.github;
       const lastUpdate = context.state.github.updated_at;
       const now = new Date();
 
@@ -93,7 +93,7 @@ export default new Vuex.Store({
      * @param {boolean} forced - whether this update is forced.
      */
     async updateProductHunt(context, forced = false) {
-      const threshold = context.state.updated_at_threshold.producthunt;
+      const threshold = context.state.updated_at_thresholds.producthunt;
       const lastUpdate = context.state.producthunt.updated_at;
       const now = new Date();
 
