@@ -83,8 +83,7 @@ export default {
 .gh-item .title {
   margin-bottom: 4px;
   height: 30px;
-  word-break: break-all;
-  display: initial;
+  display: inline-block;
 }
 
 .gh-item .description {
@@ -92,7 +91,9 @@ export default {
   color: #586069 !important;
   margin-bottom: 8px;
   padding: 4px 0;
-  word-break: break-all;
+  width: 100%;
+  overflow-wrap: break-word;
+  display: inline-block;
 }
 
 .night-mode .gh-item .description {
@@ -119,6 +120,7 @@ h3.repo-name {
   font-size: 20px;
   font-weight: 600;
   margin: 0;
+  word-break: break-word;
 }
 
 .text-normal {
