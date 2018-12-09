@@ -83,6 +83,8 @@ export default {
 .gh-item .title {
   margin-bottom: 4px;
   height: 30px;
+  word-break: break-all;
+  display: initial;
 }
 
 .gh-item .description {
@@ -90,6 +92,7 @@ export default {
   color: #586069 !important;
   margin-bottom: 8px;
   padding: 4px 0;
+  word-break: break-all;
 }
 
 .night-mode .gh-item .description {
