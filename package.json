@@ -10,14 +10,14 @@
     "docs": "rm -rf docs; cp -R dist docs"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.2",
-    "@fortawesome/free-brands-svg-icons": "^5.2.0",
-    "@fortawesome/free-solid-svg-icons": "^5.2.0",
-    "@fortawesome/vue-fontawesome": "^0.1.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.15",
+    "@fortawesome/free-brands-svg-icons": "^5.7.2",
+    "@fortawesome/free-solid-svg-icons": "^5.7.2",
+    "@fortawesome/vue-fontawesome": "^0.1.5",
     "axios": "^0.18.0",
     "flexboxgrid": "^6.3.1",
-    "vue": "^2.5.17",
-    "vuex": "^3.0.1",
+    "vue": "^2.6.6",
+    "vuex": "^3.1.0",
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
@@ -25,13 +25,13 @@
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-plugin-unit-mocha": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
-    "@vue/eslint-config-airbnb": "^3.0.1",
-    "@vue/test-utils": "^1.0.0-beta.24",
-    "chai": "^4.1.2",
+    "@vue/eslint-config-airbnb": "^3.0.5",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "chai": "^4.2.0",
     "chai-spies": "^1.0.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.6.6"
   },
   "eslintConfig": {
     "root": true,

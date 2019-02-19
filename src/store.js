@@ -54,7 +54,7 @@ export default new Vuex.Store({
 
     /**
      * Update the Hacker News response content.
-     * Respects the memoization a threshold TTL, and can be forced. 
+     * Respects the memoization a threshold TTL, and can be forced.
      * @param {any} context context instance.
      * @param {boolean} forced - whether this update is forced.
      */
