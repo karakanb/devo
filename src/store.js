@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
     settings: {
       is_night_mode: false,
+      is_twelve_hour: false
     },
     github: {
       updated_at: 0,
@@ -44,12 +45,18 @@ export default new Vuex.Store({
     },
     setNightMode(state, isNightMode) {
       state.settings.is_night_mode = isNightMode;
+    }, 
+    setTwelveHour(state, isTwelveHour) {
+      state.settings.is_twelve_hour = isTwelveHour;
     },
   },
   actions: {
-
     setNightMode(context, isNightMode) {
       context.commit('setNightMode', isNightMode);
+    },
+
+    setTwelveHour(context, isTwelveHour) {
+      context.commit('setTwelveHour', isTwelveHour);
     },
 
     /**

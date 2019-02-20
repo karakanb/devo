@@ -27,7 +27,11 @@
               <span class="semi-bold">devo</span> is an
               <a href="https://github.com/karakanb/devo">open source extension</a>.
             </span>
-            <span class="pull-right day-night-toggle">
+            <span class="pull-right toggle-switches">
+              <b>24</b>
+              <toggle-switch v-model="twelveHourToggle" style="margin-left:8px;margin-right: 8px"></toggle-switch>
+              <b>12</b>
+              <span style="margin-left:8px;margin-right:8px;">|</span>
               <font-awesome-icon :icon="['fas', 'sun']"></font-awesome-icon>
               <toggle-switch v-model="nightModeToggle" style="margin-right: 8px"></toggle-switch>
               <font-awesome-icon :icon="['fas', 'moon']" style="margin: 0;"></font-awesome-icon>
@@ -68,8 +72,9 @@ export default {
   },
   computed: {
     now() {
-      return `${this.nowTime
-        .getHours()
+      
+      return `${(this.nowTime
+        .getHours() % (this.isTwelveHour ? 12 : 24))
         .toString()
         .padStart(2, '0')}:${this.nowTime
         .getMinutes()
@@ -81,8 +86,16 @@ export default {
     },
     ...mapState({
       isNightMode: state => state.settings.is_night_mode,
+      isTwelveHour: state => state.settings.is_twelve_hour
     }),
-
+    twelveHourToggle: {
+      get() {
+        return this.isTwelveHour;
+      },
+      set(value) {
+        this.setTwelveHour(value);
+      },
+    },
     nightModeToggle: {
       get() {
         return this.isNightMode;
@@ -125,6 +138,7 @@ export default {
     },
 
     ...mapActions(['setNightMode']),
+    ...mapActions(['setTwelveHour']),
   },
 };
 </script>
@@ -153,7 +167,7 @@ body {
   box-shadow: 0 2px 8px 0 rgba(70, 73, 77, 0.16);
 }
 
-.day-night-toggle {
+.toggle-switches {
   display: flex;
   align-items: center;
 }
