@@ -56,7 +56,7 @@ export default {
 
     ...mapState({
       lines: state => state.hackernews.data,
-      isNightMode: state => state.settings.is_night_mode,
+      isNightMode: state => state.settings.isNightMode,
     }),
   },
 };

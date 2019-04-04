@@ -5,41 +5,27 @@ import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
+const GITHUB = 'github';
+const HACKERNEWS = 'hackernews';
+const PRODUCTHUNT = 'producthunt';
+
 export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
     settings: {
-      is_night_mode: false,
+      isNightMode: false,
     },
     github: {
       updated_at: 0,
       data: [],
-
-      title: 'GitHub Trending',
-      icon: '["fab", "github"]',
-      titleFontColor: 'ffffff',
-      titleBackgroundColor: '25292f',
-      externalLink: 'https://github.com/trending',
     },
     hackernews: {
       updated_at: 0,
       data: [],
-
-      title: 'Hacker News',
-      icon: '["fab", "hacker-news-square"]',
-      titleFontColor: 'ffffff',
-      titleBackgroundColor: 'fe6501',
-      externalLink: 'https://news.ycombinator.com',
     },
     producthunt: {
       updated_at: 0,
       data: [],
-
-      title: 'Product Hunt',
-      icon: '["fab", "product-hunt"]',
-      titleFontColor: 'ffffff',
-      titleBackgroundColor: 'da5430',
-      externalLink: 'https://www.producthunt.com',
     },
     updated_at_thresholds: {
       github: 5 * 60000,
@@ -61,7 +47,7 @@ export default new Vuex.Store({
       state.producthunt.updated_at = Date.now();
     },
     setNightMode(state, isNightMode) {
-      state.settings.is_night_mode = isNightMode;
+      state.settings.isNightMode = isNightMode;
     },
   },
   actions: {
@@ -118,6 +104,21 @@ export default new Vuex.Store({
       if (!lastUpdate || now - lastUpdate > threshold || forced) {
         const response = await axios.get(`${process.env.VUE_APP_API_BASE_URI}/producthunt`);
         context.commit('setProductHuntData', response.data.data);
+      }
+    },
+
+    async updatePlatformData({ dispatch }, { platform, forced }) {
+      switch (platform) {
+        case GITHUB:
+          return dispatch('updateGitHub', forced);
+        case HACKERNEWS:
+          return dispatch('updateHackerNews', forced);
+        case PRODUCTHUNT:
+          return dispatch('updateProductHunt', forced);
+        default:
+          await dispatch('updateGitHub', forced);
+          await dispatch('updateHackerNews', forced);
+          return dispatch('updateProductHunt', forced);
       }
     },
   },

@@ -1,53 +1,37 @@
 <template>
   <card
-    :title-background-color="titleBackgroundColorBasedOnMode"
-    :title-font-color="titleFontColor"
-    :icon="icon"
-    :iconOnClick="updateData"
-    :externalLink="externalLink"
-    :title="title"
+    :titleBackgroundColor="this.titleBackgroundColorBasedOnMode"
+    :titleFontColor="this.options.titleFontColor"
+    :icon="this.options.icon"
+    :externalLink="this.options.externalLink"
+    :title="this.options.title"
+    :iconOnClick="this.updateData"
   >
     <template slot="card-body">
       <div class="gh-list">
         <loading :color="loadingColorBasedOnMode" v-if="loading"></loading>
-        <slot name="card-body"></slot>
+        <slot v-else name="card-body">
+          <component :is="this.options.bodyComponentName"></component>
+        </slot>
       </div>
     </template>
   </card>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import Loading from '@/components/Loading.vue';
+import { mapState, mapActions } from 'vuex';
+import settings from '@/settings';
 import Card from '@/components/Card.vue';
+import Loading from '@/components/Loading.vue';
+import * as BodyComponents from '@/components/bodies';
 
 export default {
   name: 'PlatformCard',
-  components: { Loading, Card },
+  components: { Loading, Card, ...BodyComponents },
   props: {
-    title: {
+    platform: {
       type: String,
       required: true,
-    },
-    titleBackgroundColor: {
-      type: String,
-      required: true,
-    },
-    titleFontColor: {
-      type: String,
-      required: true,
-    },
-    icon: {
-      required: true,
-      type: Array,
-    },
-    externalLink: {
-      required: true,
-      type: String,
-    },
-    updateDataFunction: {
-      required: true,
-      type: Function,
     },
   },
   data() {
@@ -61,39 +45,29 @@ export default {
   methods: {
     async updateData(forced = true) {
       this.loading = true;
-      await this.updateDataFunction(forced);
+      await this.updatePlatformData({ platform: this.platform, forced });
       this.loading = false;
     },
+
+    ...mapActions(['updatePlatformData']),
   },
 
   computed: {
     titleBackgroundColorBasedOnMode() {
-      return this.isNightMode ? '31363e' : this.titleBackgroundColor;
+      return this.isNightMode ? this.options.nightMode.titleBackgroundColor : this.options.titleBackgroundColor;
     },
 
     loadingColorBasedOnMode() {
-      return this.isNightMode ? 'ffffff' : this.titleBackgroundColor;
+      return this.isNightMode ? this.options.nightMode.loadingColor : this.options.loadingColor;
+    },
+
+    options() {
+      return settings.platforms[this.platform];
     },
 
     ...mapState({
-      isNightMode: state => state.settings.is_night_mode,
+      isNightMode: state => state.settings.isNightMode,
     }),
   },
 };
 </script>
-
-<style>
-.gh-list {
-  height: 100%;
-}
-
-.github-card .card-body {
-  max-height: 80vh;
-}
-
-@media only screen and (min-width: 1200px) {
-  .github-card .card-body {
-    max-height: initial;
-  }
-}
-</style>

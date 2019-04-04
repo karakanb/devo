@@ -10,19 +10,11 @@
         </div>
         <div class="row cards-wrapper">
           <div class="col-lg-6 col-xs-10 col-xs-offset-1 col-lg-offset-0 left-pane">
-            <platform-card
-              title="GitHub Trending"
-              titleBackgroundColor="25292f"
-              title-font-color="ffffff"
-              :icon="['fab', 'github']"
-              externalLink="https://github.com/trending"
-              :updateDataFunction="this.updateGitHub"
-            >
-            </platform-card>
+            <platform-card platform="github"></platform-card>
           </div>
           <div class="col-lg-6 col-xs-10 col-xs-offset-1 col-lg-offset-0">
             <div class="row" style="height: 39vh; margin-bottom: 1vh;">
-              <hacker-news></hacker-news>
+              <platform-card platform="hackernews"></platform-card>
             </div>
             <div class="row" style="height: 40vh;">
               <product-hunt></product-hunt>
@@ -91,7 +83,7 @@ export default {
       return this.formatDate(this.nowTime);
     },
     ...mapState({
-      isNightMode: state => state.settings.is_night_mode,
+      isNightMode: state => state.settings.isNightMode,
     }),
 
     nightModeToggle: {

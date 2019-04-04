@@ -1,21 +1,17 @@
 <template>
   <div class="card">
-    <div class="card-title"
-         :style="titleSpanStyle">
-      <font-awesome-icon class="custom-icon"
-                         :icon="icon"></font-awesome-icon>
-      <div class="card-title-text">{{title}}</div>
+    <div class="card-title" :style="titleSpanStyle">
+      <font-awesome-icon class="custom-icon" :icon="icon"></font-awesome-icon>
+      <div class="card-title-text">{{ title }}</div>
       <div class="pull-right">
-        <div class="title-icon external-icon"
-             :style="iconStyle">
+        <div class="title-icon external-icon" :style="iconStyle">
           <a :href="externalLink">
             <font-awesome-icon :icon="['fas', 'external-link-alt']"></font-awesome-icon>
           </a>
         </div>
-        <div class="title-icon refresh-icon"
-             :style="iconStyle">
-          <font-awesome-icon class='fa-refresh-icon' :icon="['fas', 'sync-alt']"
-                             @click="iconOnClick"></font-awesome-icon>
+        <div class="title-icon refresh-icon" :style="iconStyle">
+          <font-awesome-icon class="fa-refresh-icon" :icon="['fas', 'sync-alt']" @click="iconOnClick">
+          </font-awesome-icon>
         </div>
       </div>
     </div>
@@ -23,7 +19,6 @@
       <slot name="card-body"></slot>
     </div>
   </div>
-
 </template>
 <script>
 export default {
@@ -57,9 +52,7 @@ export default {
 
   computed: {
     titleSpanStyle() {
-      return `background-color: #${this.titleBackgroundColor}; color: #${
-        this.titleFontColor
-      }`;
+      return `background-color: #${this.titleBackgroundColor}; color: #${this.titleFontColor}`;
     },
     iconStyle() {
       return `color: #${this.titleFontColor}b3`;

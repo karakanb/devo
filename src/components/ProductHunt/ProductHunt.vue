@@ -55,7 +55,7 @@ export default {
 
     ...mapState({
       lines: state => state.producthunt.data,
-      isNightMode: state => state.settings.is_night_mode,
+      isNightMode: state => state.settings.isNightMode,
     }),
   },
 };
