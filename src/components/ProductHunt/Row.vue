@@ -3,56 +3,50 @@
     <div class="row" style="display:flex">
       <div class="thumbnail">
         <div class="image-container">
-          <img :src="thumbnailLink"
-          :srcset="`${thumbnailLink}&dpr=2 2x`"
-               width="80"
-               height="80">
+          <img :src="thumbnailLink" :srcset="`${thumbnailLink}&dpr=2 2x`" width="80" height="80" />
         </div>
       </div>
       <div class="product-info">
         <div class="row title-row">
-          <a :href="itemLink"> {{item.name}}</a>
+          <a :href="itemLink"> {{ item.name }}</a>
         </div>
         <h3 class="row description">
-          {{item.tagline}}
+          {{ item.tagline }}
         </h3>
         <div class="row meta between-lg">
           <span class="ph-tag-wrapper">
-            <span class="small-info-box link-box"
-                  v-if="topicExists">
+            <span class="small-info-box link-box" v-if="topicExists">
               <a :href="firstTopicLink">
-                {{item.topics[0].name}}
+                {{ item.topics[0].name }}
               </a>
             </span>
-            <span class="remaining-topic-count"
-                  v-if="remainingTopicCount > 0"
-                  :title="remainingTopics">+{{remainingTopicCount}}</span>
+            <span class="remaining-topic-count" v-if="remainingTopicCount > 0" :title="remainingTopics"
+              >+{{ remainingTopicCount }}</span
+            >
           </span>
           <span class="ph-action-wrapper">
             <span class="small-info-box action vote-count white-background">
               <span>
                 <font-awesome-icon :icon="['fas', 'chevron-up']"></font-awesome-icon>
-                {{item.votes_count}}
+                {{ item.votes_count }}
               </span>
             </span>
             <span class="small-info-box action white-background">
               <span>
                 <font-awesome-icon :icon="['fas', 'comment']"></font-awesome-icon>
-                {{item.comments_count}}
+                {{ item.comments_count }}
               </span>
             </span>
           </span>
-
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ProductHuntRow',
+  name: 'Row',
   props: {
     item: {
       required: true,
@@ -278,7 +272,7 @@ export default {
 
 .product-info {
   flex: 1;
-  padding-left: .5rem;
-  padding-right: .5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 </style>

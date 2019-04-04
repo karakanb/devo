@@ -42,10 +42,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import GitHub from '@/components/GitHub/GitHub.vue';
 import Card from './components/Card.vue';
-import HackerNews from './components/HackerNews/HackerNews.vue';
-import ProductHunt from './components/ProductHunt/ProductHunt.vue';
 import ToggleSwitch from './components/ToggleSwitch.vue';
 import PlatformCard from './components/PlatformCard.vue';
 
@@ -53,9 +50,6 @@ export default {
   name: 'app',
   components: {
     Card,
-    HackerNews,
-    GitHub,
-    ProductHunt,
     ToggleSwitch,
     PlatformCard,
   },

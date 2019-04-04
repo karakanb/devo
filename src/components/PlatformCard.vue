@@ -8,12 +8,10 @@
     :iconOnClick="this.updateData"
   >
     <template slot="card-body">
-      <div class="gh-list">
-        <loading :color="loadingColorBasedOnMode" v-if="loading"></loading>
-        <slot v-else name="card-body">
-          <component :is="this.options.bodyComponentName"></component>
-        </slot>
-      </div>
+      <loading :color="loadingColorBasedOnMode" v-if="loading"></loading>
+      <slot v-else name="card-body">
+        <component :is="this.options.bodyComponentName"></component>
+      </slot>
     </template>
   </card>
 </template>

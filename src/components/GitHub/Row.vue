@@ -3,38 +3,34 @@
     <div class="row title">
       <h3 class="repo-name">
         <a :href="repoLink">
-          <span class="text-normal"> {{item.repo.owner}} /</span> {{item.repo.name}}
+          <span class="text-normal"> {{ item.repo.owner }} /</span> {{ item.repo.name }}
         </a>
       </h3>
     </div>
     <div class="row description">
-      {{item.repo.description}}
+      {{ item.repo.description }}
     </div>
     <div class="row meta-row text-grey">
-      <span v-if="item.language"
-          class="language m-r-16">
-        <span class="language-color inline-block"
-            :style="{backgroundColor: item.language.color}"></span>
-        <span class="language-text">{{item.language.is}}</span>
+      <span v-if="item.language" class="language m-r-16">
+        <span class="language-color inline-block" :style="{ backgroundColor: item.language.color }"></span>
+        <span class="language-text">{{ item.language.is }}</span>
       </span>
 
-      <div v-if="item.stars"
-          class="icon-with-text inline-block m-r-16 stars">
+      <div v-if="item.stars" class="icon-with-text inline-block m-r-16 stars">
         <a :href="starsLink">
           <font-awesome-icon :icon="['fas', 'star']"></font-awesome-icon>
-          <span>{{Number(item.stars.count).toLocaleString()}}</span>
+          <span>{{ Number(item.stars.count).toLocaleString() }}</span>
         </a>
       </div>
-      <div v-if="item.forks"
-          class="icon-with-text inline-block m-r-16 forks">
+      <div v-if="item.forks" class="icon-with-text inline-block m-r-16 forks">
         <a :href="forksLink">
           <font-awesome-icon :icon="['fas', 'code-branch']"></font-awesome-icon>
-          <span>{{Number(item.forks.count).toLocaleString()}}</span>
+          <span>{{ Number(item.forks.count).toLocaleString() }}</span>
         </a>
       </div>
       <div class="icon-with-text inline-block pull-right stars-today">
         <font-awesome-icon :icon="['fas', 'star']"></font-awesome-icon>
-        <span>{{Number(item.todayStars).toLocaleString()}} stars today</span>
+        <span>{{ Number(item.todayStars).toLocaleString() }} stars today</span>
       </div>
     </div>
   </div>
@@ -42,7 +38,7 @@
 
 <script>
 export default {
-  name: 'GitHubRow',
+  name: 'Row',
   props: {
     item: {
       type: Object,
