@@ -14,14 +14,32 @@ export default new Vuex.Store({
     github: {
       updated_at: 0,
       data: [],
+
+      title: 'GitHub Trending',
+      icon: '["fab", "github"]',
+      titleFontColor: 'ffffff',
+      titleBackgroundColor: '25292f',
+      externalLink: 'https://github.com/trending',
     },
     hackernews: {
       updated_at: 0,
       data: [],
+
+      title: 'Hacker News',
+      icon: '["fab", "hacker-news-square"]',
+      titleFontColor: 'ffffff',
+      titleBackgroundColor: 'fe6501',
+      externalLink: 'https://news.ycombinator.com',
     },
     producthunt: {
       updated_at: 0,
       data: [],
+
+      title: 'Product Hunt',
+      icon: '["fab", "product-hunt"]',
+      titleFontColor: 'ffffff',
+      titleBackgroundColor: 'da5430',
+      externalLink: 'https://www.producthunt.com',
     },
     updated_at_thresholds: {
       github: 5 * 60000,
