@@ -2,11 +2,6 @@ const MINUTE = 60000;
 const DEFAULT_NIGHTMODE_BACKGROUND = '31363e';
 
 export default {
-  settings: {
-    nightMode: {
-      backgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
-    },
-  },
   platforms: {
     github: {
       title: 'GitHub Trending',
@@ -48,8 +43,17 @@ export default {
       icon: ['fab', 'product-hunt'],
       titleFontColor: 'ffffff',
       titleBackgroundColor: 'da5430',
+      loadingColor: 'da5430',
+
       externalLink: 'https://www.producthunt.com',
+      bodyComponentName: 'ProductHuntBody',
       updatedAtThreshold: 30 * MINUTE,
+
+      nightMode: {
+        titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
+        titleFontColor: 'da5430',
+        loadingColor: 'da5430',
+      },
     },
   },
 };

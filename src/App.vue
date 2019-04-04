@@ -17,7 +17,7 @@
               <platform-card platform="hackernews"></platform-card>
             </div>
             <div class="row" style="height: 40vh;">
-              <product-hunt></product-hunt>
+              <platform-card platform="producthunt"></platform-card>
             </div>
           </div>
         </div>

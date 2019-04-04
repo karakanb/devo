@@ -1,7 +1,7 @@
 <template>
   <card
     :titleBackgroundColor="this.titleBackgroundColorBasedOnMode"
-    :titleFontColor="this.options.titleFontColor"
+    :titleFontColor="this.titleFontColorBasedOnMode"
     :icon="this.options.icon"
     :externalLink="this.options.externalLink"
     :title="this.options.title"
@@ -53,6 +53,10 @@ export default {
   },
 
   computed: {
+    titleFontColorBasedOnMode() {
+      return this.isNightMode ? this.options.nightMode.titleFontColor : this.options.titleFontColor;
+    },
+
     titleBackgroundColorBasedOnMode() {
       return this.isNightMode ? this.options.nightMode.titleBackgroundColor : this.options.titleBackgroundColor;
     },
