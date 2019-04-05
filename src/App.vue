@@ -65,13 +65,16 @@ export default {
   },
   computed: {
     now() {
-      return `${this.nowTime
+      const hour = this.nowTime
         .getHours()
         .toString()
-        .padStart(2, '0')}:${this.nowTime
+        .padStart(2, '0');
+      const minute = this.nowTime
         .getMinutes()
         .toString()
-        .padStart(2, '0')}`;
+        .padStart(2, '0');
+
+      return `${hour}:${minute}`;
     },
     today() {
       return this.formatDate(this.nowTime);
