@@ -1,6 +1,8 @@
 <template>
-  <div class="wrapper" @click.self="toggleDropdown">
-    {{ selectedPlatformName }}
+  <div class="wrapper">
+    <span class="select-title" @click.self="toggleDropdown">
+      {{ selectedPlatformName }} <span class="select-icon">▼</span></span
+    >
     <ul v-if="dropdownVisible" class="options round-borders with-shadow">
       <li
         v-for="platform in platforms"
@@ -73,6 +75,7 @@ export default {
   width: 100%;
   padding: 4px;
   display: inline-block;
+  cursor: pointer;
 }
 
 .options {
@@ -83,14 +86,27 @@ export default {
   position: absolute;
   background: white;
   color: black;
+  margin-top: -24px;
 }
 
 .option-item {
-  padding: 8px 12px;
+  padding: 8px 60px 8px 12px;
   cursor: pointer;
+  font-weight: 200;
 }
 
 .option-item:hover {
   background: #f5f7fa;
+}
+
+.select-icon {
+  display: none;
+  color: #ffffff82;
+  font-size: 14px;
+  padding-left: 8px;
+}
+
+.select-title:hover .select-icon {
+  display: inline-block;
 }
 </style>
