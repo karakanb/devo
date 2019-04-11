@@ -10,14 +10,14 @@
         </div>
         <div class="row cards-wrapper">
           <div class="col-lg-6 col-xs-10 col-xs-offset-1 col-lg-offset-0 left-pane">
-            <platform-card platform="github"></platform-card>
+            <platform-card platform="github" :cardIndex="0"></platform-card>
           </div>
           <div class="col-lg-6 col-xs-10 col-xs-offset-1 col-lg-offset-0">
             <div class="row" style="height: 39vh; margin-bottom: 1vh;">
-              <platform-card platform="hackernews"></platform-card>
+              <platform-card platform="hackernews" :cardIndex="1"></platform-card>
             </div>
             <div class="row" style="height: 40vh;">
-              <platform-card platform="producthunt"></platform-card>
+              <platform-card platform="producthunt" :cardIndex="2"></platform-card>
             </div>
           </div>
         </div>
@@ -136,6 +136,14 @@ body {
 
 #app.night-mode {
   background-color: #25292f;
+}
+
+.round-borders {
+  border-radius: 4px;
+}
+
+.with-shadow {
+  box-shadow: 0 2px 8px 0 rgba(70, 73, 77, 0.16);
 }
 
 .card {

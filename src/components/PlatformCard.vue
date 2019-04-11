@@ -7,6 +7,9 @@
     :title="this.options.title"
     :iconOnClick="this.updateData"
   >
+    <template slot="card-title">
+      <custom-select :cardIndex="cardIndex"></custom-select>
+    </template>
     <template slot="card-body">
       <loading :color="loadingColorBasedOnMode" v-if="loading"></loading>
       <slot v-else name="card-body">
@@ -17,18 +20,19 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import settings from '@/settings';
 import Card from '@/components/Card.vue';
 import Loading from '@/components/Loading.vue';
+import CustomSelect from '@/components/PlatformSelect.vue';
 import * as BodyComponents from '@/components/bodies';
 
 export default {
   name: 'PlatformCard',
-  components: { Loading, Card, ...BodyComponents },
+  components: { Loading, Card, CustomSelect, ...BodyComponents },
   props: {
-    platform: {
-      type: String,
+    cardIndex: {
+      type: Number,
       required: true,
     },
   },
@@ -38,6 +42,7 @@ export default {
     };
   },
   async created() {
+    console.log('cardIndex', this.cardIndex);
     this.updateData(false);
   },
   methods: {
@@ -51,6 +56,10 @@ export default {
   },
 
   computed: {
+    platform() {
+      return this.getPlatformByIndex(this.cardIndex);
+    },
+
     titleFontColorBasedOnMode() {
       return this.isNightMode ? this.options.nightMode.titleFontColor : this.options.titleFontColor;
     },
@@ -70,6 +79,8 @@ export default {
     ...mapState({
       isNightMode: state => state.settings.isNightMode,
     }),
+
+    ...mapGetters(['getPlatformByIndex']),
   },
 };
 </script>

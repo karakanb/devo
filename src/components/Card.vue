@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-title" :style="titleSpanStyle">
       <font-awesome-icon class="custom-icon" :icon="icon"></font-awesome-icon>
-      <div class="card-title-text">{{ title }}</div>
+      <div class="card-title-text"><slot name="card-title"></slot></div>
       <div class="pull-right">
         <div class="title-icon external-icon" :style="iconStyle">
           <a :href="externalLink">

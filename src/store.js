@@ -10,10 +10,11 @@ const HACKERNEWS = 'hackernews';
 const PRODUCTHUNT = 'producthunt';
 
 export default new Vuex.Store({
-  plugins: [createPersistedState()],
+  // plugins: [createPersistedState()],
   state: {
     settings: {
       isNightMode: false,
+      cards: [GITHUB, HACKERNEWS, PRODUCTHUNT],
     },
     github: {
       updated_at: 0,
@@ -49,11 +50,17 @@ export default new Vuex.Store({
     setNightMode(state, isNightMode) {
       state.settings.isNightMode = isNightMode;
     },
+    setCardPlatform(state, { index, platform }) {
+      Vue.set(state.settings.cards, index, platform);
+    },
   },
   actions: {
-
     setNightMode(context, isNightMode) {
       context.commit('setNightMode', isNightMode);
+    },
+
+    setCardPlatform(context, payload) {
+      context.commit('setCardPlatform', payload);
     },
 
     /**
@@ -121,5 +128,8 @@ export default new Vuex.Store({
           return dispatch('updateProductHunt', forced);
       }
     },
+  },
+  getters: {
+    getPlatformByIndex: state => cardIndex => state.settings.cards[cardIndex],
   },
 });
