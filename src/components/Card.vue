@@ -123,4 +123,7 @@ svg,
   text-decoration: none;
   color: inherit;
 }
+.title-icon svg {
+  transform: translateY(-8%);
+}
 </style>

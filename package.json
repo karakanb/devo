@@ -44,7 +44,8 @@
     ],
     "rules": {
       "import/extensions": "never",
-      "no-param-reassign": 0
+      "no-param-reassign": 0,
+      "arrow-parens": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"

@@ -42,7 +42,6 @@ export default {
     };
   },
   async created() {
-    console.log('cardIndex', this.cardIndex);
     this.updateData(false);
   },
   methods: {

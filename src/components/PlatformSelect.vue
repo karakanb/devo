@@ -1,16 +1,21 @@
 <template>
   <div class="wrapper">
-    <span class="select-title" @click.self="toggleDropdown">
-      {{ selectedPlatformName }} <span class="select-icon">▼</span></span
+    <span class="select-title" @click.self="toggleDropdown" v-outside="closeDropdown">
+      {{ selectedPlatformTitle }} <span class="select-icon">▼</span></span
     >
     <ul v-if="dropdownVisible" class="options round-borders with-shadow">
       <li
         v-for="platform in platforms"
-        :key="platform.index"
-        @click="selectPlatform(platform.index)"
+        :key="platform.name"
+        @click="selectPlatform(platform.name)"
         class="option-item round-borders"
+        :class="{ selected: platform.name === selectedPlatformName }"
       >
-        {{ platform.name }}
+        <span class="platform-color-box round-borders" :style="{ backgroundColor: `#${platform.color}` }"> </span>
+        <span class="platform-title">{{ platform.title }}</span>
+        <span v-if="platform.name === selectedPlatformName" class="platform-selected-icon"
+          ><font-awesome-icon icon="check"></font-awesome-icon
+        ></span>
       </li>
     </ul>
   </div>
@@ -35,6 +40,9 @@ export default {
     toggleDropdown() {
       this.dropdownVisible = !this.dropdownVisible;
     },
+    closeDropdown() {
+      this.dropdownVisible = false;
+    },
     selectPlatform(platform) {
       this.dropdownVisible = false;
       console.log('dropdown noldu', this.dropdownVisible);
@@ -51,8 +59,8 @@ export default {
       for (const platform of platformNames) {
         const details = settings.platforms[platform];
         platformList.push({
-          index: platform,
-          name: details.title,
+          name: platform,
+          title: details.title,
           color: details.titleBackgroundColor,
         });
       }
@@ -60,12 +68,33 @@ export default {
       return platformList;
     },
 
-    selectedPlatformName() {
+    selectedPlatformTitle() {
       const platform = this.getPlatformByIndex(this.cardIndex);
       return settings.platforms[platform].title;
     },
 
+    selectedPlatformName() {
+      return this.getPlatformByIndex(this.cardIndex);
+    },
+
     ...mapGetters(['getPlatformByIndex']),
+  },
+  directives: {
+    outside: {
+      bind(el, binding, vnode) {
+        el.clickOutsideEvent = event => {
+          // check that click was outside the el and his childrens
+          if (!(el === event.target || el.contains(event.target))) {
+            // if it was, call method provided in attribute value
+            vnode.context[binding.expression](event);
+          }
+        };
+        document.body.addEventListener('click', el.clickOutsideEvent);
+      },
+      unbind(el) {
+        document.body.removeEventListener('click', el.clickOutsideEvent);
+      },
+    },
   },
 };
 </script>
@@ -73,7 +102,6 @@ export default {
 <style scoped>
 .wrapper {
   width: 100%;
-  padding: 4px;
   display: inline-block;
   cursor: pointer;
 }
@@ -86,15 +114,19 @@ export default {
   position: absolute;
   background: white;
   color: black;
-  margin-top: -24px;
+  margin-top: 4px;
 }
 
 .option-item {
-  padding: 8px 60px 8px 12px;
+  padding: 8px 12px 8px 12px;
   cursor: pointer;
   font-weight: 200;
+  display: flex;
+  align-items: center;
+  min-width: 200px;
 }
 
+.option-item.selected,
 .option-item:hover {
   background: #f5f7fa;
 }
@@ -103,10 +135,22 @@ export default {
   display: none;
   color: #ffffff82;
   font-size: 14px;
-  padding-left: 8px;
+  margin-left: 8px;
 }
 
 .select-title:hover .select-icon {
   display: inline-block;
+}
+
+.platform-color-box {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.platform-selected-icon {
+  color: #576068;
+  font-size: 12px;
+  margin-left: auto;
 }
 </style>
