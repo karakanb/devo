@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card with-shadow">
     <div class="card-title" :style="titleSpanStyle">
       <font-awesome-icon class="custom-icon" :icon="icon"></font-awesome-icon>
       <div class="card-title-text"><slot name="card-title"></slot></div>

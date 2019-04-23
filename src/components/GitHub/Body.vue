@@ -18,3 +18,8 @@ export default {
   },
 };
 </script>
+<style>
+.gh-list > :last-child {
+  border: none;
+}
+</style>

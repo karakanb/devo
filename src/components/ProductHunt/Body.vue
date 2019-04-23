@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style>
-.ph-list {
-  height: 100%;
+.ph-list > :last-child {
+  border: none;
 }
 </style>

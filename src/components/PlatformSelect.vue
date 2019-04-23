@@ -56,14 +56,14 @@ export default {
     platforms() {
       const platformList = [];
       const platformNames = Object.keys(settings.platforms);
-      for (const platform of platformNames) {
+      platformNames.forEach((platform) => {
         const details = settings.platforms[platform];
         platformList.push({
           name: platform,
           title: details.title,
-          color: details.titleBackgroundColor,
+          color: this.isNightMode ? details.nightMode.titleFontColor : details.titleBackgroundColor,
         });
-      }
+      });
 
       return platformList;
     },
@@ -78,6 +78,9 @@ export default {
     },
 
     ...mapGetters(['getPlatformByIndex']),
+    ...mapState({
+      isNightMode: state => state.settings.isNightMode,
+    }),
   },
   directives: {
     outside: {
@@ -146,11 +149,30 @@ export default {
   width: 16px;
   height: 16px;
   margin-right: 8px;
+  transition: box-shadow 0.1s;
+}
+.option-item:hover .platform-color-box {
+  box-shadow: 0 2px 8px 0 rgba(70, 73, 77, 0.16);
 }
 
 .platform-selected-icon {
   color: #576068;
   font-size: 12px;
   margin-left: auto;
+}
+
+/* Here comes night-mode styling. */
+.night-mode .options {
+  background-color: #25292f;
+  color: white;
+}
+
+.night-mode .option-item.selected,
+.night-mode .option-item:hover {
+  background: #31363e;
+}
+
+.night-mode .platform-selected-icon {
+  color: #949494;
 }
 </style>

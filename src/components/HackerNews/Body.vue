@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style>
-.hn-list {
-  height: 100%;
+.hn-list > :last-child {
+  border: none;
 }
 </style>

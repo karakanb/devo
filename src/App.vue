@@ -146,11 +146,14 @@ body {
   box-shadow: 0 2px 8px 0 rgba(70, 73, 77, 0.16);
 }
 
+.night-mode .with-shadow {
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
+}
+
 .card {
   border-radius: 4px;
   -webkit-border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 2px 8px 0 rgba(70, 73, 77, 0.16);
 }
 
 .day-night-toggle {
