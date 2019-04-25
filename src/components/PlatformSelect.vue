@@ -1,8 +1,14 @@
 <template>
-  <div class="wrapper">
-    <span class="select-title" @click.self="toggleDropdown" v-outside="closeDropdown">
-      {{ selectedPlatformTitle }} <span class="select-icon">▼</span></span
-    >
+  <div
+    class="round-borders wrapper"
+    :class="{ 'hovered-wrapper': this.dropdownVisible }"
+    @click="toggleDropdown"
+    v-outside="closeDropdown"
+  >
+    <div class="select-title-wrapper">
+      <span class="select-title"> {{ selectedPlatformTitle }}</span>
+      <span class="select-icon"><font-awesome-icon icon="caret-down"></font-awesome-icon></span>
+    </div>
     <ul v-if="dropdownVisible" class="options round-borders with-shadow">
       <li
         v-for="platform in platforms"
@@ -56,7 +62,7 @@ export default {
     platforms() {
       const platformList = [];
       const platformNames = Object.keys(settings.platforms);
-      platformNames.forEach((platform) => {
+      platformNames.forEach(platform => {
         const details = settings.platforms[platform];
         platformList.push({
           name: platform,
@@ -107,6 +113,7 @@ export default {
   width: 100%;
   display: inline-block;
   cursor: pointer;
+  min-width: 180px;
 }
 
 .options {
@@ -137,12 +144,36 @@ export default {
 .select-icon {
   display: none;
   color: #ffffff82;
-  font-size: 14px;
-  margin-left: 8px;
+  margin-left: auto;
 }
 
-.select-title:hover .select-icon {
+.select-icon > svg {
+  margin-top: -1vh;
+}
+
+.select-title {
+  padding: 5px;
   display: inline-block;
+}
+
+.hovered-wrapper,
+.wrapper:hover {
+  border: 1px solid #ffffff82;
+}
+
+.hovered-wrapper .select-title,
+.wrapper:hover .select-title {
+  padding: 4px;
+}
+
+.hovered-wrapper .select-icon,
+.wrapper:hover .select-icon {
+  display: inline-block;
+}
+
+.select-title-wrapper {
+  display: flex;
+  align-items: center;
 }
 
 .platform-color-box {
@@ -174,5 +205,10 @@ export default {
 
 .night-mode .platform-selected-icon {
   color: #949494;
+}
+
+.night-mode .hovered-wrapper,
+.night-mode .wrapper:hover {
+  border: 1px solid rgb(130, 130, 130);
 }
 </style>
