@@ -7,7 +7,9 @@
   >
     <div class="select-title-wrapper">
       <span class="select-title"> {{ selectedPlatformTitle }}</span>
-      <span class="select-icon"><font-awesome-icon icon="caret-down"></font-awesome-icon></span>
+      <span class="select-icon">
+        <font-awesome-icon icon="caret-down"></font-awesome-icon>
+      </span>
     </div>
     <ul v-if="dropdownVisible" class="options round-borders with-shadow">
       <li
@@ -17,11 +19,11 @@
         class="option-item round-borders"
         :class="{ selected: platform.name === selectedPlatformName }"
       >
-        <span class="platform-color-box round-borders" :style="{ backgroundColor: `#${platform.color}` }"> </span>
+        <span class="platform-color-box round-borders" :style="{ backgroundColor: `#${platform.color}` }"></span>
         <span class="platform-title">{{ platform.title }}</span>
-        <span v-if="platform.name === selectedPlatformName" class="platform-selected-icon"
-          ><font-awesome-icon icon="check"></font-awesome-icon
-        ></span>
+        <span v-if="platform.name === selectedPlatformName" class="platform-selected-icon">
+          <font-awesome-icon icon="check"></font-awesome-icon>
+        </span>
       </li>
     </ul>
   </div>
@@ -30,6 +32,7 @@
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex';
 import settings from '@/settings';
+
 export default {
   props: {
     cardIndex: {
@@ -51,10 +54,7 @@ export default {
     },
     selectPlatform(platform) {
       this.dropdownVisible = false;
-      console.log('dropdown noldu', this.dropdownVisible);
-      this.setCardPlatform({ index: this.cardIndex, platform: platform });
-      console.log('selected platform', platform);
-      console.log('dropdown tekrar', this.dropdownVisible);
+      this.setCardPlatform({ index: this.cardIndex, platform });
     },
     ...mapActions(['setCardPlatform']),
   },

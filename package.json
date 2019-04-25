@@ -45,7 +45,13 @@
     "rules": {
       "import/extensions": "never",
       "no-param-reassign": 0,
-      "arrow-parens": "off"
+      "arrow-parens": "off",
+      "max-len": [
+        "error",
+        {
+          "code": 120
+        }
+      ]
     },
     "parserOptions": {
       "parser": "babel-eslint"
