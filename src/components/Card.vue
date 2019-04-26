@@ -3,7 +3,7 @@
     <div class="card-title" :style="titleSpanStyle">
       <font-awesome-icon class="custom-icon" :icon="icon"></font-awesome-icon>
       <div class="card-title-text"><slot name="card-title"></slot></div>
-      <div class="pull-right">
+      <div class="pull-right external-icons">
         <div class="title-icon external-icon" :style="iconStyle">
           <a :href="externalLink">
             <font-awesome-icon :icon="['fas', 'external-link-alt']"></font-awesome-icon>
@@ -71,6 +71,8 @@ export default {
   font-size: 16px;
   text-align: left;
   padding: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .card-body {
@@ -93,12 +95,12 @@ export default {
 }
 
 svg {
-  margin: -4px 8px -4px 0px;
-  white-space: nowrap;
+  margin: -8px 8px -4px 0px;
 }
 
 .custom-icon {
   font-size: 32px !important;
+  margin: -4px 8px -4px 0px !important;
 }
 
 svg,
@@ -116,7 +118,7 @@ svg,
 }
 
 .pull-right {
-  float: right;
+  margin-left: auto;
 }
 
 .title-icon a {
