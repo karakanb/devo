@@ -158,7 +158,7 @@ export default {
 
 .hovered-wrapper,
 .wrapper:hover {
-  border: 1px solid #ffffff82;
+  border: 1px solid rgb(255, 255, 255, 0.25);
 }
 
 .hovered-wrapper .select-title,
@@ -209,6 +209,6 @@ export default {
 
 .night-mode .hovered-wrapper,
 .night-mode .wrapper:hover {
-  border: 1px solid rgb(130, 130, 130);
+  border: 1px solid rgba(130, 130, 130, 0.4);
 }
 </style>
