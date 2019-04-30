@@ -161,6 +161,11 @@ body {
   align-items: center;
 }
 
+.day-night-toggle svg {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .pull-right {
   float: right;
 }
