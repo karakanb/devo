@@ -147,10 +147,6 @@ export default {
   margin-left: auto;
 }
 
-.select-icon > svg {
-  margin-top: -1vh;
-}
-
 .select-title {
   padding: 5px;
   display: inline-block;
