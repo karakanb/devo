@@ -9,6 +9,8 @@
 
 __Devo__ is a Google Chrome and Mozilla Firefox extension that displays GitHub Trending, Hacker News and Product Hunt on every new tab. It caches the information for 30 minutes, so that there is no extra calls to the external services, hence allowing a faster experience.
 
+<a href="https://www.buymeacoffee.com/Mw3KB7oHE" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+
 <p align="center">
   <img src="./img/day_mode.png">
 </p>

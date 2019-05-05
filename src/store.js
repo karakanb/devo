@@ -5,11 +5,16 @@ import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
+const GITHUB = 'github';
+const HACKERNEWS = 'hackernews';
+const PRODUCTHUNT = 'producthunt';
+
 export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
     settings: {
-      is_night_mode: false,
+      isNightMode: false,
+      cards: [GITHUB, HACKERNEWS, PRODUCTHUNT],
     },
     github: {
       updated_at: 0,
@@ -43,13 +48,19 @@ export default new Vuex.Store({
       state.producthunt.updated_at = Date.now();
     },
     setNightMode(state, isNightMode) {
-      state.settings.is_night_mode = isNightMode;
+      state.settings.isNightMode = isNightMode;
+    },
+    setCardPlatform(state, { index, platform }) {
+      Vue.set(state.settings.cards, index, platform);
     },
   },
   actions: {
-
     setNightMode(context, isNightMode) {
       context.commit('setNightMode', isNightMode);
+    },
+
+    setCardPlatform(context, payload) {
+      context.commit('setCardPlatform', payload);
     },
 
     /**
@@ -102,5 +113,23 @@ export default new Vuex.Store({
         context.commit('setProductHuntData', response.data.data);
       }
     },
+
+    async updatePlatformData({ dispatch }, { platform, forced }) {
+      switch (platform) {
+        case GITHUB:
+          return dispatch('updateGitHub', forced);
+        case HACKERNEWS:
+          return dispatch('updateHackerNews', forced);
+        case PRODUCTHUNT:
+          return dispatch('updateProductHunt', forced);
+        default:
+          await dispatch('updateGitHub', forced);
+          await dispatch('updateHackerNews', forced);
+          return dispatch('updateProductHunt', forced);
+      }
+    },
+  },
+  getters: {
+    getPlatformByIndex: state => cardIndex => state.settings.cards[cardIndex],
   },
 });

@@ -3,26 +3,23 @@
     <div class="row title-row">
       <div>
         <div class="site-string" v-if="item.siteString">
-          <a :href="siteStringLink"> ({{item.siteString}}) </a>
+          <a :href="siteStringLink"> ({{ item.siteString }}) </a>
         </div>
         <div class="title truncate">
-          <a :href="itemLink"
-             :title="item.title">{{item.title}}</a>
+          <a :href="itemLink" :title="item.title">{{ item.title }}</a>
         </div>
       </div>
     </div>
     <div class="row meta-data">
-      {{item.score}} by
-      <a :href="userLink"> {{item.user.name}}</a> | {{item.age}} |
-      <a :href="threadLink"> {{item.commentCount}}</a>
+      {{ item.score }} by <a :href="userLink"> {{ item.user.name }}</a> | {{ item.age }} |
+      <a :href="threadLink"> {{ item.commentCount }}</a>
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HackerNewsRow',
+  name: 'Row',
   props: {
     item: {
       required: true,
@@ -45,9 +42,7 @@ export default {
       return `http://${this.item.siteString}`;
     },
     itemLink() {
-      return this.item.link.startsWith('http')
-        ? this.item.link
-        : `${this.baseUrl}${this.item.link}`;
+      return this.item.link.startsWith('http') ? this.item.link : `${this.baseUrl}${this.item.link}`;
     },
   },
 };
