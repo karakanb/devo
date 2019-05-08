@@ -4,6 +4,7 @@ const DEFAULT_NIGHTMODE_BACKGROUND = '31363e';
 export default {
   platforms: {
     github: {
+      dataUrl: 'https://devo.burakkarakan.com/api/github',
       title: 'GitHub Trending',
       icon: ['fab', 'github'],
 
@@ -22,6 +23,7 @@ export default {
       },
     },
     hackernews: {
+      dataUrl: 'https://devo.burakkarakan.com/api/hackernews',
       title: 'Hacker News',
       icon: ['fab', 'hacker-news-square'],
       titleFontColor: 'ffffff',
@@ -39,6 +41,7 @@ export default {
       },
     },
     producthunt: {
+      dataUrl: 'https://devo.burakkarakan.com/api/producthunt',
       title: 'Product Hunt',
       icon: ['fab', 'product-hunt'],
       titleFontColor: 'ffffff',
