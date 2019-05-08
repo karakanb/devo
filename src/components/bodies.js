@@ -15,3 +15,4 @@
 export { default as GitHubBody } from './GitHub/Body.vue';
 export { default as HackerNewsBody } from './HackerNews/Body.vue';
 export { default as ProductHuntBody } from './ProductHunt/Body.vue';
+export { default as DesignerNewsBody } from './DesignerNews/Body.vue';

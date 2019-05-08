@@ -58,5 +58,23 @@ export default {
         loadingColor: 'da5430',
       },
     },
+    designernews: {
+      dataUrl: 'https://www.designernews.co/api/v2/stories',
+      title: 'Designer News',
+      icon: ['fas', 'newspaper'],
+      titleFontColor: 'ffffff',
+      titleBackgroundColor: '2d72d9',
+      loadingColor: '2d72d9',
+
+      externalLink: 'https://news.ycombinator.com',
+      bodyComponentName: 'DesignerNewsBody',
+      updatedAtThreshold: 5 * MINUTE,
+
+      nightMode: {
+        titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
+        titleFontColor: '7aace4',
+        loadingColor: '7aace4',
+      },
+    },
   },
 };

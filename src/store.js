@@ -31,6 +31,12 @@ export default new Vuex.Store({
       cache: 30 * 60000,
       data: [],
     },
+    designernews: {
+      updated_at: 0,
+      cache: 5 * 60000,
+      data: [],
+      responseDataKey: 'stories',
+    },
   },
   mutations: {
     setGitHubData(state, data) {
@@ -73,7 +79,11 @@ export default new Vuex.Store({
 
       if (!lastUpdate || now - lastUpdate > threshold || forced) {
         const response = await axios.get(url);
-        commit('setPlatformData', { platform, data: response.data.data });
+        let data = response.data.data;
+        if ('responseDataKey' in platformConfig) {
+          data = response.data[platformConfig.responseDataKey];
+        }
+        commit('setPlatformData', { platform, data });
       }
     },
   },
