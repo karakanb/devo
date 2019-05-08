@@ -62,13 +62,13 @@ export default {
       titleBackgroundColor: '2d72d9',
       loadingColor: '2d72d9',
 
-      externalLink: 'https://news.ycombinator.com',
+      externalLink: 'https://www.designernews.co',
       bodyComponentName: 'DesignerNewsBody',
 
       nightMode: {
         titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
-        titleFontColor: '7aace4',
-        loadingColor: '7aace4',
+        titleFontColor: '85c7fb',
+        loadingColor: '85c7fb',
       },
     },
   },
