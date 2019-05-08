@@ -1,4 +1,3 @@
-const MINUTE = 60000;
 const DEFAULT_NIGHTMODE_BACKGROUND = '31363e';
 
 export default {
@@ -14,7 +13,6 @@ export default {
 
       externalLink: 'https://github.com/trending',
       bodyComponentName: 'GitHubBody',
-      updatedAtThreshold: 5 * MINUTE,
 
       nightMode: {
         titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
@@ -32,7 +30,6 @@ export default {
 
       externalLink: 'https://news.ycombinator.com',
       bodyComponentName: 'HackerNewsBody',
-      updatedAtThreshold: 5 * MINUTE,
 
       nightMode: {
         titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
@@ -50,7 +47,6 @@ export default {
 
       externalLink: 'https://www.producthunt.com',
       bodyComponentName: 'ProductHuntBody',
-      updatedAtThreshold: 30 * MINUTE,
 
       nightMode: {
         titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
@@ -68,7 +64,6 @@ export default {
 
       externalLink: 'https://news.ycombinator.com',
       bodyComponentName: 'DesignerNewsBody',
-      updatedAtThreshold: 5 * MINUTE,
 
       nightMode: {
         titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
