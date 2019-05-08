@@ -90,5 +90,11 @@ export default {
 
     ...mapGetters(['getPlatformByIndex']),
   },
+
+  watch: {
+    platform(){
+      this.updateData(false);
+    }
+  }
 };
 </script>

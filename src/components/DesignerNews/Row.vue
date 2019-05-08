@@ -25,9 +25,6 @@ export default {
       required: true,
     },
   },
-  created() {
-    console.log(this.item.title);
-  },
   data() {
     return {
       baseUrl: 'https://www.designernews.co/',
