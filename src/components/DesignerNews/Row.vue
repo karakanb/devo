@@ -49,29 +49,34 @@ export default {
   },
   methods: {
     timeSince(date) {
-      var seconds = Math.floor((new Date() - date) / 1000);
-      var interval = Math.floor(seconds / 31536000);
+      const seconds = Math.floor((new Date() - date) / 1000);
+      let interval = Math.floor(seconds / 31536000);
 
       if (interval > 1) {
-        return interval + ' years';
+        return `${interval} years`;
       }
+
       interval = Math.floor(seconds / 2592000);
       if (interval > 1) {
-        return interval + ' months';
+        return `${interval} months`;
       }
+
       interval = Math.floor(seconds / 86400);
       if (interval >= 1) {
-        return interval + (interval == 1 ? ' day' : ' days');
+        return interval + (interval === 1 ? ' day' : ' days');
       }
+
       interval = Math.floor(seconds / 3600);
       if (interval >= 1) {
-        return interval + (interval == 1 ? ' hour' : ' hours');
+        return interval + (interval === 1 ? ' hour' : ' hours');
       }
+
       interval = Math.floor(seconds / 60);
       if (interval >= 1) {
-        return interval + (interval == 1 ? 'minute' : ' minutes');
+        return interval + (interval === 1 ? 'minute' : ' minutes');
       }
-      return Math.floor(seconds) + ' seconds';
+
+      return `${Math.floor(seconds)} seconds`;
     },
   },
 };
