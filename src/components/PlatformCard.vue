@@ -29,7 +29,12 @@ import * as BodyComponents from '@/components/bodies';
 
 export default {
   name: 'PlatformCard',
-  components: { Loading, Card, CustomSelect, ...BodyComponents },
+  components: {
+    ...BodyComponents,
+    Loading,
+    Card,
+    CustomSelect,
+  },
   props: {
     cardIndex: {
       type: Number,
@@ -47,7 +52,11 @@ export default {
   methods: {
     async updateData(forced = true) {
       this.loading = true;
-      await this.updatePlatformData({ platform: this.platform, forced });
+      await this.updatePlatformData({
+        platform: this.platform,
+        url: this.options.dataUrl,
+        forced,
+      });
       this.loading = false;
     },
 
@@ -81,5 +90,11 @@ export default {
 
     ...mapGetters(['getPlatformByIndex']),
   },
+
+  watch: {
+    platform(){
+      this.updateData(false);
+    }
+  }
 };
 </script>

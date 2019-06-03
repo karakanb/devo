@@ -18,20 +18,24 @@ export default new Vuex.Store({
     },
     github: {
       updated_at: 0,
+      cache: 5 * 60000,
       data: [],
     },
     hackernews: {
       updated_at: 0,
+      cache: 5 * 60000,
       data: [],
     },
     producthunt: {
       updated_at: 0,
+      cache: 30 * 60000,
       data: [],
     },
-    updated_at_thresholds: {
-      github: 5 * 60000,
-      hackernews: 5 * 60000,
-      producthunt: 30 * 60000,
+    designernews: {
+      updated_at: 0,
+      cache: 5 * 60000,
+      data: [],
+      responseDataKey: 'stories',
     },
   },
   mutations: {
@@ -53,6 +57,10 @@ export default new Vuex.Store({
     setCardPlatform(state, { index, platform }) {
       Vue.set(state.settings.cards, index, platform);
     },
+    setPlatformData(state, { platform, data }) {
+      state[platform].data = data;
+      state[platform].updated_at = Date.now();
+    },
   },
   actions: {
     setNightMode(context, isNightMode) {
@@ -63,69 +71,19 @@ export default new Vuex.Store({
       context.commit('setCardPlatform', payload);
     },
 
-    /**
-     * Update the Hacker News response content.
-     * Respects the memoization a threshold TTL, and can be forced.
-     * @param {any} context context instance.
-     * @param {boolean} forced - whether this update is forced.
-     */
-    async updateHackerNews(context, forced = false) {
-      const threshold = context.state.updated_at_thresholds.hackernews;
-      const lastUpdate = context.state.hackernews.updated_at;
+    async updatePlatformData({ state, commit }, { platform, forced, url }) {
+      const platformConfig = state[platform];
+      const threshold = platformConfig.cache;
+      const lastUpdate = platformConfig.updated_at;
       const now = new Date();
 
       if (!lastUpdate || now - lastUpdate > threshold || forced) {
-        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URI}/hackernews`);
-        context.commit('setHackerNewsData', response.data.data);
-      }
-    },
-
-    /**
-     * Update the GitHub Trending response content.
-     * Respects the memoization a threshold TTL, and can be forced.
-     * @param {any} context context instance.
-     * @param {boolean} forced - whether this update is forced.
-     */
-    async updateGitHub(context, forced = false) {
-      const threshold = context.state.updated_at_thresholds.github;
-      const lastUpdate = context.state.github.updated_at;
-      const now = new Date();
-
-      if (!lastUpdate || now - lastUpdate > threshold || forced) {
-        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URI}/github`);
-        context.commit('setGitHubData', response.data.data);
-      }
-    },
-
-    /**
-     * Update the Product Hunt response content.
-     * Respects the memoization a threshold TTL, and can be forced.
-     * @param {any} context context instance.
-     * @param {boolean} forced - whether this update is forced.
-     */
-    async updateProductHunt(context, forced = false) {
-      const threshold = context.state.updated_at_thresholds.producthunt;
-      const lastUpdate = context.state.producthunt.updated_at;
-      const now = new Date();
-
-      if (!lastUpdate || now - lastUpdate > threshold || forced) {
-        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URI}/producthunt`);
-        context.commit('setProductHuntData', response.data.data);
-      }
-    },
-
-    async updatePlatformData({ dispatch }, { platform, forced }) {
-      switch (platform) {
-        case GITHUB:
-          return dispatch('updateGitHub', forced);
-        case HACKERNEWS:
-          return dispatch('updateHackerNews', forced);
-        case PRODUCTHUNT:
-          return dispatch('updateProductHunt', forced);
-        default:
-          await dispatch('updateGitHub', forced);
-          await dispatch('updateHackerNews', forced);
-          return dispatch('updateProductHunt', forced);
+        const response = await axios.get(url);
+        let data = response.data.data;
+        if ('responseDataKey' in platformConfig) {
+          data = response.data[platformConfig.responseDataKey];
+        }
+        commit('setPlatformData', { platform, data });
       }
     },
   },
