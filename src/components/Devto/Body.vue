@@ -13,14 +13,14 @@ export default {
   components: { Row },
   computed: {
     ...mapState({
-      lines: state => state.hackernews.data,
+      lines: state => state.devto.data,
     }),
   },
 };
 </script>
 
 <style>
-.hn-list > :last-child {
+.devto-list > :last-child {
   border: none;
 }
 </style>

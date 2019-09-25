@@ -1,5 +1,5 @@
 <template>
-  <div class="hn-item">
+  <div class="devto-item">
     <div class="row title-row">
       <div>
         <div class="site-string" v-if="item.siteString">
@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {
-      baseUrl: 'https://news.ycombinator.com/',
+      baseUrl: 'https://dev.to/',
     };
   },
 
