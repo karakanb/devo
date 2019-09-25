@@ -71,5 +71,22 @@ export default {
         loadingColor: '85c7fb',
       },
     },
+    devto: {
+      dataUrl: 'https://dev.to/api/articles',
+      title: 'dev.to',
+      icon: ['fab', 'dev'],
+      titleFontColor: 'ffffff',
+      titleBackgroundColor: '0a0a0a',
+      loadingColor: '0a0a0a',
+
+      externalLink: 'https://dev.to',
+      bodyComponentName: 'DevtoBody',
+
+      nightMode: {
+        titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
+        titleFontColor: 'ffffff',
+        loadingColor: 'ffffff',
+      },
+    },
   },
 };
