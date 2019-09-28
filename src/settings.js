@@ -73,7 +73,7 @@ export default {
     },
     devto: {
       dataUrl: 'https://dev.to/api/articles',
-      title: 'dev.to',
+      title: 'DEV Community',
       icon: ['fab', 'dev'],
       titleFontColor: 'ffffff',
       titleBackgroundColor: '0a0a0a',

@@ -116,7 +116,7 @@ export default {
       return `${days[date.getDay()]}, ${monthNames[monthIndex]} ${day}`;
     },
 
-    ...mapActions(['setNightMode', 'updateGitHub']),
+    ...mapActions(['setNightMode']),
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
-  <div class="devto-list">
+  <span class="devto-list">
     <row v-for="(item, index) in lines" :key="index" :item="item"></row>
-  </div>
+  </span>
 </template>
 
 <script>

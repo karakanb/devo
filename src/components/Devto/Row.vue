@@ -9,11 +9,10 @@
     </div>
     <div class="row metadata">
       <span>
-        by <a class="hover-underline" :href="userLink"> {{ item.user.name }}</a> |
+        by <a class="hover-underline" :href="userLink">{{ item.user.name }}</a> | {{ relativeDate }} ago |
         {{ item.positive_reactions_count }} likes |
-        <a class="hover-underline" :href="commentsLink"> {{ item.comments_count }} comments </a> |
-        {{ relativeDate }} ago</span
-      >
+        <a class="hover-underline" :href="commentsLink"> {{ item.comments_count }} comments </a>
+      </span>
 
       <span
         v-if="item.flare_tag"
@@ -103,10 +102,6 @@ export default {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
-}
-
-.devto-item .metadata a {
-  margin: 0 2.5px;
 }
 
 .devto-item a:hover .hover-underline,

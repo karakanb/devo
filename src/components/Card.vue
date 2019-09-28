@@ -65,6 +65,8 @@ export default {
 .card {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-title {
@@ -76,10 +78,10 @@ export default {
 }
 
 .card-body {
-  height: calc(100% - 48px);
   background-color: white;
   padding: 0 16px;
   overflow-x: auto;
+  height: 100%;
 }
 
 .night-mode .card-body {
