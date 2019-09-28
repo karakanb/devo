@@ -13,13 +13,6 @@
         {{ item.positive_reactions_count }} likes |
         <a class="hover-underline" :href="commentsLink"> {{ item.comments_count }} comments </a>
       </span>
-
-      <span
-        v-if="item.flare_tag"
-        class="flare-tag"
-        :style="{ backgroundColor: item.flare_tag.bg_color_hex, color: item.flare_tag.text_color_hex }"
-        >#{{ item.flare_tag.name }}</span
-      >
     </div>
   </div>
 </template>
@@ -88,7 +81,7 @@ export default {
 <style>
 .devto-item {
   font-size: 16px;
-  padding: 8px 0 4px 0;
+  padding: 8px 0;
   text-align: left;
   border-bottom: 1px solid #dfe3e8a8;
   line-height: 20px;
@@ -117,10 +110,6 @@ export default {
   overflow: hidden;
 }
 
-.devto-item .title-row > div {
-  max-width: 100%;
-}
-
 .devto-item .site-string {
   color: rgb(130, 130, 130);
   font-size: 10.667px;
@@ -132,7 +121,6 @@ export default {
 
 .devto-item .flare-tag {
   border-radius: 4px;
-  cursor: pointer;
   display: inline;
   font-size: 12px;
   font-weight: 500;
@@ -156,7 +144,6 @@ export default {
   font-size: 9.33333px;
   display: flex;
   justify-content: space-between;
-  margin-top: 4px;
 }
 
 .devto-item .truncate {
