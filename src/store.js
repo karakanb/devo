@@ -10,7 +10,7 @@ const HACKERNEWS = 'hackernews';
 const PRODUCTHUNT = 'producthunt';
 
 export default new Vuex.Store({
-  // plugins: [createPersistedState()],
+  plugins: [createPersistedState()],
   state: {
     settings: {
       isNightMode: false,

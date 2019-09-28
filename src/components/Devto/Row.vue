@@ -1,18 +1,26 @@
 <template>
   <div class="devto-item">
     <div class="row title-row">
-      <div>
-        <div class="site-string" v-if="item.siteString">
-          <a :href="siteStringLink"> ({{ item.siteString }}) </a>
-        </div>
-        <div class="title truncate">
-          <a :href="itemLink" :title="item.title">{{ item.title }}</a>
-        </div>
+      <div class="title truncate">
+        <a :href="item.url" :title="item.title">
+          <span class="hover-underline">{{ item.title }}</span>
+        </a>
       </div>
     </div>
-    <div class="row meta-data">
-      {{ item.score }} by <a :href="userLink"> {{ item.user.name }}</a> | {{ item.age }} |
-      <a :href="threadLink"> {{ item.commentCount }}</a>
+    <div class="row metadata">
+      <span>
+        by <a class="hover-underline" :href="userLink"> {{ item.user.name }}</a> |
+        {{ item.positive_reactions_count }} likes |
+        <a class="hover-underline" :href="commentsLink"> {{ item.comments_count }} comments </a> |
+        {{ relativeDate }} ago</span
+      >
+
+      <span
+        v-if="item.flare_tag"
+        class="flare-tag"
+        :style="{ backgroundColor: item.flare_tag.bg_color_hex, color: item.flare_tag.text_color_hex }"
+        >#{{ item.flare_tag.name }}</span
+      >
     </div>
   </div>
 </template>
@@ -33,63 +41,92 @@ export default {
 
   computed: {
     userLink() {
-      return `${this.baseUrl}${this.item.user.link}`;
+      return `${this.baseUrl}${this.item.user.username}`;
     },
-    threadLink() {
-      return `${this.baseUrl}${this.item.threadLink}`;
+    commentsLink() {
+      return `${this.item.url}#comments`;
     },
-    siteStringLink() {
-      return `http://${this.item.siteString}`;
+    relativeDate() {
+      return this.timeSince(new Date(this.item.published_at));
     },
-    itemLink() {
-      return this.item.link.startsWith('http') ? this.item.link : `${this.baseUrl}${this.item.link}`;
+  },
+
+  methods: {
+    timeSince(date) {
+      const seconds = Math.floor((new Date() - date) / 1000);
+      let interval = Math.floor(seconds / 31536000);
+
+      if (interval > 1) {
+        return `${interval} years`;
+      }
+
+      interval = Math.floor(seconds / 2592000);
+      if (interval > 1) {
+        return `${interval} months`;
+      }
+
+      interval = Math.floor(seconds / 86400);
+      if (interval >= 1) {
+        return interval + (interval === 1 ? ' day' : ' days');
+      }
+
+      interval = Math.floor(seconds / 3600);
+      if (interval >= 1) {
+        return interval + (interval === 1 ? ' hour' : ' hours');
+      }
+
+      interval = Math.floor(seconds / 60);
+      if (interval >= 1) {
+        return interval + (interval === 1 ? 'minute' : ' minutes');
+      }
+
+      return `${Math.floor(seconds)} seconds`;
     },
   },
 };
 </script>
 
 <style>
-.hn-item {
+.devto-item {
   font-size: 16px;
-  padding: 8px 0;
+  padding: 8px 0 4px 0;
   text-align: left;
   border-bottom: 1px solid #dfe3e8a8;
+  line-height: 20px;
 }
 
-.hn-item .row {
+.devto-item .row {
   margin: 0;
 }
 
-.hn-item a {
+.devto-item a {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
 }
 
-.hn-item .meta-data a {
+.devto-item .metadata a {
   margin: 0 2.5px;
 }
 
-.hn-item a:hover {
+.devto-item a:hover .hover-underline,
+.devto-item .hover-underline:hover {
   text-decoration: underline;
   text-decoration-line: underline;
   text-decoration-style: initial;
   text-decoration-color: initial;
 }
 
-.hn-item .title {
+.devto-item .title {
   white-space: nowrap;
   overflow: hidden;
 }
 
-.hn-item .title-row {
-  margin-bottom: 4px;
-}
-
-.hn-item .title-row > div {
+.devto-item .title-row > div {
   max-width: 100%;
 }
 
-.hn-item .site-string {
+.devto-item .site-string {
   color: rgb(130, 130, 130);
   font-size: 10.667px;
   float: right;
@@ -98,12 +135,36 @@ export default {
   padding-left: 4px;
 }
 
-.meta-data {
-  color: rgb(130, 130, 130);
-  font-size: 9.33333px;
+.devto-item .flare-tag {
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 5px;
+  padding: 0 6px;
+  vertical-align: 2px;
 }
 
-.truncate {
+.devto-item a:hover .flare-tag {
+  text-decoration: none;
+}
+
+.devto-item .tag {
+  margin-right: 8px;
+  padding: 8px 0;
+  color: rgb(130, 130, 130);
+}
+
+.devto-item .metadata {
+  color: rgb(130, 130, 130);
+  font-size: 9.33333px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.devto-item .truncate {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
