@@ -85,7 +85,6 @@ export default {
 }
 
 .night-mode .card-body {
-  height: calc(100% - 48px);
   background-color: #31363e;
   color: #c5c8ca;
   padding: 0 16px;

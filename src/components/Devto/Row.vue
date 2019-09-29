@@ -1,18 +1,32 @@
 <template>
   <div class="devto-item">
     <div class="row title-row">
-      <div class="title truncate">
+      <h2 class="title truncate">
         <a :href="item.url" :title="item.title">
           <span class="hover-underline">{{ item.title }}</span>
         </a>
-      </div>
+      </h2>
     </div>
+    <div class="row tag-list" v-if="item.tag_list">
+      <a class="tag hover-underline" v-for="tag in item.tag_list" :key="tag" :href="`${baseUrl}/t/${tag}`"
+        >#{{ tag }}</a
+      >
+    </div>
+    <div class="row author">
+      <a class="hover-underline" :href="userLink">{{ item.user.name }}</a
+      >・{{ publishDateShort }}
+      <span class="relative-date light-grey"> ({{ relativeDate }} ago) </span>
+    </div>
+
     <div class="row metadata">
-      <span>
-        by <a class="hover-underline" :href="userLink">{{ item.user.name }}</a> | {{ relativeDate }} ago |
-        {{ item.positive_reactions_count }} likes |
-        <a class="hover-underline" :href="commentsLink"> {{ item.comments_count }} comments </a>
-      </span>
+      <div class="icon-with-text inline-block likes">
+        <font-awesome-icon :icon="['fas', 'heart']"></font-awesome-icon>
+        <span>{{ item.positive_reactions_count }} likes</span>
+      </div>
+      <div class="icon-with-text inline-block comments">
+        <font-awesome-icon :icon="['fas', 'comment']"></font-awesome-icon>
+        <a class="hover-underline" :href="commentsLink">{{ item.comments_count }} comments</a>
+      </div>
     </div>
   </div>
 </template>
@@ -40,6 +54,10 @@ export default {
     },
     relativeDate() {
       return this.timeSince(new Date(this.item.published_at));
+    },
+    publishDateShort() {
+      const d = new Date(this.item.published_at);
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     },
   },
 
@@ -80,11 +98,16 @@ export default {
 
 <style>
 .devto-item {
-  font-size: 16px;
+  font-size: 15px;
   padding: 8px 0;
   text-align: left;
   border-bottom: 1px solid #dfe3e8a8;
-  line-height: 20px;
+  color: #292929 !important;
+}
+
+.night-mode .devto-item,
+.night-mode .devto-item .title {
+  color: inherit !important;
 }
 
 .devto-item .row {
@@ -108,6 +131,12 @@ export default {
 .devto-item .title {
   white-space: nowrap;
   overflow: hidden;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 300;
+  margin: 0;
+  color: #292929;
+  line-height: 28px;
 }
 
 .devto-item .site-string {
@@ -133,22 +162,70 @@ export default {
   text-decoration: none;
 }
 
+.devto-item .tag-list {
+  margin-top: 2px;
+  font-size: 10px;
+}
+
 .devto-item .tag {
   margin-right: 8px;
-  padding: 8px 0;
-  color: rgb(130, 130, 130);
+  color: #757575;
+  font-size: 12px;
+}
+
+.devto-item .author {
+  margin-top: 12px;
+  line-height: 20px;
+}
+
+.devto-item .relative-date {
+  margin-left: 4px;
 }
 
 .devto-item .metadata {
-  color: rgb(130, 130, 130);
-  font-size: 9.33333px;
-  display: flex;
-  justify-content: space-between;
+  color: rgba(0, 0, 0, 0.54) !important;
+  font-size: 12px;
+  line-height: 20px;
+  margin-top: 4px;
+}
+
+.night-mode .devto-item .metadata {
+  color: #757575 !important;
+}
+
+.devto-item .metadata .likes {
+  margin-right: 16px;
+}
+.devto-item .metadata .likes > svg {
+  color: #ff3939;
+  vertical-align: 3px !important;
+}
+
+.devto-item .metadata .comments > svg {
+  vertical-align: 2px !important;
+  color: #4992ff;
 }
 
 .devto-item .truncate {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.devto-item .light-grey {
+  color: #757575;
+}
+
+.icon-with-text svg {
+  margin-right: 4px;
+  vertical-align: 20% !important;
+}
+
+.icon-with-text a {
+  text-decoration: none;
+  text-decoration-line: none;
+  text-decoration-style: initial;
+  text-decoration-color: initial;
+  color: inherit;
 }
 </style>

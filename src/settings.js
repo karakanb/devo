@@ -72,7 +72,10 @@ export default {
       },
     },
     devto: {
-      dataUrl: 'https://dev.to/api/articles',
+      dataUrl: () => {
+        const randomPage = Math.random().toString(36).substring(3);
+        return `https://dev.to/api/articles?page=${randomPage}`;
+      },
       title: 'DEV Community',
       icon: ['fab', 'dev'],
       titleFontColor: 'ffffff',
