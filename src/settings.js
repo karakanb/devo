@@ -71,5 +71,25 @@ export default {
         loadingColor: '85c7fb',
       },
     },
+    devto: {
+      dataUrl: () => {
+        const randomPage = Math.random().toString(36).substring(3);
+        return `https://dev.to/api/articles?page=${randomPage}`;
+      },
+      title: 'DEV Community',
+      icon: ['fab', 'dev'],
+      titleFontColor: 'ffffff',
+      titleBackgroundColor: '0a0a0a',
+      loadingColor: '0a0a0a',
+
+      externalLink: 'https://dev.to',
+      bodyComponentName: 'DevtoBody',
+
+      nightMode: {
+        titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
+        titleFontColor: 'ffffff',
+        loadingColor: 'ffffff',
+      },
+    },
   },
 };

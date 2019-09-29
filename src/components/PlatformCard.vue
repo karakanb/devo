@@ -54,7 +54,7 @@ export default {
       this.loading = true;
       await this.updatePlatformData({
         platform: this.platform,
-        url: this.options.dataUrl,
+        url: this.options.dataUrl instanceof Function ? this.options.dataUrl() : this.options.dataUrl,
         forced,
       });
       this.loading = false;
@@ -92,9 +92,9 @@ export default {
   },
 
   watch: {
-    platform(){
+    platform() {
       this.updateData(false);
-    }
-  }
+    },
+  },
 };
 </script>

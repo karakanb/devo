@@ -116,7 +116,7 @@ export default {
       return `${days[date.getDay()]}, ${monthNames[monthIndex]} ${day}`;
     },
 
-    ...mapActions(['setNightMode', 'updateGitHub']),
+    ...mapActions(['setNightMode']),
   },
 };
 </script>
@@ -196,6 +196,7 @@ body {
 
 .date-time-wrapper {
   height: 10vh;
+  font-size: 12px;
 }
 
 .date-time {

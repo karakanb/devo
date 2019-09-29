@@ -9,9 +9,8 @@
             <font-awesome-icon :icon="['fas', 'external-link-alt']"></font-awesome-icon>
           </a>
         </div>
-        <div class="title-icon refresh-icon" :style="iconStyle">
-          <font-awesome-icon class="fa-refresh-icon" :icon="['fas', 'sync-alt']" @click="iconOnClick">
-          </font-awesome-icon>
+        <div class="title-icon refresh-icon" :style="iconStyle" @click="iconOnClick">
+          <font-awesome-icon class="fa-refresh-icon" :icon="['fas', 'sync-alt']"> </font-awesome-icon>
         </div>
       </div>
     </div>
@@ -65,6 +64,8 @@ export default {
 .card {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-title {
@@ -76,14 +77,13 @@ export default {
 }
 
 .card-body {
-  height: calc(100% - 48px);
   background-color: white;
   padding: 0 16px;
   overflow-x: auto;
+  height: 100%;
 }
 
 .night-mode .card-body {
-  height: calc(100% - 48px);
   background-color: #31363e;
   color: #c5c8ca;
   padding: 0 16px;

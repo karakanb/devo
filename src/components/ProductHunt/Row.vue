@@ -31,7 +31,7 @@
                 {{ item.votes_count }}
               </span>
             </span>
-            <span class="small-info-box action white-background">
+            <span class="small-info-box action comment-count white-background">
               <span>
                 <font-awesome-icon :icon="['fas', 'comment']"></font-awesome-icon>
                 {{ item.comments_count }}
@@ -211,11 +211,11 @@ export default {
 
 .ph-item .vote-count {
   color: black;
+  background-color: white;
 }
 
-.ph-item .vote-count {
-  color: black;
-  background-color: white;
+.ph-item .comment-count {
+  margin-right: 0;
 }
 
 .ph-item .action span {
@@ -273,6 +273,5 @@ export default {
 .product-info {
   flex: 1;
   padding-left: 0.5rem;
-  padding-right: 0.5rem;
 }
 </style>

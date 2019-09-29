@@ -20,16 +20,19 @@ export default new Vuex.Store({
       updated_at: 0,
       cache: 5 * 60000,
       data: [],
+      responseDataKey: 'data',
     },
     hackernews: {
       updated_at: 0,
       cache: 5 * 60000,
       data: [],
+      responseDataKey: 'data',
     },
     producthunt: {
       updated_at: 0,
       cache: 30 * 60000,
       data: [],
+      responseDataKey: 'data',
     },
     designernews: {
       updated_at: 0,
@@ -37,20 +40,13 @@ export default new Vuex.Store({
       data: [],
       responseDataKey: 'stories',
     },
+    devto: {
+      updated_at: 0,
+      cache: 5 * 60000,
+      data: [],
+    },
   },
   mutations: {
-    setGitHubData(state, data) {
-      state.github.data = data;
-      state.github.updated_at = Date.now();
-    },
-    setHackerNewsData(state, data) {
-      state.hackernews.data = data;
-      state.hackernews.updated_at = Date.now();
-    },
-    setProductHuntData(state, data) {
-      state.producthunt.data = data;
-      state.producthunt.updated_at = Date.now();
-    },
     setNightMode(state, isNightMode) {
       state.settings.isNightMode = isNightMode;
     },
@@ -79,7 +75,7 @@ export default new Vuex.Store({
 
       if (!lastUpdate || now - lastUpdate > threshold || forced) {
         const response = await axios.get(url);
-        let data = response.data.data;
+        let data = response.data;
         if ('responseDataKey' in platformConfig) {
           data = response.data[platformConfig.responseDataKey];
         }
