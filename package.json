@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
-    "docs": "rm -rf docs; cp -R dist docs"
+    "docs": "rm -rf docs && cp -R dist docs && sed -i '' 's_href=/css/_href=css/_g' docs/index.html && sed -i '' 's_href=/js/_href=js/_g' docs/index.html && sed -i '' 's_src=/js/_src=js/_g' docs/index.html"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
