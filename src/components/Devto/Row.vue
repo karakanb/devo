@@ -218,12 +218,12 @@ export default {
 }
 .devto-item .metadata .likes > svg {
   color: #ff6363;
-  vertical-align: 3px !important;
+  vertical-align: 2.5px !important;
 }
 
 .devto-item .metadata .comments > svg {
   color: #60a0ff;
-  vertical-align: 2px !important;
+  vertical-align: 2.5px !important;
 }
 
 .devto-item .truncate {
@@ -236,12 +236,12 @@ export default {
   color: #757575;
 }
 
-.icon-with-text svg {
-  margin-right: 4px;
+.devto-item .icon-with-text svg {
+  margin-right: 6px;
   vertical-align: 20% !important;
 }
 
-.icon-with-text a {
+.devto-item .icon-with-text a {
   text-decoration: none;
   text-decoration-line: none;
   text-decoration-style: initial;
