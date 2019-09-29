@@ -9,9 +9,8 @@
             <font-awesome-icon :icon="['fas', 'external-link-alt']"></font-awesome-icon>
           </a>
         </div>
-        <div class="title-icon refresh-icon" :style="iconStyle">
-          <font-awesome-icon class="fa-refresh-icon" :icon="['fas', 'sync-alt']" @click="iconOnClick">
-          </font-awesome-icon>
+        <div class="title-icon refresh-icon" :style="iconStyle" @click="iconOnClick">
+          <font-awesome-icon class="fa-refresh-icon" :icon="['fas', 'sync-alt']"> </font-awesome-icon>
         </div>
       </div>
     </div>
