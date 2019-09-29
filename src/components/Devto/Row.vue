@@ -12,20 +12,20 @@
         >#{{ tag }}</a
       >
     </div>
-    <div class="row author">
-      <a class="hover-underline" :href="userLink">{{ item.user.name }}</a
-      >・{{ publishDateShort }}
-      <span class="relative-date light-grey"> ({{ relativeDate }} ago) </span>
-    </div>
-
     <div class="row metadata">
-      <div class="icon-with-text inline-block likes">
-        <font-awesome-icon :icon="['fas', 'heart']"></font-awesome-icon>
-        <span>{{ item.positive_reactions_count }} likes</span>
+      <div>
+        <a class="hover-underline" :href="userLink">{{ item.user.name }}</a
+        >・{{ publishDateShort }} ({{ relativeDate }} ago)
       </div>
-      <div class="icon-with-text inline-block comments">
-        <font-awesome-icon :icon="['fas', 'comment']"></font-awesome-icon>
-        <a class="hover-underline" :href="commentsLink">{{ item.comments_count }} comments</a>
+      <div class="pull-right">
+        <div class="icon-with-text inline-block box likes">
+          <font-awesome-icon :icon="['fas', 'heart']"></font-awesome-icon>
+          <span>{{ item.positive_reactions_count }}</span>
+        </div>
+        <a :href="commentsLink" class="icon-with-text inline-block box comments">
+          <font-awesome-icon :icon="['fas', 'comment']"></font-awesome-icon>
+          <span>{{ item.comments_count }}</span>
+        </a>
       </div>
     </div>
   </div>
@@ -173,20 +173,40 @@ export default {
   font-size: 12px;
 }
 
-.devto-item .author {
-  margin-top: 12px;
-  line-height: 20px;
-}
-
-.devto-item .relative-date {
-  margin-left: 4px;
-}
-
 .devto-item .metadata {
   color: rgba(0, 0, 0, 0.54) !important;
   font-size: 12px;
-  line-height: 20px;
-  margin-top: 4px;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.devto-item .box {
+  color: rgb(153, 153, 153);
+  border-radius: 3px;
+  border: 1px solid #e8e8e8;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  outline: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 2px 6px;
+}
+
+.devto-item a.box:hover {
+  background-color: #f2f2f2;
+}
+
+.night-mode .devto-item a.box:hover {
+  background-color: #25292e;
+}
+
+.night-mode .devto-item .box {
+  border: 1px solid #757575;
 }
 
 .night-mode .devto-item .metadata {
@@ -194,16 +214,16 @@ export default {
 }
 
 .devto-item .metadata .likes {
-  margin-right: 16px;
+  margin-right: 4px;
 }
 .devto-item .metadata .likes > svg {
-  color: #ff3939;
+  color: #ff6363;
   vertical-align: 3px !important;
 }
 
 .devto-item .metadata .comments > svg {
+  color: #60a0ff;
   vertical-align: 2px !important;
-  color: #4992ff;
 }
 
 .devto-item .truncate {
