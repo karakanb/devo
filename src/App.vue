@@ -4,7 +4,7 @@
       <div class="col-lg-10 col-lg-offset-1">
         <div class="row date-time-wrapper middle-lg">
           <div class="col-xs date-time grey-text">
-            <div class="time inline-block">{{ now }}</div>
+            <div class="time inline-block" @click="toggle24HourFormat">{{ now }}</div>
             <div class="date inline-block pull-right">{{ today }}</div>
           </div>
         </div>
@@ -42,6 +42,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import { format } from 'date-fns';
 import Card from './components/Card.vue';
 import ToggleSwitch from './components/ToggleSwitch.vue';
 import PlatformCard from './components/PlatformCard.vue';
@@ -64,23 +65,16 @@ export default {
     }, 1000);
   },
   computed: {
-    now() {
-      const hour = this.nowTime
-        .getHours()
-        .toString()
-        .padStart(2, '0');
-      const minute = this.nowTime
-        .getMinutes()
-        .toString()
-        .padStart(2, '0');
-
-      return `${hour}:${minute}`;
-    },
     today() {
       return this.formatDate(this.nowTime);
     },
     ...mapState({
       isNightMode: state => state.settings.isNightMode,
+      now(state) {
+        const { is24HourFormat } = state.settings;
+        return format(this.nowTime, is24HourFormat ? 'HH:mm' : 'h:mm aaaa');
+      },
+      is24HourFormat: state => state.settings.is24HourFormat,
     }),
 
     nightModeToggle: {
@@ -115,8 +109,10 @@ export default {
       const monthIndex = date.getMonth();
       return `${days[date.getDay()]}, ${monthNames[monthIndex]} ${day}`;
     },
-
-    ...mapActions(['setNightMode']),
+    toggle24HourFormat() {
+      this.set24HourFormat(!this.is24HourFormat);
+    },
+    ...mapActions(['setNightMode', 'set24HourFormat']),
   },
 };
 </script>
@@ -207,6 +203,10 @@ body {
 
 .date-time .row {
   margin: 0;
+}
+
+.date-time .time {
+  cursor: pointer;
 }
 
 footer {
