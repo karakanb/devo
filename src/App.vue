@@ -66,7 +66,8 @@ export default {
   },
   computed: {
     today() {
-      return this.formatDate(this.nowTime);
+      // date-fns format patterns - https://date-fns.org/v2.8.1/docs/format
+      return format(this.nowTime, 'eeee, MMMM d');
     },
     ...mapState({
       isNightMode: state => state.settings.isNightMode,
@@ -87,28 +88,6 @@ export default {
     },
   },
   methods: {
-    formatDate(date) {
-      const monthNames = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-      ];
-
-      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-      const day = date.getDate();
-      const monthIndex = date.getMonth();
-      return `${days[date.getDay()]}, ${monthNames[monthIndex]} ${day}`;
-    },
     toggle24HourFormat() {
       this.set24HourFormat(!this.is24HourFormat);
     },
