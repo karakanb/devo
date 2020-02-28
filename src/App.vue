@@ -7,7 +7,7 @@
             <div class="time inline-block">{{ now }}</div>
             <div class="search inline-block">
               <iframe 
-                src="https://duckduckgo.com/search.html?duck=yes&prefill=vue.js vs react" 
+                src="https://duckduckgo.com/search.html?duck=yes&amp;prefill=vue.js vs react" 
                 style="overflow:hidden;margin:auto;padding:0;width:483px;height:60px;" 
                 frameborder="0"
                 ></iframe>
