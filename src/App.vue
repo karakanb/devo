@@ -5,6 +5,13 @@
         <div class="row date-time-wrapper middle-lg">
           <div class="col-xs date-time grey-text">
             <div class="time inline-block">{{ now }}</div>
+            <div class="search inline-block">
+              <iframe 
+                src="https://duckduckgo.com/search.html?duck=yes&prefill=vue.js vs react" 
+                style="overflow:hidden;margin:auto;padding:0;width:483px;height:60px;" 
+                frameborder="0"
+                ></iframe>
+            </div>
             <div class="date inline-block pull-right">{{ today }}</div>
           </div>
         </div>
