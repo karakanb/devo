@@ -3,6 +3,8 @@ import Vuex from 'vuex';
 import axios from 'axios';
 import createPersistedState from 'vuex-persistedstate';
 
+import prefersDarkMode from './utils/prefers-dark-mode';
+
 Vue.use(Vuex);
 
 const GITHUB = 'github';
@@ -13,7 +15,7 @@ export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
     settings: {
-      isNightMode: false,
+      isNightMode: prefersDarkMode(),
       cards: [GITHUB, HACKERNEWS, PRODUCTHUNT],
     },
     github: {
