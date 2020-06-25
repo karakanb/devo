@@ -1,5 +1,6 @@
 <template>
   <div id="app" :class="{ 'night-mode': isNightMode }">
+    <div class="background"></div>
     <div class="row">
       <div class="col-lg-10 col-lg-offset-1">
         <div class="row date-time-wrapper middle-lg">
@@ -29,6 +30,7 @@
             </span>
 
             <span class="pull-right day-night-toggle">
+              <background-selector></background-selector>
               <font-awesome-icon :icon="['fas', 'sun']"></font-awesome-icon>
               <toggle-switch v-model="nightModeToggle" style="margin-right: 8px"></toggle-switch>
               <font-awesome-icon :icon="['fas', 'moon']" style="margin: 0;"></font-awesome-icon>
@@ -45,6 +47,7 @@ import { mapState, mapActions } from 'vuex';
 import Card from './components/Card.vue';
 import ToggleSwitch from './components/ToggleSwitch.vue';
 import PlatformCard from './components/PlatformCard.vue';
+import BackgroundSelector from './components/BackgroundSelector.vue';
 
 export default {
   name: 'app',
@@ -52,6 +55,7 @@ export default {
     Card,
     ToggleSwitch,
     PlatformCard,
+    BackgroundSelector,
   },
   data() {
     return {
@@ -126,7 +130,6 @@ body {
   margin: 0;
 }
 #app {
-  background-color: #f5f7fa;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol';
   -webkit-font-smoothing: antialiased;
@@ -134,7 +137,19 @@ body {
   overflow: hidden;
 }
 
-#app.night-mode {
+.background {
+  position:absolute;
+  top: 0;
+  left: 0;
+  z-index: -100;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-color: #f5f7fa;
+}
+
+#app.night-mode .background {
   background-color: #25292f;
 }
 
