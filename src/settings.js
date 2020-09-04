@@ -91,5 +91,22 @@ export default {
         loadingColor: 'ffffff',
       },
     },
+    lobsters: {
+      dataUrl: '/proxy/hottest.json',
+      title: 'Lobsters',
+      icon: ['fa', 'anchor'],
+      titleFontColor: 'ffffff',
+      titleBackgroundColor: '9E271B',
+      loadingColor: '9E271B',
+
+      externalLink: 'https://lobste.rs',
+      bodyComponentName: 'LobstersBody',
+
+      nightMode: {
+        titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
+        titleFontColor: 'ffffff',
+        loadingColor: 'ffffff',
+      },
+    },
   },
 };
