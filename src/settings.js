@@ -96,8 +96,8 @@ export default {
       title: 'Lobsters',
       icon: ['fa', 'anchor'],
       titleFontColor: 'ffffff',
-      titleBackgroundColor: '9E271B',
-      loadingColor: '9E271B',
+      titleBackgroundColor: '9e271b',
+      loadingColor: '9e271b',
 
       externalLink: 'https://lobste.rs',
       bodyComponentName: 'LobstersBody',
