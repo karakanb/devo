@@ -92,7 +92,7 @@ export default {
       },
     },
     lobsters: {
-      dataUrl: '/proxy/hottest.json',
+      dataUrl: 'https://lobste.rs/hottest.json',
       title: 'Lobsters',
       icon: ['fa', 'anchor'],
       titleFontColor: 'ffffff',
