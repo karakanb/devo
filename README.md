@@ -32,6 +32,7 @@ Devo currently supports:
 - [Product Hunt](https://www.producthunt.com/)
 - [Designer News](https://www.designernews.co/)
 - [DEV Community](https://dev.to/)
+- [Lobsters](https://lobste.rs/)
 
 ### Adding a new platform
 Adding a new platform is super easy. All you need to do is:
