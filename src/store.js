@@ -47,6 +47,11 @@ export default new Vuex.Store({
       cache: 5 * 60000,
       data: [],
     },
+    lobsters: {
+      updated_at: 0,
+      cache: 5 * 60000,
+      data: [],
+    },
   },
   mutations: {
     setNightMode(state, isNightMode) {

@@ -17,3 +17,4 @@ export { default as HackerNewsBody } from './HackerNews/Body.vue';
 export { default as ProductHuntBody } from './ProductHunt/Body.vue';
 export { default as DesignerNewsBody } from './DesignerNews/Body.vue';
 export { default as DevtoBody } from './Devto/Body.vue';
+export { default as LobstersBody } from './Lobsters/Body.vue';
