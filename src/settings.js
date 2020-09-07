@@ -104,8 +104,8 @@ export default {
 
       nightMode: {
         titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
-        titleFontColor: 'ffffff',
-        loadingColor: 'ffffff',
+        titleFontColor: 'ec8f8f',
+        loadingColor: 'ec8f8f',
       },
     },
   },
