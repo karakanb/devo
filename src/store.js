@@ -30,7 +30,7 @@ export default new Vuex.Store({
     },
     producthunt: {
       updated_at: 0,
-      cache: 30 * 60000,
+      cache: 15 * 60000,
       data: [],
     },
     designernews: {
