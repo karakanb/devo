@@ -22,19 +22,16 @@ export default new Vuex.Store({
       updated_at: 0,
       cache: 5 * 60000,
       data: [],
-      responseDataKey: 'data',
     },
     hackernews: {
       updated_at: 0,
       cache: 5 * 60000,
       data: [],
-      responseDataKey: 'data',
     },
     producthunt: {
       updated_at: 0,
       cache: 30 * 60000,
       data: [],
-      responseDataKey: 'data',
     },
     designernews: {
       updated_at: 0,
