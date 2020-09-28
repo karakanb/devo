@@ -2,22 +2,48 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 
-import prefersDarkMode from './utils/prefers-dark-mode';
-
 Vue.use(Vuex);
 
 const GITHUB = 'github';
 const HACKERNEWS = 'hackernews';
 const PRODUCTHUNT = 'producthunt';
 
-window.localStorage.removeItem('vuex');
+const SETTINGS_ISNIGHTMODE = 'settings.isNightMode';
+
+/**
+ * @returns {Boolean} - in priority: the user's existing selection > their dark mode preference > false
+ */
+const getIsNightMode = () => {
+  const localVersion = localStorage.getItem(SETTINGS_ISNIGHTMODE);
+  if (localVersion) {
+    return JSON.parse(localVersion);
+  }
+
+  const hasMatchMedia = 'matchMedia' in window;
+  if (!hasMatchMedia) {
+    return false;
+  }
+
+  const darkModeQuery = '(prefers-color-scheme: dark)';
+  return window.matchMedia(darkModeQuery).matches;
+};
+
+/**
+ * @returns {String} - the version number of the extension to version the state.
+ */
+const getVersion = () => {
+  const manifest = chrome.runtime.getManifest();
+  return 'version' in manifest ? manifest.version : 'vuex-state-default-version';
+};
+
+
 export default new Vuex.Store({
   plugins: [createPersistedState({
-    key: 'v1.7',
+    key: `vuex-state-${getVersion()}`,
   })],
   state: {
     settings: {
-      isNightMode: prefersDarkMode(),
+      isNightMode: getIsNightMode(),
       cards: [GITHUB, HACKERNEWS, PRODUCTHUNT],
     },
     github: {
@@ -55,6 +81,7 @@ export default new Vuex.Store({
   mutations: {
     setNightMode(state, isNightMode) {
       state.settings.isNightMode = isNightMode;
+      localStorage.setItem(SETTINGS_ISNIGHTMODE, isNightMode);
     },
     setCardPlatform(state, { index, platform }) {
       Vue.set(state.settings.cards, index, platform);
