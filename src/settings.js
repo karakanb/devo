@@ -3,7 +3,7 @@ const DEFAULT_NIGHTMODE_BACKGROUND = '31363e';
 export default {
   platforms: {
     github: {
-      dataUrl: 'https://devo.burakkarakan.com/api/github',
+      dataUrl: 'https://devo.ams3.digitaloceanspaces.com/github.json',
       title: 'GitHub Trending',
       icon: ['fab', 'github'],
 
@@ -21,7 +21,7 @@ export default {
       },
     },
     hackernews: {
-      dataUrl: 'https://devo.burakkarakan.com/api/hackernews',
+      dataUrl: 'https://devo.ams3.digitaloceanspaces.com/hackernews.json',
       title: 'Hacker News',
       icon: ['fab', 'hacker-news-square'],
       titleFontColor: 'ffffff',
@@ -38,7 +38,7 @@ export default {
       },
     },
     producthunt: {
-      dataUrl: 'https://devo.burakkarakan.com/api/producthunt',
+      dataUrl: 'https://devo.ams3.digitaloceanspaces.com/producthunt.json',
       title: 'Product Hunt',
       icon: ['fab', 'product-hunt'],
       titleFontColor: 'ffffff',
