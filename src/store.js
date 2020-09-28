@@ -10,8 +10,11 @@ const GITHUB = 'github';
 const HACKERNEWS = 'hackernews';
 const PRODUCTHUNT = 'producthunt';
 
+window.localStorage.removeItem('vuex');
 export default new Vuex.Store({
-  plugins: [createPersistedState()],
+  plugins: [createPersistedState({
+    key: 'v1.7',
+  })],
   state: {
     settings: {
       isNightMode: prefersDarkMode(),
