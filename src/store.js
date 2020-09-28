@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios';
 import createPersistedState from 'vuex-persistedstate';
 
 import prefersDarkMode from './utils/prefers-dark-mode';
@@ -78,10 +77,10 @@ export default new Vuex.Store({
       const now = new Date();
 
       if (!lastUpdate || now - lastUpdate > threshold || forced) {
-        const response = await axios.get(url);
-        let data = response.data;
+        const response = await fetch(url);
+        let data = await response.json();
         if ('responseDataKey' in platformConfig) {
-          data = response.data[platformConfig.responseDataKey];
+          data = data[platformConfig.responseDataKey];
         }
         commit('setPlatformData', { platform, data });
       }
