@@ -32,12 +32,23 @@ const getIsNightMode = () => {
  * @returns {String} - the version number of the extension to version the state.
  */
 const getVersion = () => {
-  if (!(window.chrome || false)) {
-    return 'default-version';
+  const defaultValue = 'default-version';
+  if (typeof chrome === 'undefined' && typeof browser === 'undefined') {
+    return defaultValue;
   }
 
-  const manifest = chrome.runtime.getManifest();
-  return 'version' in manifest ? manifest.version : 'default-version';
+  /* global chrome, browser */
+  const browserInstance = chrome || browser;
+  if (('getManifest' in browserInstance.runtime)) {
+    return defaultValue;
+  }
+
+  if (typeof browserInstance.runtime.getManifest !== 'function') {
+    return defaultValue;
+  }
+
+  const manifest = browserInstance.runtime.getManifest();
+  return 'version' in manifest ? manifest.version : defaultValue;
 };
 
 
