@@ -66,6 +66,7 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
+  max-height: 80vh;
 }
 
 .card-title {

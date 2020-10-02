@@ -8,18 +8,8 @@
             <div class="date inline-block pull-right">{{ today }}</div>
           </div>
         </div>
-        <div class="row cards-wrapper">
-          <div class="col-lg-6 col-xs-10 col-xs-offset-1 col-lg-offset-0 left-pane">
-            <platform-card platform="github" :cardIndex="0"></platform-card>
-          </div>
-          <div class="col-lg-6 col-xs-10 col-xs-offset-1 col-lg-offset-0">
-            <div class="row" style="height: 39vh; margin-bottom: 1vh;">
-              <platform-card platform="hackernews" :cardIndex="1"></platform-card>
-            </div>
-            <div class="row" style="height: 40vh;">
-              <platform-card platform="producthunt" :cardIndex="2"></platform-card>
-            </div>
-          </div>
+        <div class="cards-wrapper">
+          <component :is="this.layout"></component>
         </div>
         <div class="row date-time-wrapper middle-lg">
           <footer class="col-xs grey-text light">
@@ -31,7 +21,7 @@
             <span class="pull-right day-night-toggle">
               <font-awesome-icon :icon="['fas', 'sun']"></font-awesome-icon>
               <toggle-switch v-model="nightModeToggle" style="margin-right: 8px"></toggle-switch>
-              <font-awesome-icon :icon="['fas', 'moon']" style="margin: 0;"></font-awesome-icon>
+              <font-awesome-icon :icon="['fas', 'moon']" style="margin: 0"></font-awesome-icon>
             </span>
           </footer>
         </div>
@@ -45,6 +35,12 @@ import { mapState, mapActions } from 'vuex';
 import Card from './components/Card.vue';
 import ToggleSwitch from './components/ToggleSwitch.vue';
 import PlatformCard from './components/PlatformCard.vue';
+import SingleColumn from './layouts/SingleColumn.vue';
+import TwoColumns from './layouts/TwoColumns.vue';
+import ThreeColumns from './layouts/ThreeColumns.vue';
+import TwoLeftOneRight from './layouts/TwoLeftOneRight.vue';
+import OneLeftTwoRight from './layouts/OneLeftTwoRight.vue';
+import TwoRowsTwoColumns from './layouts/TwoRowsTwoColumns.vue';
 
 export default {
   name: 'app',
@@ -52,6 +48,12 @@ export default {
     Card,
     ToggleSwitch,
     PlatformCard,
+    SingleColumn,
+    TwoColumns,
+    ThreeColumns,
+    TwoLeftOneRight,
+    OneLeftTwoRight,
+    TwoRowsTwoColumns,
   },
   data() {
     return {
@@ -65,14 +67,8 @@ export default {
   },
   computed: {
     now() {
-      const hour = this.nowTime
-        .getHours()
-        .toString()
-        .padStart(2, '0');
-      const minute = this.nowTime
-        .getMinutes()
-        .toString()
-        .padStart(2, '0');
+      const hour = this.nowTime.getHours().toString().padStart(2, '0');
+      const minute = this.nowTime.getMinutes().toString().padStart(2, '0');
 
       return `${hour}:${minute}`;
     },
@@ -80,8 +76,12 @@ export default {
       return this.formatDate(this.nowTime);
     },
     ...mapState({
-      isNightMode: state => state.settings.isNightMode,
+      isNightMode: (state) => state.settings.isNightMode,
     }),
+
+    layout() {
+      return 'OneLeftTwoRight';
+    },
 
     nightModeToggle: {
       get() {

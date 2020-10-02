@@ -7,6 +7,7 @@ Vue.use(Vuex);
 const GITHUB = 'github';
 const HACKERNEWS = 'hackernews';
 const PRODUCTHUNT = 'producthunt';
+const DESIGNERNEWS = 'designernews';
 
 const SETTINGS_ISNIGHTMODE = 'settings.isNightMode';
 
@@ -59,7 +60,7 @@ export default new Vuex.Store({
   state: {
     settings: {
       isNightMode: getIsNightMode(),
-      cards: [GITHUB, HACKERNEWS, PRODUCTHUNT],
+      cards: [GITHUB, HACKERNEWS, PRODUCTHUNT, DESIGNERNEWS],
     },
     github: {
       updated_at: 0,
