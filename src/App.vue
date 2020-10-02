@@ -150,12 +150,6 @@ body {
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
 }
 
-.card {
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
-  overflow: hidden;
-}
-
 .day-night-toggle {
   display: flex;
   align-items: center;
@@ -233,12 +227,6 @@ footer a:hover {
   text-decoration-color: initial;
 }
 
-.left-pane {
-  padding: 0;
-  margin-bottom: 1vh;
-  height: 100%;
-}
-
 @media screen and (min-width: 1200px) {
   .date-time {
     margin: initial;
@@ -251,11 +239,6 @@ footer a:hover {
 
   .cards-wrapper {
     height: 80vh;
-  }
-
-  .left-pane {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
   }
 }
 </style>
