@@ -10,6 +10,7 @@
 import PlatformCard from '../components/PlatformCard.vue';
 
 export default {
+  name: 'TwoLeftOneRight',
   components: {
     PlatformCard,
   },

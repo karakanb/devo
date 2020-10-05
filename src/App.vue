@@ -18,11 +18,16 @@
               <a href="https://github.com/karakanb/devo">open-source extension</a>.
             </span>
 
-            <span class="pull-right day-night-toggle">
-              <font-awesome-icon :icon="['fas', 'sun']"></font-awesome-icon>
-              <toggle-switch v-model="nightModeToggle" style="margin-right: 8px"></toggle-switch>
-              <font-awesome-icon :icon="['fas', 'moon']" style="margin: 0"></font-awesome-icon>
-            </span>
+            <div class="pull-right day-night-toggle">
+              <div>
+                <layout-select></layout-select>
+              </div>
+              <div>
+                <font-awesome-icon :icon="['fas', 'sun']"></font-awesome-icon>
+                <toggle-switch v-model="nightModeToggle" style="margin-right: 8px"></toggle-switch>
+                <font-awesome-icon :icon="['fas', 'moon']" style="margin: 0"></font-awesome-icon>
+              </div>
+            </div>
           </footer>
         </div>
       </div>
@@ -34,7 +39,7 @@
 import { mapState, mapActions } from 'vuex';
 import Card from './components/Card.vue';
 import ToggleSwitch from './components/ToggleSwitch.vue';
-import PlatformCard from './components/PlatformCard.vue';
+import LayoutSelect from './components/LayoutSelect.vue';
 import SingleColumn from './layouts/SingleColumn.vue';
 import TwoColumns from './layouts/TwoColumns.vue';
 import ThreeColumns from './layouts/ThreeColumns.vue';
@@ -47,7 +52,7 @@ export default {
   components: {
     Card,
     ToggleSwitch,
-    PlatformCard,
+    LayoutSelect,
     SingleColumn,
     TwoColumns,
     ThreeColumns,
@@ -77,12 +82,8 @@ export default {
     },
     ...mapState({
       isNightMode: (state) => state.settings.isNightMode,
+      layout: (state) => state.settings.layout,
     }),
-
-    layout() {
-      return 'OneLeftTwoRight';
-    },
-
     nightModeToggle: {
       get() {
         return this.isNightMode;

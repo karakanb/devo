@@ -61,6 +61,7 @@ export default new Vuex.Store({
     settings: {
       isNightMode: getIsNightMode(),
       cards: [GITHUB, HACKERNEWS, PRODUCTHUNT, DESIGNERNEWS],
+      layout: 'OneLeftTwoRight',
     },
     github: {
       updated_at: 0,
@@ -102,6 +103,9 @@ export default new Vuex.Store({
     setCardPlatform(state, { index, platform }) {
       Vue.set(state.settings.cards, index, platform);
     },
+    setLayout(state, layout) {
+      state.settings.layout = layout;
+    },
     setPlatformData(state, { platform, data }) {
       state[platform].data = data;
       state[platform].updated_at = Date.now();
@@ -114,6 +118,10 @@ export default new Vuex.Store({
 
     setCardPlatform(context, payload) {
       context.commit('setCardPlatform', payload);
+    },
+
+    setLayout(context, layout) {
+      context.commit('setLayout', layout);
     },
 
     async updatePlatformData({ state, commit }, { platform, forced, url }) {

@@ -9,10 +9,10 @@
 import PlatformCard from '../components/PlatformCard.vue';
 
 export default {
+  name: 'TwoColumns',
   components: {
     PlatformCard,
   },
-  methods: {},
 };
 </script>
 
