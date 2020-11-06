@@ -18,11 +18,11 @@
               <a href="https://github.com/karakanb/devo">open-source extension</a>.
             </span>
 
-            <div class="pull-right day-night-toggle">
-              <div>
+            <div class="pull-right day-night-toggle flex items-center">
+              <div style="margin-right: 12px;">
                 <layout-select></layout-select>
               </div>
-              <div>
+              <div class="flex items-center">
                 <font-awesome-icon :icon="['fas', 'sun']"></font-awesome-icon>
                 <toggle-switch v-model="nightModeToggle" style="margin-right: 8px"></toggle-switch>
                 <font-awesome-icon :icon="['fas', 'moon']" style="margin: 0"></font-awesome-icon>
@@ -159,6 +159,14 @@ body {
 .day-night-toggle svg {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
 }
 
 .pull-right {

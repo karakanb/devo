@@ -6,9 +6,8 @@
     v-outside="closeDropdown"
   >
     <div class="select-title-wrapper">
-      <span class="select-title"> {{ selectedLayoutDisplayName }}</span>
-      <span class="select-icon">
-        <font-awesome-icon icon="caret-up"></font-awesome-icon>
+      <span class="select-title">
+        <font-awesome-icon icon="th-large" style="margin: 0"></font-awesome-icon>
       </span>
     </div>
     <ul v-if="dropdownVisible" class="options round-borders with-shadow">
@@ -85,9 +84,9 @@ export default {
   width: 100%;
   display: inline-block;
   cursor: pointer;
-  min-width: 180px;
-  /* border: 1px solid grey; */
   box-sizing: border-box;
+  position: relative;
+  font-size: larger;
 }
 
 .options {
@@ -98,8 +97,9 @@ export default {
   position: absolute;
   background: white;
   color: black;
-  /* margin-top: 4px; */
-  bottom: 80px;
+  bottom: 28px;
+  right: 0;
+  border: 1px #535a635e solid;
 }
 
 .option-item {
@@ -124,6 +124,7 @@ export default {
 
 .select-title {
   padding: 5px;
+  line-height: 0;
   display: inline-block;
 }
 
@@ -166,6 +167,7 @@ export default {
 /* Here comes night-mode styling. */
 .night-mode .options {
   background-color: #25292f;
+  border: 1px #1e2123 solid;
   color: white;
 }
 
