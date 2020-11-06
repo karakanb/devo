@@ -130,7 +130,7 @@ export default {
 
 .hovered-wrapper,
 .wrapper:hover {
-  border: 1px solid rgb(255, 255, 255, 0.25);
+  border: 1px solid #535a635e;
 }
 
 .hovered-wrapper .select-title,
