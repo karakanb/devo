@@ -1,3 +1,10 @@
+import SingleColumn from './layouts/SingleColumn.vue';
+import TwoColumns from './layouts/TwoColumns.vue';
+import ThreeColumns from './layouts/ThreeColumns.vue';
+import TwoLeftOneRight from './layouts/TwoLeftOneRight.vue';
+import OneLeftTwoRight from './layouts/OneLeftTwoRight.vue';
+import TwoRowsTwoColumns from './layouts/TwoRowsTwoColumns.vue';
+
 const DEFAULT_NIGHTMODE_BACKGROUND = '31363e';
 
 export default {
@@ -109,4 +116,30 @@ export default {
       },
     },
   },
+  layouts: [
+    {
+      displayName: 'Single Column',
+      component: SingleColumn.name,
+    },
+    {
+      displayName: 'Two Columns',
+      component: TwoColumns.name,
+    },
+    {
+      displayName: 'Three Columns',
+      component: ThreeColumns.name,
+    },
+    {
+      displayName: 'Two Left, One Right',
+      component: TwoLeftOneRight.name,
+    },
+    {
+      displayName: 'One Left, Two Right',
+      component: OneLeftTwoRight.name,
+    },
+    {
+      displayName: 'Four Cards',
+      component: TwoRowsTwoColumns.name,
+    },
+  ],
 };

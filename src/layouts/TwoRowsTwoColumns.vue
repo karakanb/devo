@@ -11,6 +11,7 @@
 import PlatformCard from '../components/PlatformCard.vue';
 
 export default {
+  name: 'TwoRowsTwoColumns',
   components: {
     PlatformCard,
   },
