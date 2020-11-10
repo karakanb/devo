@@ -1,13 +1,20 @@
-import Vue from 'vue';
 import { expect, use, spy } from 'chai';
 import spies from 'chai-spies';
-import { mount } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faSyncAlt, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
 import Card from '@/components/Card.vue';
 
+library.add(faGithub, faSyncAlt, faExternalLinkAlt);
+
+const localVue = createLocalVue();
+localVue.component('font-awesome-icon', FontAwesomeIcon);
+
 use(spies);
-Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 const objectProps = {
   title: 'test title',
@@ -24,7 +31,15 @@ describe('Card.vue', () => {
     const bodyContent = 'this is card body.';
     const body = `<p>${bodyContent}</p>`;
 
-    const wrapper = mount(Card, { propsData: objectProps, slots: { 'card-title': title, 'card-body': body } });
+    const wrapper = mount(Card, {
+      localVue,
+      propsData: objectProps,
+      slots: {
+        'card-title': title,
+        'card-body': body,
+      },
+    });
+
     expect(wrapper.find('.card-title-text').text()).to.include(titleContent);
     expect(wrapper.find('.card-body').text()).to.include(bodyContent);
     expect(wrapper.find('.external-icon > a').attributes('href')).to.be.equal(objectProps.externalLink);
@@ -32,7 +47,7 @@ describe('Card.vue', () => {
   });
 
   it('icon action triggered on click', () => {
-    const wrapper = mount(Card, { propsData: objectProps });
+    const wrapper = mount(Card, { localVue, propsData: objectProps });
     const refreshIcon = wrapper.find('.fa-refresh-icon');
     refreshIcon.trigger('click');
     expect(objectProps.iconOnClick).to.have.been.called.once;
