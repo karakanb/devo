@@ -3,7 +3,7 @@
     <div class="row title-row">
       <div>
         <div class="site-string" v-if="item.url">
-          <a :href="'http://' + siteStringLink"> ({{ siteStringLink }}) </a>
+          <a :href="siteStringLink"> ({{ siteString }}) </a>
         </div>
         <div class="title truncate">
           <a :href="item.url" :title="item.title">{{ item.title }}</a>
@@ -11,8 +11,11 @@
       </div>
     </div>
     <div class="row meta-data">
-      {{ item.score }} votes via <a :href="userLink"> {{ item.submitter_user.username }}</a> | {{ relativeDate }} ago |
-      <a :href="threadLink"> {{ item.comment_count > 0 ? `${item.comment_count} comments` : "discuss" }} </a>
+      {{ item.score }} votes via <a class="user-link" :href="userLink"> {{ item.submitter_user.username }}</a> |
+      {{ relativeDate }} ago |
+      <a class="thread-link" :href="threadLink">
+        {{ item.comment_count > 0 ? `${item.comment_count} comments` : 'discuss' }}
+      </a>
     </div>
   </div>
 </template>
@@ -36,10 +39,13 @@ export default {
       return `${this.baseUrl}/u/${this.item.submitter_user.username}`;
     },
     threadLink() {
-      return `${this.baseUrl}/s/${this.item.short_id}`;
+      return this.item.comments_url;
     },
     siteStringLink() {
-      return `${(new URL(this.item.url)).hostname}`;
+      return `http://${new URL(this.item.url).hostname}`;
+    },
+    siteString() {
+      return new URL(this.item.url).hostname;
     },
     relativeDate() {
       return this.timeSince(new Date(this.item.created_at));

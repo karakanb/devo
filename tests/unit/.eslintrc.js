@@ -4,6 +4,7 @@ module.exports = {
   },
   rules: {
     'import/no-extraneous-dependencies': 'off',
-    'no-unused-expressions': 'off'
+    'no-unused-expressions': 'off',
+    'max-len': 'off'
   }
 }

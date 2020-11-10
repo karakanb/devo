@@ -1,53 +1,53 @@
-import Vue from 'vue';
 import { expect, use, spy } from 'chai';
 import spies from 'chai-spies';
-import { mount, shallowMount } from '@vue/test-utils';
-import Card from '@/components/Card.vue';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faGithub, faHackerNewsSquare, faProductHunt } from '@fortawesome/free-brands-svg-icons';
-import { faSyncAlt, faCodeBranch, faStar, faChevronUp, faComment, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { mount, createLocalVue } from '@vue/test-utils';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add([faGithub, faHackerNewsSquare, faProductHunt, faSyncAlt,
-  faCodeBranch, faStar, faChevronUp, faComment, faExternalLinkAlt]);
-Vue.component('font-awesome-icon', FontAwesomeIcon);
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faSyncAlt, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+
+import Card from '@/components/Card.vue';
+
+library.add(faGithub, faSyncAlt, faExternalLinkAlt);
+
+const localVue = createLocalVue();
+localVue.component('font-awesome-icon', FontAwesomeIcon);
 
 use(spies);
-Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 const objectProps = {
+  title: 'test title',
   icon: ['fab', 'github'],
   iconOnClick: spy(() => { }),
-  title: 'test title',
   externalLink: 'https://github.com/trending',
 };
 
 describe('Card.vue', () => {
-  it('title is rendered', () => {
-    const wrapper = shallowMount(Card, { propsData: objectProps });
-    expect(wrapper.text()).to.include(objectProps.title);
-  });
+  it('card is properly rendered', () => {
+    const titleContent = 'this is card title';
+    const title = `<h1>${titleContent}</h1>`;
 
-  it('external link is set on icon', () => {
-    const wrapper = shallowMount(Card, { propsData: objectProps });
-    expect(wrapper.find('.external-icon > a').attributes('href').href).to.be.equal(objectProps.externalLink);
-  });
+    const bodyContent = 'this is card body.';
+    const body = `<p>${bodyContent}</p>`;
 
-  it('body is placed for slot', () => {
-    const message = 'this is card body.';
-    const cardBody = `<h1>${message}</h1>`;
-    const wrapper = shallowMount(Card, { propsData: objectProps, slots: { 'card-body': cardBody } });
+    const wrapper = mount(Card, {
+      localVue,
+      propsData: objectProps,
+      slots: {
+        'card-title': title,
+        'card-body': body,
+      },
+    });
 
-    expect(wrapper.find('.card-body').text()).to.include(message);
-  });
-
-  it('three font-awesome icons exist on title', () => {
-    const wrapper = shallowMount(Card, { propsData: objectProps });
-    expect(wrapper.findAll(FontAwesomeIcon).length).to.be.equal(3);
+    expect(wrapper.find('.card-title-text').text()).to.include(titleContent);
+    expect(wrapper.find('.card-body').text()).to.include(bodyContent);
+    expect(wrapper.find('.external-icon > a').attributes('href')).to.be.equal(objectProps.externalLink);
+    expect(wrapper.findAllComponents(FontAwesomeIcon).length).to.be.equal(3);
   });
 
   it('icon action triggered on click', () => {
-    const wrapper = mount(Card, { propsData: objectProps });
+    const wrapper = mount(Card, { localVue, propsData: objectProps });
     const refreshIcon = wrapper.find('.fa-refresh-icon');
     refreshIcon.trigger('click');
     expect(objectProps.iconOnClick).to.have.been.called.once;
