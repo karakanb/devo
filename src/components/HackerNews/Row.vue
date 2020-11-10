@@ -11,8 +11,8 @@
       </div>
     </div>
     <div class="row meta-data">
-      {{ item.score }} by <a :href="userLink"> {{ item.user.name }}</a> | {{ item.age }} |
-      <a :href="threadLink"> {{ item.commentCount }}</a>
+      {{ item.score }} by <a class="user-link" :href="userLink"> {{ item.user.name }}</a> | {{ item.age }} |
+      <a class="thread-link" :href="threadLink"> {{ item.commentCount }}</a>
     </div>
   </div>
 </template>

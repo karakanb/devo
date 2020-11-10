@@ -37,7 +37,7 @@ const objectProps = {
   },
 };
 
-describe('GitHubRow.vue', () => {
+describe('GitHub/Row.vue', () => {
   it('row is properly rendered', () => {
     const wrapper = shallowMount(Row, { localVue, propsData: objectProps });
 
