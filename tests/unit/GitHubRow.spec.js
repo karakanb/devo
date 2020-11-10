@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { expect } from 'chai';
 import { shallowMount } from '@vue/test-utils';
-import Row from '@/components/GitHub/GitHubRow.vue';
+import Row from '@/components/GitHub/Row.vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faGithub,
