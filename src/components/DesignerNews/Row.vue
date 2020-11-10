@@ -12,7 +12,9 @@
     </div>
     <div class="row meta-data">
       {{ item.vote_count }} points | {{ relativeDate }} ago |
-      <a :href="threadLink"> {{ item.comment_count > 0 ? `${item.comment_count} comments` : 'discuss' }}</a>
+      <a class="thread-link" :href="threadLink">
+        {{ item.comment_count > 0 ? `${item.comment_count} comments` : 'discuss' }}
+      </a>
     </div>
   </div>
 </template>
