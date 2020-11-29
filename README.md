@@ -22,6 +22,10 @@ __Devo__ is a Google Chrome and Mozilla Firefox extension that displays GitHub T
 ## Installation
 Devo can be installed for [Chrome here](https://chrome.google.com/webstore/detail/devo/elkhalpmbmbaeoemecpcfdcoekmpgmdm), and [Firefox here](https://addons.mozilla.org/en-US/firefox/addon/devo-new-tab/).
 
+For installation on Safari:
+1. [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify/netlify-statuskit)
+2. Once deployed, [update homepage on safari](https://support.apple.com/guide/safari/change-your-homepage-ibrw1020/mac).
+
 ## Demo
 [Demo can be found here.](https://burakkarakan.com/devo/)
 
