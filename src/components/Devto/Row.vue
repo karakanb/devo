@@ -1,18 +1,18 @@
 <template>
   <div class="devto-item">
-    <div class="row title-row">
+    <div class="title-row">
       <h2 class="title truncate">
         <a :href="item.url" :title="item.title">
           <span class="hover-underline">{{ item.title }}</span>
         </a>
       </h2>
     </div>
-    <div class="row tag-list" v-if="item.tag_list">
+    <div class="tag-list" v-if="item.tag_list">
       <a class="tag hover-underline" v-for="tag in item.tag_list" :key="tag" :href="`${baseUrl}/t/${tag}`"
         >#{{ tag }}</a
       >
     </div>
-    <div class="row metadata">
+    <div class="metadata">
       <div>
         <a class="hover-underline" :href="userLink">{{ item.user.name }}</a
         >・{{ publishDateShort }} ({{ relativeDate }} ago)
@@ -110,7 +110,7 @@ export default {
   color: inherit !important;
 }
 
-.devto-item .row {
+.devto-item {
   margin: 0;
 }
 

@@ -1,16 +1,16 @@
 <template>
   <div class="gh-item">
-    <div class="row title">
+    <div class="title">
       <h3 class="repo-name">
         <a :href="repoLink">
           <span class="text-normal"> {{ item.repo.owner }} /</span> {{ item.repo.name }}
         </a>
       </h3>
     </div>
-    <div class="row description">
+    <div class="description">
       {{ item.repo.description }}
     </div>
-    <div class="row meta-row text-grey">
+    <div class="meta-row text-grey">
       <span v-if="item.language" class="language m-r-16">
         <span class="language-color inline-block" :style="{ backgroundColor: item.language.color }"></span>
         <span class="language-text">{{ item.language.is }}</span>
@@ -72,20 +72,18 @@ export default {
   border-bottom: 1px solid #dfe3e8a8;
 }
 
-.gh-item .row {
+.gh-item {
   margin: 0;
 }
 
 .gh-item .title {
-  margin-bottom: 4px;
-  height: 30px;
   display: inline-block;
 }
 
 .gh-item .description {
   font-size: 14px;
   color: #586069 !important;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   padding: 4px 0;
   width: 100%;
   overflow-wrap: break-word;
@@ -131,7 +129,7 @@ h3.repo-name {
   text-decoration-color: initial;
 }
 
-.row.meta-row {
+.meta-row {
   display: block;
 }
 

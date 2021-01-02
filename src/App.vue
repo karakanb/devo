@@ -1,54 +1,61 @@
 <template>
   <div id="app" :class="{ 'night-mode': isNightMode }">
-    <div class="row">
-      <div class="col-lg-10 col-lg-offset-1">
-        <div class="row date-time-wrapper middle-lg">
-          <div class="col-xs date-time grey-text">
-            <div class="time inline-block">{{ now }}</div>
-            <div class="date inline-block pull-right">{{ today }}</div>
-          </div>
+    <!-- <div class="app-card-container"> -->
+    <div class="app-card-container">
+      <div class="date-time-wrapper">
+        <div class="col-xs date-time grey-text">
+          <div class="time inline-block">{{ now }}</div>
+          <div class="date inline-block pull-right">{{ today }}</div>
         </div>
-        <div class="cards-wrapper">
-          <component :is="this.layout"></component>
-        </div>
-        <div class="row date-time-wrapper middle-lg">
-          <footer class="col-xs grey-text light">
-            <span class="pull-left">
-              <span class="semi-bold">devo</span> is an
-              <a href="https://github.com/karakanb/devo">open-source extension</a>.
-            </span>
+      </div>
+      <div class="cards-wrapper">
+        <component :is="this.layout"></component>
+      </div>
+      <div class="date-time-wrapper">
+        <footer class="col-xs grey-text light">
+          <span class="pull-left">
+            <span class="semi-bold">devo</span> is an
+            <a href="https://github.com/karakanb/devo">open-source extension</a
+            >.
+          </span>
 
-            <div class="pull-right day-night-toggle flex items-center">
-              <div style="margin-right: 12px;">
-                <layout-select></layout-select>
-              </div>
-              <div class="flex items-center">
-                <font-awesome-icon :icon="['fas', 'sun']"></font-awesome-icon>
-                <toggle-switch v-model="nightModeToggle" style="margin-right: 8px"></toggle-switch>
-                <font-awesome-icon :icon="['fas', 'moon']" style="margin: 0"></font-awesome-icon>
-              </div>
+          <div class="pull-right day-night-toggle flex items-center">
+            <div style="margin-right: 12px">
+              <layout-select></layout-select>
             </div>
-          </footer>
-        </div>
+            <div class="flex items-center">
+              <font-awesome-icon :icon="['fas', 'sun']"></font-awesome-icon>
+              <toggle-switch
+                v-model="nightModeToggle"
+                style="margin-right: 8px"
+              ></toggle-switch>
+              <font-awesome-icon
+                :icon="['fas', 'moon']"
+                style="margin: 0"
+              ></font-awesome-icon>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   </div>
+  <!-- </div> -->
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
-import Card from './components/Card.vue';
-import ToggleSwitch from './components/ToggleSwitch.vue';
-import LayoutSelect from './components/LayoutSelect.vue';
-import SingleColumn from './layouts/SingleColumn.vue';
-import TwoColumns from './layouts/TwoColumns.vue';
-import ThreeColumns from './layouts/ThreeColumns.vue';
-import TwoLeftOneRight from './layouts/TwoLeftOneRight.vue';
-import OneLeftTwoRight from './layouts/OneLeftTwoRight.vue';
-import TwoRowsTwoColumns from './layouts/TwoRowsTwoColumns.vue';
+import { mapState, mapActions } from "vuex";
+import Card from "./components/Card.vue";
+import ToggleSwitch from "./components/ToggleSwitch.vue";
+import LayoutSelect from "./components/LayoutSelect.vue";
+import SingleColumn from "./layouts/SingleColumn.vue";
+import TwoColumns from "./layouts/TwoColumns.vue";
+import ThreeColumns from "./layouts/ThreeColumns.vue";
+import TwoLeftOneRight from "./layouts/TwoLeftOneRight.vue";
+import OneLeftTwoRight from "./layouts/OneLeftTwoRight.vue";
+import TwoRowsTwoColumns from "./layouts/TwoRowsTwoColumns.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
     Card,
     ToggleSwitch,
@@ -72,8 +79,8 @@ export default {
   },
   computed: {
     now() {
-      const hour = this.nowTime.getHours().toString().padStart(2, '0');
-      const minute = this.nowTime.getMinutes().toString().padStart(2, '0');
+      const hour = this.nowTime.getHours().toString().padStart(2, "0");
+      const minute = this.nowTime.getMinutes().toString().padStart(2, "0");
 
       return `${hour}:${minute}`;
     },
@@ -96,28 +103,36 @@ export default {
   methods: {
     formatDate(date) {
       const monthNames = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
       ];
 
-      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
 
       const day = date.getDate();
       const monthIndex = date.getMonth();
       return `${days[date.getDay()]}, ${monthNames[monthIndex]} ${day}`;
     },
 
-    ...mapActions(['setNightMode']),
+    ...mapActions(["setNightMode"]),
   },
 };
 </script>
@@ -128,8 +143,8 @@ body {
 }
 #app {
   background-color: #f5f7fa;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
@@ -159,6 +174,16 @@ body {
 .day-night-toggle svg {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.app-card-container {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  padding-right: var(--half-gutter-width, 0.5rem);
+  padding-left: var(--half-gutter-width, 0.5rem);
+  flex-basis: 83.33333333%;
+  max-width: 83.33333333%;
+  margin-left: 8.33333333%;
 }
 
 .flex {
@@ -198,18 +223,16 @@ body {
 }
 
 .date-time-wrapper {
+  display: flex;
   height: 10vh;
   font-size: 12px;
+  align-items: center;
 }
 
 .date-time {
   font-size: 32px;
   font-weight: 100;
-  margin: 25px;
-}
-
-.date-time .row {
-  margin: 0;
+  margin: initial;
 }
 
 footer {
@@ -237,10 +260,6 @@ footer a:hover {
 }
 
 @media screen and (min-width: 1200px) {
-  .date-time {
-    margin: initial;
-  }
-
   .footer-row {
     margin: initial;
     text-align: left;
@@ -249,5 +268,13 @@ footer a:hover {
   .cards-wrapper {
     height: 80vh;
   }
+}
+
+.col-xs {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  flex-grow: 1;
+  flex-basis: 0;
+  max-width: 100%;
 }
 </style>

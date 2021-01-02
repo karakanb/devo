@@ -1,6 +1,6 @@
 <template>
   <div class="dn-item">
-    <div class="row title-row">
+    <div class="title-row">
       <div>
         <div class="site-string" v-if="item.hostname">
           <a :href="hostnameLink"> ({{ item.hostname }}) </a>
@@ -10,7 +10,7 @@
         </div>
       </div>
     </div>
-    <div class="row meta-data">
+    <div class="meta-data">
       {{ item.vote_count }} points | {{ relativeDate }} ago |
       <a class="thread-link" :href="threadLink">
         {{ item.comment_count > 0 ? `${item.comment_count} comments` : 'discuss' }}

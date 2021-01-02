@@ -1,19 +1,19 @@
 <template>
   <div class="ph-item">
-    <div class="row" style="display:flex">
+    <div style="display:flex">
       <div class="thumbnail">
         <div class="image-container">
           <img :src="thumbnailLink" :srcset="`${thumbnailLink}&dpr=2 2x`" width="80" height="80" />
         </div>
       </div>
       <div class="product-info">
-        <div class="row title-row">
+        <div class="title-row">
           <a :href="itemLink"> {{ item.name }}</a>
         </div>
-        <h3 class="row description">
+        <h3 class="description">
           {{ item.tagline }}
         </h3>
-        <div class="row meta between-lg">
+        <div class="meta between-lg">
           <span class="ph-tag-wrapper">
             <span class="small-info-box link-box" v-if="topicExists">
               <a :href="firstTopicLink">
@@ -99,14 +99,6 @@ export default {
   border-bottom: 1px solid #dfe3e8a8;
 }
 
-.ph-item .row {
-  margin: 0;
-}
-
-.ph-item .row .col-lg-2 {
-  padding: 0;
-}
-
 .ph-item a {
   text-decoration: none;
   color: inherit;
@@ -143,6 +135,7 @@ export default {
   font-weight: 400;
   line-height: 20px;
   margin-bottom: 5px;
+  margin-top: 0px;
 }
 
 .ph-item .small-info-box {
@@ -251,17 +244,12 @@ export default {
   text-decoration-color: initial;
 }
 
-.hn-item .title {
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.hn-item .title-row {
-  margin-bottom: 4px;
-}
-
-.hn-item .title-row > div {
-  max-width: 100%;
+.ph-item .meta {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .truncate {

@@ -1,6 +1,6 @@
 <template>
   <div class="hn-item">
-    <div class="row title-row">
+    <div class="title-row">
       <div>
         <div class="site-string" v-if="item.siteString">
           <a :href="siteStringLink"> ({{ item.siteString }}) </a>
@@ -10,7 +10,7 @@
         </div>
       </div>
     </div>
-    <div class="row meta-data">
+    <div class="meta-data">
       {{ item.score }} by <a class="user-link" :href="userLink"> {{ item.user.name }}</a> | {{ item.age }} |
       <a class="thread-link" :href="threadLink"> {{ item.commentCount }}</a>
     </div>
@@ -56,7 +56,7 @@ export default {
   border-bottom: 1px solid #dfe3e8a8;
 }
 
-.hn-item .row {
+.hn-item {
   margin: 0;
 }
 

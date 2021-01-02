@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import 'flexboxgrid';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faGithub, faHackerNewsSquare, faProductHunt, faDev } from '@fortawesome/free-brands-svg-icons';
 import {

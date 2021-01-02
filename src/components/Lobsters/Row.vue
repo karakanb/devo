@@ -1,6 +1,6 @@
 <template>
   <div class="lr-item">
-    <div class="row title-row">
+    <div class="title-row">
       <div>
         <div class="site-string" v-if="item.url">
           <a :href="siteStringLink"> ({{ siteString }}) </a>
@@ -10,7 +10,7 @@
         </div>
       </div>
     </div>
-    <div class="row meta-data">
+    <div class="meta-data">
       {{ item.score }} votes via <a class="user-link" :href="userLink"> {{ item.submitter_user.username }}</a> |
       {{ relativeDate }} ago |
       <a class="thread-link" :href="threadLink">
@@ -98,7 +98,7 @@ export default {
   border-bottom: 1px solid #dfe3e8a8;
 }
 
-.lr-item .row {
+.lr-item{
   margin: 0;
 }
 
