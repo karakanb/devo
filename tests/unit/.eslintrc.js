@@ -1,10 +1,10 @@
 module.exports = {
   env: {
-    mocha: true
+    mocha: true,
   },
   rules: {
     'import/no-extraneous-dependencies': 'off',
     'no-unused-expressions': 'off',
-    'max-len': 'off'
-  }
-}
+    'max-len': 'off',
+  },
+};

@@ -43,19 +43,19 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-import Card from "./components/Card.vue";
-import ToggleSwitch from "./components/ToggleSwitch.vue";
-import LayoutSelect from "./components/LayoutSelect.vue";
-import SingleColumn from "./layouts/SingleColumn.vue";
-import TwoColumns from "./layouts/TwoColumns.vue";
-import ThreeColumns from "./layouts/ThreeColumns.vue";
-import TwoLeftOneRight from "./layouts/TwoLeftOneRight.vue";
-import OneLeftTwoRight from "./layouts/OneLeftTwoRight.vue";
-import TwoRowsTwoColumns from "./layouts/TwoRowsTwoColumns.vue";
+import { mapState, mapActions } from 'vuex';
+import Card from './components/Card.vue';
+import ToggleSwitch from './components/ToggleSwitch.vue';
+import LayoutSelect from './components/LayoutSelect.vue';
+import SingleColumn from './layouts/SingleColumn.vue';
+import TwoColumns from './layouts/TwoColumns.vue';
+import ThreeColumns from './layouts/ThreeColumns.vue';
+import TwoLeftOneRight from './layouts/TwoLeftOneRight.vue';
+import OneLeftTwoRight from './layouts/OneLeftTwoRight.vue';
+import TwoRowsTwoColumns from './layouts/TwoRowsTwoColumns.vue';
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
     Card,
     ToggleSwitch,
@@ -79,8 +79,8 @@ export default {
   },
   computed: {
     now() {
-      const hour = this.nowTime.getHours().toString().padStart(2, "0");
-      const minute = this.nowTime.getMinutes().toString().padStart(2, "0");
+      const hour = this.nowTime.getHours().toString().padStart(2, '0');
+      const minute = this.nowTime.getMinutes().toString().padStart(2, '0');
 
       return `${hour}:${minute}`;
     },
@@ -103,28 +103,28 @@ export default {
   methods: {
     formatDate(date) {
       const monthNames = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
       ];
 
       const days = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
       ];
 
       const day = date.getDate();
@@ -132,7 +132,7 @@ export default {
       return `${days[date.getDay()]}, ${monthNames[monthIndex]} ${day}`;
     },
 
-    ...mapActions(["setNightMode"]),
+    ...mapActions(['setNightMode']),
   },
 };
 </script>
