@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="single-column-wrapper">
     <platform-card :cardIndex="0"></platform-card>
   </div>
 </template>
@@ -14,3 +14,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@media screen and (min-width: 1200px) {
+  #single-column-wrapper {
+    height: 100%;
+  }
+}
+</style>

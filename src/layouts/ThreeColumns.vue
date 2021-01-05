@@ -26,6 +26,7 @@ export default {
 @media screen and (min-width: 1200px) {
   #three-columns-wrapper {
     grid-template-columns: repeat(3, 1fr);
+    height: 100%;
   }
 }
 </style>
