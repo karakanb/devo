@@ -1,17 +1,17 @@
 <template>
   <div class="hn-item">
     <div class="title-row">
-      <div>
-        <div class="site-string" v-if="item.siteString">
-          <a :href="siteStringLink"> ({{ item.siteString }}) </a>
-        </div>
-        <div class="title truncate">
-          <a :href="itemLink" :title="item.title">{{ item.title }}</a>
-        </div>
+      <div class="title">
+        <a :href="itemLink" :title="item.title">{{ item.title }}</a>
+      </div>
+      <div class="site-string" v-if="item.siteString">
+        <a :href="siteStringLink"> ({{ item.siteString }}) </a>
       </div>
     </div>
     <div class="meta-data">
-      {{ item.score }} by <a class="user-link" :href="userLink"> {{ item.user.name }}</a> | {{ item.age }} |
+      {{ item.score }} by
+      <a class="user-link" :href="userLink"> {{ item.user.name }}</a> |
+      {{ item.age }} |
       <a class="thread-link" :href="threadLink"> {{ item.commentCount }}</a>
     </div>
   </div>
@@ -42,7 +42,9 @@ export default {
       return `http://${this.item.siteString}`;
     },
     itemLink() {
-      return this.item.link.startsWith('http') ? this.item.link : `${this.baseUrl}${this.item.link}`;
+      return this.item.link.startsWith('http')
+        ? this.item.link
+        : `${this.baseUrl}${this.item.link}`;
     },
   },
 };
@@ -54,19 +56,12 @@ export default {
   padding: 8px 0;
   text-align: left;
   border-bottom: 1px solid #dfe3e8a8;
-}
-
-.hn-item {
   margin: 0;
 }
 
 .hn-item a {
   text-decoration: none;
   color: inherit;
-}
-
-.hn-item .meta-data a {
-  margin: 0 2.5px;
 }
 
 .hn-item a:hover {
@@ -79,20 +74,20 @@ export default {
 .hn-item .title {
   white-space: nowrap;
   overflow: hidden;
+  display: inline-block;
+  text-overflow: ellipsis;
 }
 
 .hn-item .title-row {
-  margin-bottom: 4px;
-}
-
-.hn-item .title-row > div {
+  margin-bottom: 2px;
   max-width: 100%;
+  display: flex;
 }
 
 .hn-item .site-string {
   color: rgb(130, 130, 130);
   font-size: 10.667px;
-  float: right;
+  display: inline-block;
   white-space: nowrap;
   margin-top: 3px;
   padding-left: 4px;
@@ -101,11 +96,5 @@ export default {
 .meta-data {
   color: rgb(130, 130, 130);
   font-size: 9.33333px;
-}
-
-.truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 </style>
