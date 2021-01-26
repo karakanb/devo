@@ -250,6 +250,7 @@ export default {
   flex: 0 1 auto;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .truncate {
