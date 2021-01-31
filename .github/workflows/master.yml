@@ -27,8 +27,14 @@ jobs:
     - run: npm run build
     - run: npm run test
     
-    - name: Archive production artifacts
+    - name: Archive source code
+      uses: actions/upload-artifact@v2
+      with:
+        name: src
+        path: dist-zip/src.zip
+
+    - name: Archive build files
       uses: actions/upload-artifact@v2
       with:
         name: dist
-        path: dist
+        path: dist-zip/dist.zip
