@@ -70,11 +70,15 @@ export default {
   data() {
     return {
       nowTime: new Date(),
+      disableNightAutoToggle: false,
     };
   },
   created() {
     setInterval(() => {
       this.nowTime = new Date();
+      if (!this.disableNightAutoToggle) {
+        this.setNightMode(this.checkIsNightMode());
+      }
     }, 1000);
   },
   computed: {
@@ -96,6 +100,7 @@ export default {
         return this.isNightMode;
       },
       set(value) {
+        this.disableNightAutoToggle = true;
         this.setNightMode(value);
       },
     },
@@ -130,6 +135,10 @@ export default {
       const day = date.getDate();
       const monthIndex = date.getMonth();
       return `${days[date.getDay()]}, ${monthNames[monthIndex]} ${day}`;
+    },
+    checkIsNightMode() {
+      const { matches } = window.matchMedia('(prefers-color-scheme: dark)');
+      return matches;
     },
 
     ...mapActions(['setNightMode']),

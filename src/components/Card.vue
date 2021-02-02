@@ -94,6 +94,16 @@ export default {
   overflow-x: auto;
 }
 
+.night-mode .card-body::-webkit-scrollbar {
+  width: 5px;
+  background: rgb(49, 54, 62);
+}
+
+.night-mode .card-body::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: #dfe3e82d;
+}
+
 .card-title-text {
   font-weight: 600;
 }

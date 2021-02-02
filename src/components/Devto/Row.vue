@@ -105,6 +105,11 @@ export default {
   color: #292929 !important;
 }
 
+.night-mode .devto-item {
+  border-bottom: 1px solid #dfe3e82d;
+}
+
+
 .night-mode .devto-item,
 .night-mode .devto-item .title {
   color: inherit !important;

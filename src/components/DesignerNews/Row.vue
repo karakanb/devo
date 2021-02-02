@@ -92,6 +92,10 @@ export default {
   border-bottom: 1px solid #dfe3e8a8;
 }
 
+.night-mode .dn-item {
+  border-bottom: 1px solid #dfe3e82d;
+}
+
 .dn-item .row {
   margin: 0;
 }
