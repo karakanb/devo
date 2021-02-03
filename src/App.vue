@@ -74,11 +74,9 @@ export default {
     };
   },
   created() {
+    this.setNightMode(this.checkIsNightMode());
     setInterval(() => {
       this.nowTime = new Date();
-      if (!this.disableNightAutoToggle) {
-        this.setNightMode(this.checkIsNightMode());
-      }
     }, 1000);
   },
   computed: {
@@ -100,7 +98,6 @@ export default {
         return this.isNightMode;
       },
       set(value) {
-        this.disableNightAutoToggle = true;
         this.setNightMode(value);
       },
     },
