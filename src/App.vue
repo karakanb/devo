@@ -70,7 +70,6 @@ export default {
   data() {
     return {
       nowTime: new Date(),
-      disableNightAutoToggle: false,
     };
   },
   created() {
