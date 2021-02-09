@@ -2,7 +2,6 @@
 node_modules
 /dist
 /dist-zip
-/demo
 
 # local env files
 .env.local
