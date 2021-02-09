@@ -3,7 +3,7 @@
   "description": "GitHub Trending, Hacker News and Product Hunt, on every new tab!",
   "author": "Burak Karakan",
   "short_name": "Devo",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "manifest_version": 2,
   "icons": {
     "16": "icons/icon-16.png",
