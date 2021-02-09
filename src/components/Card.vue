@@ -61,6 +61,13 @@ export default {
 </script>
 
 <style>
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+}
+
 .card {
   height: 100%;
   width: 100%;
@@ -93,6 +100,17 @@ export default {
   background-color: #31363e;
   color: #c5c8ca;
   scrollbar-color: #dfe3e82d transparent;
+}
+
+.night-mode .card-body::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+.card-body::-webkit-scrollbar-thumb {
+  background-color: #4f4f4f2e;
+}
+.night-mode .card-body::-webkit-scrollbar-thumb {
+  background-color: #dfe3e82d;
 }
 
 .card-title-text {
