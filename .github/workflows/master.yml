@@ -26,6 +26,14 @@ jobs:
     - run: npm ci
     - run: npm run build
     - run: npm run test
+    - run: npm run demo
+    
+    - name: Deploy the demo to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@4.0.0
+      with:
+        branch: gh-pages
+        folder: demo
+
     
     - name: Archive source code
       uses: actions/upload-artifact@v2
