@@ -26,14 +26,6 @@ jobs:
     - run: npm ci
     - run: npm run build
     - run: npm run test
-    - run: npm run demo
-    
-    - name: Deploy the demo to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@4.0.0
-      with:
-        branch: gh-pages
-        folder: demo
-
     
     - name: Archive source code
       uses: actions/upload-artifact@v2
@@ -46,3 +38,34 @@ jobs:
       with:
         name: dist
         path: dist-zip/dist.zip
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/cache@v2
+      with:
+        # npm cache files are stored in `~/.npm` on Linux/macOS
+        path: ~/.npm 
+        key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.OS }}-node-
+          ${{ runner.OS }}-
+    
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2-beta
+      with:
+        node-version: '14'
+    
+    - run: npm ci
+    - run: npm run build
+    # - run: sed -i '' 's_href=/css/_href=css/_g' demo/index.html
+    # - run: sed -i '' 's_href=/js/_href=js/_g' demo/index.html
+    # - run: sed -i '' 's_src=/js/_src=js/_g' demo/index.html
+    - run: npm run demo
+    - run: ls
+    
+    - name: Deploy the demo to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@4.0.0
+      with:
+        branch: gh-pages
+        folder: demo

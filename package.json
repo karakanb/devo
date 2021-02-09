@@ -7,7 +7,7 @@
     "build": "vue-cli-service build && npm run zip",
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service test:unit",
-    "demo": "rm -rf demo && cp -R dist demo && sed -i '' 's_href=/css/_href=css/_g' demo/index.html && sed -i '' 's_href=/js/_href=js/_g' demo/index.html && sed -i '' 's_src=/js/_src=js/_g' demo/index.html",
+    "demo": "rm -rf demo && cp -R dist demo && sed -i 's_href=/css/_href=css/_g' demo/index.html && sed -i 's_href=/js/_href=js/_g' demo/index.html && sed -i 's_src=/js/_src=js/_g' demo/index.html",
     "build-report": "vue-cli-service build --report",
     "zip": "./prepare-zip.sh"
   },
