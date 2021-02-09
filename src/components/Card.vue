@@ -85,23 +85,14 @@ export default {
   padding: 0 16px;
   overflow-x: auto;
   height: 100%;
+  scrollbar-color: #4f4f4f2e transparent;
+  scrollbar-width: thin;
 }
 
 .night-mode .card-body {
   background-color: #31363e;
   color: #c5c8ca;
-  padding: 0 16px;
-  overflow-x: auto;
-}
-
-.night-mode .card-body::-webkit-scrollbar {
-  width: 5px;
-  background: rgb(49, 54, 62);
-}
-
-.night-mode .card-body::-webkit-scrollbar-thumb {
-  border-radius: 3px;
-  background-color: #dfe3e82d;
+  scrollbar-color: #dfe3e82d transparent;
 }
 
 .card-title-text {
