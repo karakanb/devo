@@ -72,6 +72,10 @@ export default {
   border-bottom: 1px solid #dfe3e8a8;
 }
 
+.night-mode .gh-item {
+  border-bottom: 1px solid #dfe3e82d;
+}
+
 .gh-item {
   margin: 0;
 }

@@ -59,6 +59,10 @@ export default {
   margin: 0;
 }
 
+.night-mode .hn-item {
+  border-bottom: 1px solid #dfe3e82d;
+}
+
 .hn-item a {
   text-decoration: none;
   color: inherit;

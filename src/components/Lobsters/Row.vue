@@ -98,6 +98,10 @@ export default {
   border-bottom: 1px solid #dfe3e8a8;
 }
 
+.night-mode .lr-item {
+  border-bottom: 1px solid #dfe3e82d;
+}
+
 .lr-item{
   margin: 0;
 }

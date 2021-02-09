@@ -99,6 +99,10 @@ export default {
   border-bottom: 1px solid #dfe3e8a8;
 }
 
+.night-mode .ph-item {
+  border-bottom: 1px solid #dfe3e82d;
+}
+
 .ph-item a {
   text-decoration: none;
   color: inherit;

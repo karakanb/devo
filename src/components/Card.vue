@@ -85,13 +85,14 @@ export default {
   padding: 0 16px;
   overflow-x: auto;
   height: 100%;
+  scrollbar-color: #4f4f4f2e transparent;
+  scrollbar-width: thin;
 }
 
 .night-mode .card-body {
   background-color: #31363e;
   color: #c5c8ca;
-  padding: 0 16px;
-  overflow-x: auto;
+  scrollbar-color: #dfe3e82d transparent;
 }
 
 .card-title-text {

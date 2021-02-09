@@ -73,6 +73,7 @@ export default {
     };
   },
   created() {
+    this.setNightMode(this.checkIsNightMode());
     setInterval(() => {
       this.nowTime = new Date();
     }, 1000);
@@ -130,6 +131,10 @@ export default {
       const day = date.getDate();
       const monthIndex = date.getMonth();
       return `${days[date.getDay()]}, ${monthNames[monthIndex]} ${day}`;
+    },
+    checkIsNightMode() {
+      const { matches } = window.matchMedia('(prefers-color-scheme: dark)');
+      return matches;
     },
 
     ...mapActions(['setNightMode']),
