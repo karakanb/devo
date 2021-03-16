@@ -4,7 +4,7 @@
     <div class="app-card-container">
       <div class="date-time-wrapper">
         <div class="col-xs date-time grey-text">
-          <div class="time inline-block">{{ now }}</div>
+          <div class="time inline-block" @click="toggle24HourFormat">{{ now }}</div>
           <div class="date inline-block pull-right">{{ today }}</div>
         </div>
       </div>
@@ -78,17 +78,26 @@ export default {
     }, 1000);
   },
   computed: {
-    now() {
-      const hour = this.nowTime.getHours().toString().padStart(2, '0');
-      const minute = this.nowTime.getMinutes().toString().padStart(2, '0');
-
-      return `${hour}:${minute}`;
-    },
     today() {
       return this.formatDate(this.nowTime);
     },
     ...mapState({
       isNightMode: (state) => state.settings.isNightMode,
+      now(state) {
+        const { is24HourFormat } = state.settings;
+        console.log(is24HourFormat);
+        if (is24HourFormat) {
+          return this.getTime();
+        } else {
+          let time = this.getTime();
+          time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+          time = time.slice(1);
+          time[5] = +time[0] < 12 ? ' AM' : ' PM';
+          time[0] = +time[0] % 12 || 12;
+          return time.join('');
+        }
+      },
+      is24HourFormat: state => state.settings.is24HourFormat,
       layout: (state) => state.settings.layout,
     }),
     nightModeToggle: {
@@ -131,7 +140,15 @@ export default {
       const monthIndex = date.getMonth();
       return `${days[date.getDay()]}, ${monthNames[monthIndex]} ${day}`;
     },
-    ...mapActions(['setNightMode']),
+    getTime(){
+      const hour = this.nowTime.getHours().toString().padStart(2, "0");
+      const minute = this.nowTime.getMinutes().toString().padStart(2, "0");
+      return `${hour}:${minute}`;
+    },
+    toggle24HourFormat() {
+      this.set24HourFormat(!this.is24HourFormat);
+    },
+    ...mapActions(["setNightMode", "set24HourFormat"]),
   },
 };
 </script>
@@ -232,6 +249,10 @@ body {
   font-size: 32px;
   font-weight: 100;
   margin: initial;
+}
+
+.date-time .time {
+  cursor: pointer;
 }
 
 footer {
