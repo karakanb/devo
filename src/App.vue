@@ -85,7 +85,6 @@ export default {
       isNightMode: (state) => state.settings.isNightMode,
       now(state) {
         const { is24HourFormat } = state.settings;
-        console.log(is24HourFormat);
         if (is24HourFormat) {
           return this.getTime();
         } else {
