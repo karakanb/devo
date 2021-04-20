@@ -4,7 +4,9 @@
     <div class="app-card-container">
       <div class="date-time-wrapper">
         <div class="col-xs date-time grey-text">
-          <div class="time inline-block" @click="toggle24HourFormat">{{ now }}</div>
+          <div class="time inline-block" @click="toggle24HourFormat">
+            {{ now }}
+          </div>
           <div class="date inline-block pull-right">{{ today }}</div>
         </div>
       </div>
@@ -13,11 +15,7 @@
       </div>
       <div class="date-time-wrapper">
         <footer class="col-xs grey-text light">
-          <span class="pull-left">
-            <span class="semi-bold">devo</span> is an
-            <a href="https://github.com/karakanb/devo">open-source extension</a
-            >.
-          </span>
+          <span class="pull-left"> <span class="semi-bold">devo</span> is an <a href="https://github.com/karakanb/devo">open-source extension</a>. </span>
 
           <div class="pull-right day-night-toggle flex items-center">
             <div style="margin-right: 12px">
@@ -25,14 +23,8 @@
             </div>
             <div class="flex items-center">
               <font-awesome-icon :icon="['fas', 'sun']"></font-awesome-icon>
-              <toggle-switch
-                v-model="nightModeToggle"
-                style="margin-right: 8px"
-              ></toggle-switch>
-              <font-awesome-icon
-                :icon="['fas', 'moon']"
-                style="margin: 0"
-              ></font-awesome-icon>
+              <toggle-switch v-model="nightModeToggle" style="margin-right: 8px"></toggle-switch>
+              <font-awesome-icon :icon="['fas', 'moon']" style="margin: 0"></font-awesome-icon>
             </div>
           </div>
         </footer>
@@ -81,22 +73,18 @@ export default {
     today() {
       return this.formatDate(this.nowTime);
     },
+    now() {
+      if (this.is24HourFormat) {
+        const hour = this.nowTime.getHours().toString().padStart(2, '0');
+        const minute = this.nowTime.getMinutes().toString().padStart(2, '0');
+        return `${hour}:${minute}`;
+      }
+
+      return this.nowTime.toLocaleTimeString({}, { hour12: true, hour: 'numeric', minute: 'numeric' }).toUpperCase();
+    },
     ...mapState({
       isNightMode: (state) => state.settings.isNightMode,
-      now(state) {
-        const { is24HourFormat } = state.settings;
-        if (is24HourFormat) {
-          return this.getTime();
-        } else {
-          let time = this.getTime();
-          time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
-          time = time.slice(1);
-          time[5] = +time[0] < 12 ? ' AM' : ' PM';
-          time[0] = +time[0] % 12 || 12;
-          return time.join('');
-        }
-      },
-      is24HourFormat: state => state.settings.is24HourFormat,
+      is24HourFormat: (state) => state.settings.is24HourFormat,
       layout: (state) => state.settings.layout,
     }),
     nightModeToggle: {
@@ -110,44 +98,18 @@ export default {
   },
   methods: {
     formatDate(date) {
-      const monthNames = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-      ];
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-      const days = [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-      ];
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
       const day = date.getDate();
       const monthIndex = date.getMonth();
       return `${days[date.getDay()]}, ${monthNames[monthIndex]} ${day}`;
     },
-    getTime(){
-      const hour = this.nowTime.getHours().toString().padStart(2, "0");
-      const minute = this.nowTime.getMinutes().toString().padStart(2, "0");
-      return `${hour}:${minute}`;
-    },
     toggle24HourFormat() {
       this.set24HourFormat(!this.is24HourFormat);
     },
-    ...mapActions(["setNightMode", "set24HourFormat"]),
+    ...mapActions(['setNightMode', 'set24HourFormat']),
   },
 };
 </script>
@@ -158,8 +120,7 @@ body {
 }
 #app {
   background-color: #f5f7fa;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;

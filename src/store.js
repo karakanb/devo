@@ -119,7 +119,7 @@ export default new Vuex.Store({
     set24HourFormat(context, is24HourFormat) {
       context.commit('set24HourFormat', is24HourFormat);
     },
-    
+
     setNightMode(context, isNightMode) {
       context.commit('setNightMode', isNightMode);
     },
