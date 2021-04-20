@@ -59,6 +59,7 @@ export default new Vuex.Store({
   })],
   state: {
     settings: {
+      is24HourFormat: true,
       isNightMode: getIsNightMode(),
       cards: [GITHUB, HACKERNEWS, PRODUCTHUNT, DESIGNERNEWS],
       layout: 'OneLeftTwoRight',
@@ -96,6 +97,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    set24HourFormat(state, is24HourFormat) {
+      state.settings.is24HourFormat = is24HourFormat;
+    },
     setNightMode(state, isNightMode) {
       state.settings.isNightMode = isNightMode;
       localStorage.setItem(SETTINGS_ISNIGHTMODE, isNightMode);
@@ -112,6 +116,10 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    set24HourFormat(context, is24HourFormat) {
+      context.commit('set24HourFormat', is24HourFormat);
+    },
+
     setNightMode(context, isNightMode) {
       context.commit('setNightMode', isNightMode);
     },
