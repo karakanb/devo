@@ -6,7 +6,7 @@
           <a :href="siteStringLink"> ({{ siteString }}) </a>
         </div>
         <div class="title truncate">
-          <a :href="item.url" :title="item.title">{{ item.title }}</a>
+          <a :href="externalLink" :title="item.title">{{ item.title }}</a>
         </div>
       </div>
     </div>
@@ -49,6 +49,9 @@ export default {
     },
     relativeDate() {
       return this.timeSince(new Date(this.item.created_at));
+    },
+    externalLink() {
+      return this.item.url !== '' ? this.item.url : this.item.comments_url;
     },
     itemLink() {
       return this.item.link.startsWith('http') ? this.item.link : `${this.baseUrl}${this.item.link}`;
