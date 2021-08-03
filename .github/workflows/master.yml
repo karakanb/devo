@@ -26,21 +26,37 @@ jobs:
     - run: npm ci
     - run: npm run build
     - run: npm run test
-    
+
+    - name: Archive dist code to be deployed
+      uses: actions/upload-artifact@v2
+      with:
+        name: dist-code
+        path: dist
+
+    - name: Archive source code for store uploads
+      uses: actions/upload-artifact@v2
+      with:
+        name: src-zip
+        path: dist-zip/src.zip
+
+    - name: Archive build files for store uploads
+      uses: actions/upload-artifact@v2
+      with:
+        name: dist-zip
+        path: dist-zip/dist.zip
+
+  deploy-demo:  
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: dist-code
+        path: dist
     - name: Deploy the demo to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@4.0.0
+      uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
         branch: gh-pages
         folder: dist
-    
-    - name: Archive source code
-      uses: actions/upload-artifact@v2
-      with:
-        name: src
-        path: dist-zip/src.zip
+  
 
-    - name: Archive build files
-      uses: actions/upload-artifact@v2
-      with:
-        name: dist
-        path: dist-zip/dist.zip
