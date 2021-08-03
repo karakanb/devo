@@ -1,4 +1,4 @@
-import { expect, use, spy } from 'chai';
+import chai from 'chai';
 import spies from 'chai-spies';
 import { mount, createLocalVue } from '@vue/test-utils';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -14,12 +14,12 @@ library.add(faGithub, faSyncAlt, faExternalLinkAlt);
 const localVue = createLocalVue();
 localVue.component('font-awesome-icon', FontAwesomeIcon);
 
-use(spies);
+chai.use(spies);
 
 const objectProps = {
   title: 'test title',
   icon: ['fab', 'github'],
-  iconOnClick: spy(() => { }),
+  iconOnClick: chai.spy(() => { }),
   externalLink: 'https://github.com/trending',
 };
 
@@ -40,16 +40,16 @@ describe('Card.vue', () => {
       },
     });
 
-    expect(wrapper.find('.card-title-text').text()).to.include(titleContent);
-    expect(wrapper.find('.card-body').text()).to.include(bodyContent);
-    expect(wrapper.find('.external-icon > a').attributes('href')).to.be.equal(objectProps.externalLink);
-    expect(wrapper.findAllComponents(FontAwesomeIcon).length).to.be.equal(3);
+    chai.expect(wrapper.find('.card-title-text').text()).to.include(titleContent);
+    chai.expect(wrapper.find('.card-body').text()).to.include(bodyContent);
+    chai.expect(wrapper.find('.external-icon > a').attributes('href')).to.be.equal(objectProps.externalLink);
+    chai.expect(wrapper.findAllComponents(FontAwesomeIcon).length).to.be.equal(3);
   });
 
   it('icon action triggered on click', () => {
     const wrapper = mount(Card, { localVue, propsData: objectProps });
     const refreshIcon = wrapper.find('.fa-refresh-icon');
     refreshIcon.trigger('click');
-    expect(objectProps.iconOnClick).to.have.been.called.once;
+    chai.expect(objectProps.iconOnClick).to.have.been.called.once;
   });
 });
