@@ -44,19 +44,13 @@ jobs:
       with:
         name: dist-zip
         path: dist-zip/dist.zip
-
-  deploy-demo:  
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-    - uses: actions/download-artifact@v2
-      with:
-        name: dist-code
-        path: dist
+    
     - name: Deploy the demo to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
         branch: gh-pages
         folder: dist
+
+    
   
 
