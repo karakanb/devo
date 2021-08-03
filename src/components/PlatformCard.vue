@@ -2,10 +2,10 @@
   <card
     :titleBackgroundColor="this.titleBackgroundColorBasedOnMode"
     :titleFontColor="this.titleFontColorBasedOnMode"
-    :icon="this.options.icon"
-    :externalLink="this.options.externalLink"
-    :title="this.options.title"
-    :iconOnClick="this.updateData"
+    :icon="options.icon"
+    :externalLink="options.externalLink"
+    :title="options.title"
+    :iconOnClick="updateData"
   >
     <template slot="card-title">
       <custom-select :cardIndex="cardIndex"></custom-select>
@@ -13,7 +13,7 @@
     <template slot="card-body">
       <loading :color="loadingColorBasedOnMode" v-if="loading"></loading>
       <slot v-else name="card-body">
-        <component :is="this.options.bodyComponentName"></component>
+        <component :is="options.bodyComponentName"></component>
       </slot>
     </template>
   </card>
