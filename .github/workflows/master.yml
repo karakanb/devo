@@ -1,7 +1,5 @@
 name: Master Build
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the main branch
   push:
     branches:
       - master
@@ -50,7 +48,6 @@ jobs:
       with:
         branch: gh-pages
         folder: dist
-
     
   
 
