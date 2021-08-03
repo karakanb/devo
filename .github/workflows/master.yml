@@ -48,6 +48,26 @@ jobs:
       with:
         branch: gh-pages
         folder: dist
+
+  deploy-chrome-store:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'release' && github.event.action == 'published'
+    steps:
+    - uses: actions/setup-node@v2-beta
+      with:
+        node-version: '14'
+    - uses: actions/download-artifact@v2
+      with:
+        name: dist-zip
+        path: ./dist.zip
+    - run: npm run deploy-chrome
+      env:
+        SOURCE_ZIP: dist.zip
+        EXTENSION_ID: ${{ secrets.GOOGLE_EXTENSION_ID }}
+        CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+        CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+        REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
     
   
 

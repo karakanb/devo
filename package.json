@@ -8,7 +8,8 @@
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service test:unit",
     "build-report": "vue-cli-service build --report",
-    "zip": "./prepare-zip.sh"
+    "zip": "./scripts/prepare-zip.sh",
+    "deploy-chrome": "./scripts/deploy-chrome.sh"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
