@@ -15,6 +15,7 @@ done
 npm install --silent --no-progress -g chrome-webstore-upload-cli
 
 ls -lah
+ls dist-zip
 
 # upload and publish the extension
 webstore upload \
