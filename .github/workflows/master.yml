@@ -65,14 +65,13 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: dist-zip
-        path: ./dist.zip
+        path: ./dist-zip
     - run: npm run deploy-chrome
       env:
-        SOURCE_ZIP: dist.zip
+        SOURCE_ZIP: ./dist-zip/dist.zip
         EXTENSION_ID: ${{ secrets.GOOGLE_EXTENSION_ID }}
         CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
         CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
         REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
-    
   
 
