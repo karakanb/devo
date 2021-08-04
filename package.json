@@ -9,7 +9,8 @@
     "test": "vue-cli-service test:unit",
     "build-report": "vue-cli-service build --report",
     "zip": "./scripts/prepare-zip.sh",
-    "deploy-chrome": "./scripts/deploy-chrome.sh"
+    "deploy-chrome": "./scripts/deploy-chrome.sh",
+    "version": "./scripts/update-manifest.sh && git add public/manifest.json"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
