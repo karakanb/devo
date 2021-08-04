@@ -21,6 +21,11 @@ jobs:
     - run: npm ci
     - run: npm run build
     - run: npm run test
+    - name: Archive build files for store uploads
+      uses: actions/upload-artifact@v2
+      with:
+        name: dist-zip
+        path: dist-zip/dist.zip
   
   deploy-chrome-store:
     runs-on: ubuntu-latest
