@@ -39,7 +39,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: dist-zip
-        path: ./dist-zip
+        path: .
     - run: npm run deploy-chrome
       env:
         SOURCE_ZIP: dist.zip

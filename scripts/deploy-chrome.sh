@@ -14,9 +14,6 @@ done
 # install the chrome uploader tool
 npm install --silent --no-progress -g chrome-webstore-upload-cli
 
-ls -lah
-ls dist-zip
-
 # upload and publish the extension
 webstore upload \
     --source $SOURCE_ZIP \
