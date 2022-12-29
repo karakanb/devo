@@ -37,12 +37,14 @@ Devo currently supports:
 - [Designer News](https://www.designernews.co/)
 - [DEV Community](https://dev.to/)
 - [Lobsters](https://lobste.rs/)
+- [TabNews](https://www.tabnews.com.br/)
 
 ### Adding a new platform
 Adding a new platform is super easy. All you need to do is:
 - add a body component that will be displayed in the cards.
 - export the body component from the [`src/components/bodies.js`](./src/components/bodies.js) file.
 - add the details for the platform to the [`src/settings.js`](./src/settings.js) file.
+- add the state to the [`src/store.js`](.src/store.js) file.
 
 You can check the [HackerNews component](./src/components/HackerNews/Body.vue) to see how easy it is to add a new platform. Feel free to submit pull requests or ask questions regarding adding a new platform, any kind of input is appreciated.
 

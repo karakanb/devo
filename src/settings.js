@@ -115,6 +115,23 @@ export default {
         loadingColor: 'ec8f8f',
       },
     },
+    tabnews: {
+      dataUrl: 'https://www.tabnews.com.br/api/v1/contents?page=1&per_page=20&strategy=relevant',
+      title: 'TabNews',
+      icon: ['fa', 'folder'],
+      titleFontColor: 'ffffff',
+      titleBackgroundColor: '24292f',
+      loadingColor: '9e271b',
+
+      externalLink: 'https://www.tabnews.com.br',
+      bodyComponentName: 'TabNewsBody',
+
+      nightMode: {
+        titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
+        titleFontColor: '8eb5e3',
+        loadingColor: '8eb5e3',
+      },
+    },
   },
   layouts: [
     {
