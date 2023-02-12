@@ -4,14 +4,11 @@
       <div class="title">
         <a :href="itemLink" :title="item.title">{{ item.title }}</a>
       </div>
-      <div class="site-string">
-        <a :href="siteStringLink"> ({{ siteStringLink }}) </a>
-      </div>
     </div>
     <div class="meta-data">
       {{ tabcoinsVerbose }} by
       <a class="user-link" :href="userLink"> {{ item.owner_username }}</a> |
-      {{ relativeDate }} |
+      {{ relativeDate }} ago |
       <a class="thread-link" :href="itemLink"> {{commentsVerbose}}</a>
     </div>
   </div>
@@ -34,9 +31,6 @@ export default {
   computed: {
     userLink() {
       return `${this.baseUrl}/${this.item.owner_username}`;
-    },
-    siteStringLink() {
-      return this.baseUrl.replace('https://', '');
     },
     itemLink() {
       return `${this.baseUrl}/${this.item.owner_username}/${this.item.slug}`;
