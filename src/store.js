@@ -95,6 +95,11 @@ export default new Vuex.Store({
       cache: 5 * 60000,
       data: [],
     },
+    tabnews: {
+      updated_at: 0,
+      cache: 5 * 60000,
+      data: [],
+    },
   },
   mutations: {
     set24HourFormat(state, is24HourFormat) {
