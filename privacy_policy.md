@@ -56,5 +56,5 @@ Contact Us
 
 If you have any questions about this Privacy Policy, You can contact us:
 
-- By visiting this page on our website: [https://github.com/karakanb/devo/blob/master/privacy\_policy.txt](https://github.com/karakanb/devo/blob/master/privacy_policy.txt)
+- By visiting this page on our website: [https://github.com/karakanb/devo/blob/master/privacy\_policy.md](https://github.com/karakanb/devo/blob/master/privacy_policy.md)
 - By creating a GitHub issue in this repository
