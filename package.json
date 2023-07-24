@@ -27,7 +27,7 @@
     "@vue/cli-plugin-unit-mocha": "^5.0.8",
     "@vue/cli-service": "^4.5.19",
     "@vue/eslint-config-airbnb": "^3.0.5",
-    "@vue/test-utils": "^1.3.4",
+    "@vue/test-utils": "^1.3.6",
     "chai": "^4.3.7",
     "chai-spies": "^1.0.0",
     "sass-loader": "^7.3.1",
