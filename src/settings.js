@@ -10,7 +10,7 @@ const DEFAULT_NIGHTMODE_BACKGROUND = '31363e';
 export default {
   platforms: {
     github: {
-      dataUrl: 'https://devo.ams3.digitaloceanspaces.com/github.json',
+      dataUrl: 'https://devo-platforms.burakkarakan.com/github.json',
       title: 'GitHub Trending',
       icon: ['fab', 'github'],
 
@@ -28,7 +28,7 @@ export default {
       },
     },
     hackernews: {
-      dataUrl: 'https://devo.ams3.digitaloceanspaces.com/hackernews.json',
+      dataUrl: 'https://devo-platforms.burakkarakan.com/hackernews.json',
       title: 'Hacker News',
       icon: ['fab', 'hacker-news-square'],
       titleFontColor: 'ffffff',
