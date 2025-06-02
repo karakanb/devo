@@ -4,7 +4,7 @@
   "author": "Burak Karakan",
   "short_name": "Devo",
   "version": "1.10.1",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "icons": {
     "16": "icons/icon-16.png",
     "24": "icons/icon-24.png",
@@ -17,12 +17,12 @@
     "newtab": "index.html"
   },
   "background": {
-    "scripts": [
-      "background.js"
-    ],
-    "persistent": false
+    "service_worker": "background.js"
   },
-  "permissions": [
+  "host_permissions": [
     "https://lobste.rs/*"
+  ],
+  "permissions": [
+    "storage"
   ]
 }
