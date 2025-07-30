@@ -1,5 +1,5 @@
-import { expect } from 'chai';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { describe, it, expect } from 'vitest';
+import { shallowMount } from '@vue/test-utils';
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -8,9 +8,6 @@ import { faCodeBranch, faStar } from '@fortawesome/free-solid-svg-icons';
 import Row from '@/components/GitHub/Row.vue';
 
 library.add(faCodeBranch, faStar);
-
-const localVue = createLocalVue();
-localVue.component('font-awesome-icon', FontAwesomeIcon);
 
 const objectProps = {
   item: {
@@ -39,16 +36,23 @@ const objectProps = {
 
 describe('GitHub/Row.vue', () => {
   it('row is properly rendered', () => {
-    const wrapper = shallowMount(Row, { localVue, propsData: objectProps });
+    const wrapper = shallowMount(Row, { 
+      props: objectProps,
+      global: {
+        components: {
+          'font-awesome-icon': FontAwesomeIcon,
+        },
+      },
+    });
 
-    expect(wrapper.find('.repo-name').text()).to.equal(objectProps.item.repo.rawName);
-    expect(wrapper.find('.repo-name > a').attributes('href')).to.include(objectProps.item.repo.link);
-    expect(wrapper.find('.description').text()).to.equal(objectProps.item.repo.description);
-    expect(wrapper.find('.language-text').text()).to.equal(objectProps.item.language.is);
-    expect(wrapper.find('.stars').text()).to.equal(objectProps.item.stars.count.toString());
-    expect(wrapper.find('.stars > a').attributes('href')).to.include(objectProps.item.stars.link);
-    expect(wrapper.find('.forks').text()).to.equal(objectProps.item.forks.count.toString());
-    expect(wrapper.find('.forks > a').attributes('href')).to.include(objectProps.item.forks.link);
-    expect(wrapper.find('.stars-today').text()).to.equal(`${objectProps.item.todayStars.toString()} stars today`);
+    expect(wrapper.find('.repo-name').text()).toBe(objectProps.item.repo.rawName);
+    expect(wrapper.find('.repo-name > a').attributes('href')).toContain(objectProps.item.repo.link);
+    expect(wrapper.find('.description').text()).toBe(objectProps.item.repo.description);
+    expect(wrapper.find('.language-text').text()).toBe(objectProps.item.language.is);
+    expect(wrapper.find('.stars').text()).toBe(objectProps.item.stars.count.toString());
+    expect(wrapper.find('.stars > a').attributes('href')).toContain(objectProps.item.stars.link);
+    expect(wrapper.find('.forks').text()).toBe(objectProps.item.forks.count.toString());
+    expect(wrapper.find('.forks > a').attributes('href')).toContain(objectProps.item.forks.link);
+    expect(wrapper.find('.stars-today').text()).toBe(`${objectProps.item.todayStars.toString()} stars today`);
   });
 });

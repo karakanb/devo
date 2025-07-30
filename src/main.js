@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faGithub, faHackerNewsSquare, faProductHunt, faDev } from '@fortawesome/free-brands-svg-icons';
 import {
@@ -12,11 +12,8 @@ import store from './store';
 library.add([faGithub, faHackerNewsSquare, faProductHunt, faSyncAlt,
   faCodeBranch, faStar, faChevronUp, faComment, faExternalLinkAlt, faSun, faMoon, faCheck, faCaretUp, faCaretDown,
   faNewspaper, faDev, faHeart, faAnchor, faThLarge, faFolder]);
-Vue.component('font-awesome-icon', FontAwesomeIcon);
 
-Vue.config.productionTip = false;
-
-new Vue({
-  store,
-  render: h => h(App),
-}).$mount('#app');
+const app = createApp(App);
+app.component('font-awesome-icon', FontAwesomeIcon);
+app.use(store);
+app.mount('#app');

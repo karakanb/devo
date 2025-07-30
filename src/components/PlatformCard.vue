@@ -7,10 +7,10 @@
     :title="options.title"
     :iconOnClick="updateData"
   >
-    <template slot="card-title">
+    <template #card-title>
       <custom-select :cardIndex="cardIndex"></custom-select>
     </template>
-    <template slot="card-body">
+    <template #card-body>
       <loading :color="loadingColorBasedOnMode" v-if="loading"></loading>
       <slot v-else name="card-body">
         <component :is="options.bodyComponentName"></component>

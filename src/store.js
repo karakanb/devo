@@ -1,8 +1,5 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
-
-Vue.use(Vuex);
 
 const GITHUB = 'github';
 const HACKERNEWS = 'hackernews';
@@ -40,7 +37,11 @@ const getVersion = () => {
 
   /* global chrome, browser */
   const browserInstance = chrome || browser;
-  if (('getManifest' in browserInstance.runtime)) {
+  if (!browserInstance || !browserInstance.runtime) {
+    return defaultValue;
+  }
+
+  if (!('getManifest' in browserInstance.runtime)) {
     return defaultValue;
   }
 
@@ -53,7 +54,7 @@ const getVersion = () => {
 };
 
 
-export default new Vuex.Store({
+export default createStore({
   plugins: [createPersistedState({
     key: `vuex-state-${getVersion()}`,
   })],
@@ -110,7 +111,7 @@ export default new Vuex.Store({
       localStorage.setItem(SETTINGS_ISNIGHTMODE, isNightMode);
     },
     setCardPlatform(state, { index, platform }) {
-      Vue.set(state.settings.cards, index, platform);
+      state.settings.cards[index] = platform;
     },
     setLayout(state, layout) {
       state.settings.layout = layout;

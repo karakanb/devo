@@ -1,6 +1,5 @@
-import chai from 'chai';
-import spies from 'chai-spies';
-import { mount, createLocalVue } from '@vue/test-utils';
+import { describe, it, expect, vi } from 'vitest';
+import { mount } from '@vue/test-utils';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -11,15 +10,10 @@ import Card from '@/components/Card.vue';
 
 library.add(faGithub, faSyncAlt, faExternalLinkAlt);
 
-const localVue = createLocalVue();
-localVue.component('font-awesome-icon', FontAwesomeIcon);
-
-chai.use(spies);
-
 const objectProps = {
   title: 'test title',
   icon: ['fab', 'github'],
-  iconOnClick: chai.spy(() => { }),
+  iconOnClick: vi.fn(),
   externalLink: 'https://github.com/trending',
 };
 
@@ -32,24 +26,35 @@ describe('Card.vue', () => {
     const body = `<p>${bodyContent}</p>`;
 
     const wrapper = mount(Card, {
-      localVue,
-      propsData: objectProps,
+      props: objectProps,
       slots: {
         'card-title': title,
         'card-body': body,
       },
+      global: {
+        components: {
+          'font-awesome-icon': FontAwesomeIcon,
+        },
+      },
     });
 
-    chai.expect(wrapper.find('.card-title-text').text()).to.include(titleContent);
-    chai.expect(wrapper.find('.card-body').text()).to.include(bodyContent);
-    chai.expect(wrapper.find('.external-icon > a').attributes('href')).to.be.equal(objectProps.externalLink);
-    chai.expect(wrapper.findAllComponents(FontAwesomeIcon).length).to.be.equal(3);
+    expect(wrapper.find('.card-title-text').text()).toContain(titleContent);
+    expect(wrapper.find('.card-body').text()).toContain(bodyContent);
+    expect(wrapper.find('.external-icon > a').attributes('href')).toBe(objectProps.externalLink);
+    expect(wrapper.findAllComponents(FontAwesomeIcon).length).toBe(3);
   });
 
   it('icon action triggered on click', () => {
-    const wrapper = mount(Card, { localVue, propsData: objectProps });
+    const wrapper = mount(Card, { 
+      props: objectProps,
+      global: {
+        components: {
+          'font-awesome-icon': FontAwesomeIcon,
+        },
+      },
+    });
     const refreshIcon = wrapper.find('.fa-refresh-icon');
     refreshIcon.trigger('click');
-    chai.expect(objectProps.iconOnClick).to.have.been.called.once;
+    expect(objectProps.iconOnClick).toHaveBeenCalledOnce();
   });
 });
