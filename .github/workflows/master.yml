@@ -12,11 +12,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2-beta
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
-        node-version: '14'
-    - uses: actions/cache@v2
+        node-version: '20'
+        cache: 'npm'
+    - uses: actions/cache@v4
       with:
         # npm cache files are stored in `~/.npm` on Linux/macOS
         path: ~/.npm 
@@ -30,25 +31,25 @@ jobs:
     - run: npm run test
 
     - name: Archive dist code to be deployed
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: dist-code
         path: dist
 
     - name: Archive source code for store uploads
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: src-zip
         path: dist-zip/src.zip
 
     - name: Archive build files for store uploads
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: dist-zip
         path: dist-zip/dist.zip
     
     - name: Deploy the demo to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@4.1.4
+      uses: JamesIves/github-pages-deploy-action@v4.6.8
       with:
         branch: gh-pages
         folder: dist
@@ -58,11 +59,12 @@ jobs:
     needs: build
     if: (github.event_name == 'create' && github.event.ref_type == 'tag') || (github.event_name == 'release' && github.event.action == 'published')
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2-beta
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
-        node-version: '14'
-    - uses: actions/download-artifact@v2
+        node-version: '20'
+        cache: 'npm'
+    - uses: actions/download-artifact@v4
       with:
         name: dist-zip
         path: ./dist-zip
