@@ -1,8 +1,8 @@
 <template>
     <label class="switch">
         <input type="checkbox"
-            v-bind:checked="checked"
-            v-on:change="$emit('change', $event.target.checked)">
+            :checked="modelValue"
+            @change="$emit('update:modelValue', $event.target.checked)">
         <span class="slider round"></span>
     </label>
 </template>
@@ -10,11 +10,13 @@
 <script>
 export default {
   name: 'ToggleSwitch',
-  props: ['checked'],
-  model: {
-    prop: 'checked',
-    event: 'change',
+  props: {
+    modelValue: {
+      type: Boolean,
+      default: false,
+    },
   },
+  emits: ['update:modelValue'],
 };
 </script>
 
