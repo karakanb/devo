@@ -162,7 +162,7 @@ export default createStore({
     },
 
     async updatePlatformData({ state, commit }, {
-      platform, forced, url, transform,
+      platform, forced, url, transform, fetchOptions,
     }) {
       const platformConfig = state[platform];
       const threshold = platformConfig.cache;
@@ -170,7 +170,7 @@ export default createStore({
       const now = new Date();
 
       if (!lastUpdate || now - lastUpdate > threshold || forced) {
-        const response = await fetch(url);
+        const response = await fetch(url, fetchOptions);
         if (!response.ok) {
           throw new Error(`Failed to load ${platform}: ${response.status}`);
         }

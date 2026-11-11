@@ -136,6 +136,8 @@ export default {
     reddit: {
       dataUrl: state => buildUrl(state.reddit.settings),
       transform: toItems,
+      // reddit rejects anonymous requests, the listing is loaded with the user's reddit.com session.
+      fetchOptions: { credentials: 'include' },
       title: 'Reddit',
       icon: ['fab', 'reddit-alien'],
       titleFontColor: 'ffffff',

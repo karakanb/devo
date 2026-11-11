@@ -70,6 +70,7 @@ export default {
           platform: this.platform,
           url: this.options.dataUrl instanceof Function ? this.options.dataUrl(this.$store.state) : this.options.dataUrl,
           transform: this.options.transform,
+          fetchOptions: this.options.fetchOptions,
           forced,
         });
       } catch (error) {
