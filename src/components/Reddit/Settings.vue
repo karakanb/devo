@@ -33,7 +33,7 @@
 <script>
 import { mapActions } from 'vuex';
 import {
-  parseSubreddits, fetchSubscribedSubreddits, SORTS, IMPORT_LIMIT,
+  parseSubreddits, fetchSubscribedSubreddits, normalizeSort, SORTS, IMPORT_LIMIT,
 } from '@/components/Reddit/reddit';
 
 let instanceCount = 0;
@@ -48,7 +48,7 @@ export default {
       inputId: `rd-settings-subreddits-${instanceCount}`,
       sortId: `rd-settings-sort-${instanceCount}`,
       subredditsText: this.$store.state.reddit.settings.subreddits.join(', '),
-      sort: this.$store.state.reddit.settings.sort,
+      sort: normalizeSort(this.$store.state.reddit.settings.sort),
       sorts: SORTS,
       error: '',
       importing: false,

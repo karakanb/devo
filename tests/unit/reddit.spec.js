@@ -14,16 +14,20 @@ describe('reddit.js', () => {
 
   it('builds the listing url', () => {
     expect(buildUrl({ subreddits: ['programming'], sort: 'hot' }))
-      .to.equal('https://www.reddit.com/r/programming/hot.json?limit=30&raw_json=1');
+      .to.equal('https://www.reddit.com/r/programming.json?limit=30&raw_json=1');
     expect(buildUrl({ subreddits: ['vuejs', 'rust'], sort: 'top' }))
       .to.equal('https://www.reddit.com/r/vuejs+rust/top.json?limit=30&raw_json=1&t=day');
+    expect(buildUrl({ subreddits: ['rust'], sort: 'top-week' }))
+      .to.equal('https://www.reddit.com/r/rust/top.json?limit=30&raw_json=1&t=week');
   });
 
   it('falls back to the defaults for missing or invalid settings', () => {
-    const defaultUrl = 'https://www.reddit.com/r/programming/hot.json?limit=30&raw_json=1';
+    const defaultUrl = 'https://www.reddit.com/r/programming.json?limit=30&raw_json=1';
 
     expect(buildUrl()).to.equal(defaultUrl);
     expect(buildUrl({ subreddits: [], sort: 'nope' })).to.equal(defaultUrl);
+    // a sort saved by an older version that reddit no longer serves
+    expect(buildUrl({ subreddits: [], sort: 'new' })).to.equal(defaultUrl);
     expect(buildUrl({ subreddits: ['../../evil'], sort: 'hot' })).to.equal(defaultUrl);
   });
 

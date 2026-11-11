@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
-import { parseSubreddits, DEFAULT_SUBREDDITS, DEFAULT_SORT, SORTS } from './components/Reddit/reddit';
+import { parseSubreddits, normalizeSort, DEFAULT_SUBREDDITS, DEFAULT_SORT } from './components/Reddit/reddit';
 
 const GITHUB = 'github';
 const HACKERNEWS = 'hackernews';
@@ -130,7 +130,7 @@ export default createStore({
       const names = parseSubreddits((subreddits || []).join(' '));
       state.reddit.settings = {
         subreddits: names.length > 0 ? names : [...DEFAULT_SUBREDDITS],
-        sort: SORTS.some(item => item.value === sort) ? sort : DEFAULT_SORT,
+        sort: normalizeSort(sort),
       };
       // the cache belongs to the previous settings, the next update has to fetch again.
       state.reddit.updated_at = 0;

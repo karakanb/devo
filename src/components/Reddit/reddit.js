@@ -1,11 +1,12 @@
 export const BASE_URL = 'https://www.reddit.com';
 export const DEFAULT_SUBREDDITS = ['programming'];
 export const DEFAULT_SORT = 'hot';
+// Reddit answers 403 to extension requests for /hot.json, /new.json and /rising.json,
+// so hot is loaded from the bare subreddit listing and new/rising are not offered.
 export const SORTS = [
-  { value: 'hot', title: 'Hot' },
-  { value: 'new', title: 'New' },
-  { value: 'top', title: 'Top today' },
-  { value: 'rising', title: 'Rising' },
+  { value: 'hot', title: 'Hot', path: '', period: '' },
+  { value: 'top', title: 'Top today', path: '/top', period: 'day' },
+  { value: 'top-week', title: 'Top this week', path: '/top', period: 'week' },
 ];
 
 const POST_LIMIT = 30;
@@ -33,16 +34,22 @@ export const parseSubreddits = text => {
 };
 
 /**
+ * @param {String} sort
+ * @returns {String} - the given sort if it is supported, the default one otherwise.
+ */
+export const normalizeSort = sort => (SORTS.some(item => item.value === sort) ? sort : DEFAULT_SORT);
+
+/**
  * @param {{ subreddits: String[], sort: String }} options
  * @returns {String} - the listing URL for the given subreddits and sort order.
  */
 export const buildUrl = ({ subreddits, sort } = {}) => {
   const names = parseSubreddits((subreddits || []).join(' '));
   const subredditPath = (names.length > 0 ? names : DEFAULT_SUBREDDITS).join('+');
-  const sortPath = SORTS.some(item => item.value === sort) ? sort : DEFAULT_SORT;
-  const period = sortPath === 'top' ? '&t=day' : '';
+  const { path, period } = SORTS.find(item => item.value === normalizeSort(sort));
+  const periodParam = period ? `&t=${period}` : '';
 
-  return `${BASE_URL}/r/${subredditPath}/${sortPath}.json?limit=${POST_LIMIT}&raw_json=1${period}`;
+  return `${BASE_URL}/r/${subredditPath}${path}.json?limit=${POST_LIMIT}&raw_json=1${periodParam}`;
 };
 
 /**
