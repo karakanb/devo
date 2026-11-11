@@ -24,13 +24,23 @@ describe('RedditRow.vue', () => {
     expect(wrapper.find('.title a').text()).to.equal(linkPost.title);
     expect(wrapper.find('.title a').attributes().href).to.equal(linkPost.url);
     expect(wrapper.find('.site-string').text()).to.equal('(pijul.org)');
-    expect(wrapper.find('.subreddit-link').text()).to.equal('r/programming');
-    expect(wrapper.find('.subreddit-link').attributes().href).to.equal('https://www.reddit.com/r/programming');
+    expect(wrapper.find('.title .subreddit-link').exists()).to.equal(false);
+    expect(wrapper.find('.meta-data .subreddit-link').text()).to.equal('r/programming');
+    expect(wrapper.find('.meta-data .subreddit-link').attributes().href).to.equal('https://www.reddit.com/r/programming');
     expect(wrapper.find('.user-link').text()).to.equal('pmeunier');
     expect(wrapper.find('.user-link').attributes().href).to.equal('https://www.reddit.com/user/pmeunier');
     expect(wrapper.find('.thread-link').text()).to.equal('15 comments');
     expect(wrapper.find('.thread-link').attributes().href).to.equal(`https://www.reddit.com${linkPost.permalink}`);
     expect(wrapper.find('.meta-data').text()).to.contain('34 points');
+  });
+
+  it('shows the subreddit in the title when asked', () => {
+    const wrapper = shallowMount(Row, { propsData: { item: linkPost, subredditInTitle: true } });
+
+    expect(wrapper.find('.title .subreddit-link').text()).to.equal('r/programming');
+    expect(wrapper.find('.title .subreddit-link').attributes().href).to.equal('https://www.reddit.com/r/programming');
+    expect(wrapper.find('.meta-data .subreddit-link').exists()).to.equal(false);
+    expect(wrapper.find('.meta-data').text()).to.match(/^34 points/);
   });
 
   it('links a self post to its thread', () => {

@@ -21,6 +21,11 @@
       <option v-for="option in sorts" :key="option.value" :value="option.value">{{ option.title }}</option>
     </select>
 
+    <label class="rd-settings-label rd-settings-sort-label" :for="placementId">Show subreddit</label>
+    <select :id="placementId" class="rd-settings-input rd-settings-sort rd-settings-placement round-borders" v-model="subredditPlacement">
+      <option v-for="option in placements" :key="option.value" :value="option.value">{{ option.title }}</option>
+    </select>
+
     <div v-if="error" class="rd-settings-error">{{ error }}</div>
 
     <div class="rd-settings-actions">
@@ -33,7 +38,8 @@
 <script>
 import { mapActions } from 'vuex';
 import {
-  parseSubreddits, fetchSubscribedSubreddits, normalizeSort, SORTS, IMPORT_LIMIT,
+  parseSubreddits, fetchSubscribedSubreddits, normalizeSort, normalizeSubredditPlacement,
+  SORTS, SUBREDDIT_PLACEMENTS, IMPORT_LIMIT,
 } from '@/components/Reddit/reddit';
 
 let instanceCount = 0;
@@ -47,9 +53,12 @@ export default {
     return {
       inputId: `rd-settings-subreddits-${instanceCount}`,
       sortId: `rd-settings-sort-${instanceCount}`,
+      placementId: `rd-settings-placement-${instanceCount}`,
       subredditsText: this.$store.state.reddit.settings.subreddits.join(', '),
       sort: normalizeSort(this.$store.state.reddit.settings.sort),
       sorts: SORTS,
+      subredditPlacement: normalizeSubredditPlacement(this.$store.state.reddit.settings.subredditPlacement),
+      placements: SUBREDDIT_PLACEMENTS,
       error: '',
       importing: false,
       importMessage: '',
@@ -63,7 +72,7 @@ export default {
         return;
       }
 
-      this.setRedditSettings({ subreddits, sort: this.sort });
+      this.setRedditSettings({ subreddits, sort: this.sort, subredditPlacement: this.subredditPlacement });
       this.$emit('saved');
     },
 

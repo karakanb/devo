@@ -9,6 +9,26 @@ export const SORTS = [
   { value: 'top-week', title: 'Top this week', path: '/top', period: 'week' },
 ];
 
+export const SUBREDDIT_PLACEMENTS = [
+  { value: 'title', title: 'In the title' },
+  { value: 'meta', title: 'In the details line' },
+];
+export const DEFAULT_SUBREDDIT_PLACEMENT = 'title';
+
+/**
+ * @param {String} placement
+ * @returns {String} - where the post's subreddit is shown, the default place for unknown values.
+ */
+export const normalizeSubredditPlacement = placement => (
+  SUBREDDIT_PLACEMENTS.some(item => item.value === placement) ? placement : DEFAULT_SUBREDDIT_PLACEMENT
+);
+
+/**
+ * @param {String} sort
+ * @returns {String} - the given sort if it is supported, the default one otherwise.
+ */
+export const normalizeSort = sort => (SORTS.some(item => item.value === sort) ? sort : DEFAULT_SORT);
+
 const POST_LIMIT = 30;
 
 /**
@@ -32,12 +52,6 @@ export const parseSubreddits = text => {
 
   return names;
 };
-
-/**
- * @param {String} sort
- * @returns {String} - the given sort if it is supported, the default one otherwise.
- */
-export const normalizeSort = sort => (SORTS.some(item => item.value === sort) ? sort : DEFAULT_SORT);
 
 /**
  * @param {{ subreddits: String[], sort: String }} options

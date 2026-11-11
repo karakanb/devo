@@ -1,6 +1,8 @@
 import { createStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
-import { parseSubreddits, normalizeSort, DEFAULT_SUBREDDITS, DEFAULT_SORT } from './components/Reddit/reddit';
+import {
+  parseSubreddits, normalizeSort, normalizeSubredditPlacement, DEFAULT_SUBREDDITS, DEFAULT_SORT, DEFAULT_SUBREDDIT_PLACEMENT,
+} from './components/Reddit/reddit';
 
 const GITHUB = 'github';
 const HACKERNEWS = 'hackernews';
@@ -109,6 +111,7 @@ export default createStore({
       settings: {
         subreddits: [...DEFAULT_SUBREDDITS],
         sort: DEFAULT_SORT,
+        subredditPlacement: DEFAULT_SUBREDDIT_PLACEMENT,
       },
     },
   },
@@ -126,14 +129,20 @@ export default createStore({
     setLayout(state, layout) {
       state.settings.layout = layout;
     },
-    setRedditSettings(state, { subreddits, sort }) {
+    setRedditSettings(state, { subreddits, sort, subredditPlacement }) {
       const names = parseSubreddits((subreddits || []).join(' '));
-      state.reddit.settings = {
+      const previous = state.reddit.settings;
+      const next = {
         subreddits: names.length > 0 ? names : [...DEFAULT_SUBREDDITS],
         sort: normalizeSort(sort),
+        subredditPlacement: normalizeSubredditPlacement(subredditPlacement),
       };
-      // the cache belongs to the previous settings, the next update has to fetch again.
-      state.reddit.updated_at = 0;
+      state.reddit.settings = next;
+      // the cache belongs to the previous listing, the next update has to fetch again.
+      // The subreddit placement only changes how posts are shown, so it keeps the cache.
+      if (next.sort !== previous.sort || next.subreddits.join('+') !== previous.subreddits.join('+')) {
+        state.reddit.updated_at = 0;
+      }
     },
     setPlatformData(state, { platform, data }) {
       state[platform].data = data;

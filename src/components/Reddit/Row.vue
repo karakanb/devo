@@ -4,12 +4,13 @@
       <div>
         <div class="site-string" v-if="!item.is_self && item.domain">({{ item.domain }})</div>
         <div class="title truncate">
+          <a v-if="subredditInTitle" class="subreddit-link title-subreddit" :href="subredditLink">r/{{ item.subreddit }}</a>
           <a :href="externalLink" :title="item.title">{{ item.title }}</a>
         </div>
       </div>
     </div>
     <div class="meta-data">
-      <a class="subreddit-link" :href="subredditLink">r/{{ item.subreddit }}</a> |
+      <template v-if="!subredditInTitle"><a class="subreddit-link" :href="subredditLink">r/{{ item.subreddit }}</a> |</template>
       {{ item.score }} points by <a class="user-link" :href="userLink">{{ item.author }}</a> |
       {{ relativeDate }} ago |
       <a class="thread-link" :href="threadLink">
@@ -27,6 +28,10 @@ export default {
   props: {
     item: {
       required: true,
+    },
+    subredditInTitle: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -104,6 +109,15 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.rd-item .title .title-subreddit {
+  color: #ff4500;
+  margin-right: 6px;
+}
+
+.night-mode .rd-item .title .title-subreddit {
+  color: #ffa07c;
 }
 
 .rd-item .title-row {
