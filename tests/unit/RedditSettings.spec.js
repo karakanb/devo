@@ -35,6 +35,16 @@ describe('RedditSettings.vue', () => {
     expect(wrapper.emitted().saved).to.have.lengthOf(1);
   });
 
+  it('saves the selected sort order', async () => {
+    const { wrapper, saved } = mountSettings();
+
+    expect(wrapper.find('.rd-settings-sort').element.value).to.equal('hot');
+    await wrapper.find('.rd-settings-sort').setValue('top');
+    await wrapper.find('form').trigger('submit');
+
+    expect(saved).to.deep.equal([{ subreddits: ['programming'], sort: 'top' }]);
+  });
+
   it('does not save without a valid subreddit', async () => {
     const { wrapper, saved } = mountSettings();
 

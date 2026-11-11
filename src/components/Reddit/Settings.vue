@@ -12,6 +12,11 @@
     />
     <div class="rd-settings-hint">Separate names with commas or spaces.</div>
 
+    <label class="rd-settings-label rd-settings-sort-label" :for="sortId">Sort by</label>
+    <select :id="sortId" class="rd-settings-input rd-settings-sort round-borders" v-model="sort">
+      <option v-for="option in sorts" :key="option.value" :value="option.value">{{ option.title }}</option>
+    </select>
+
     <div v-if="error" class="rd-settings-error">{{ error }}</div>
 
     <div class="rd-settings-actions">
@@ -22,8 +27,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
-import { parseSubreddits } from '@/components/Reddit/reddit';
+import { mapActions } from 'vuex';
+import { parseSubreddits, SORTS } from '@/components/Reddit/reddit';
 
 let instanceCount = 0;
 
@@ -35,14 +40,12 @@ export default {
 
     return {
       inputId: `rd-settings-subreddits-${instanceCount}`,
+      sortId: `rd-settings-sort-${instanceCount}`,
       subredditsText: this.$store.state.reddit.settings.subreddits.join(', '),
+      sort: this.$store.state.reddit.settings.sort,
+      sorts: SORTS,
       error: '',
     };
-  },
-  computed: {
-    ...mapState({
-      settings: state => state.reddit.settings,
-    }),
   },
   methods: {
     save() {
@@ -52,7 +55,7 @@ export default {
         return;
       }
 
-      this.setRedditSettings({ subreddits, sort: this.settings.sort });
+      this.setRedditSettings({ subreddits, sort: this.sort });
       this.$emit('saved');
     },
 
@@ -82,6 +85,15 @@ export default {
   color: inherit;
   background: white;
   border: 1px solid #dfe3e8;
+}
+
+.rd-settings-sort-label {
+  margin-top: 16px;
+}
+
+.rd-settings-sort {
+  width: auto;
+  min-width: 160px;
 }
 
 .rd-settings-input:focus-visible,
