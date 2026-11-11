@@ -132,6 +132,8 @@ export default createStore({
         subreddits: names.length > 0 ? names : [...DEFAULT_SUBREDDITS],
         sort: SORTS.some(item => item.value === sort) ? sort : DEFAULT_SORT,
       };
+      // the cache belongs to the previous settings, the next update has to fetch again.
+      state.reddit.updated_at = 0;
     },
     setPlatformData(state, { platform, data }) {
       state[platform].data = data;
