@@ -12,6 +12,7 @@
     </template>
     <template #card-body>
       <loading :color="loadingColorBasedOnMode" v-if="loading"></loading>
+      <div v-else-if="failed" class="load-error">Could not load {{ options.title }}. Try refreshing.</div>
       <slot v-else name="card-body">
         <component :is="options.bodyComponentName"></component>
       </slot>
@@ -44,6 +45,7 @@ export default {
   data() {
     return {
       loading: true,
+      failed: false,
     };
   },
   async created() {
@@ -52,12 +54,18 @@ export default {
   methods: {
     async updateData(forced = true) {
       this.loading = true;
-      await this.updatePlatformData({
-        platform: this.platform,
-        url: this.options.dataUrl instanceof Function ? this.options.dataUrl() : this.options.dataUrl,
-        forced,
-      });
-      this.loading = false;
+      this.failed = false;
+      try {
+        await this.updatePlatformData({
+          platform: this.platform,
+          url: this.options.dataUrl instanceof Function ? this.options.dataUrl() : this.options.dataUrl,
+          forced,
+        });
+      } catch (error) {
+        this.failed = true;
+      } finally {
+        this.loading = false;
+      }
     },
 
     ...mapActions(['updatePlatformData']),
@@ -98,3 +106,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.load-error {
+  padding: 16px 0;
+  text-align: left;
+  color: rgb(130, 130, 130);
+}
+</style>

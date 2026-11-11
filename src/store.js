@@ -146,6 +146,10 @@ export default createStore({
 
       if (!lastUpdate || now - lastUpdate > threshold || forced) {
         const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Failed to load ${platform}: ${response.status}`);
+        }
+
         let data = await response.json();
         if ('responseDataKey' in platformConfig) {
           data = data[platformConfig.responseDataKey];
