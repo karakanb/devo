@@ -70,3 +70,50 @@ export const toItems = listing => {
       domain: data.domain,
     }));
 };
+
+export const IMPORT_LIMIT = 100;
+const SUBSCRIPTIONS_PAGE_SIZE = 100;
+const SUBSCRIPTIONS_MAX_PAGES = 10;
+
+/**
+ * Loads the subreddits the user is subscribed to, using their reddit.com session in this browser.
+ * User profiles the account follows are skipped, they are not subreddits.
+ *
+ * @param {Function} fetchFn
+ * @returns {Promise<String[]>} - subreddit names, sorted alphabetically.
+ */
+export const fetchSubscribedSubreddits = async (fetchFn = fetch) => {
+  const names = [];
+  let after = '';
+
+  for (let page = 0; page < SUBSCRIPTIONS_MAX_PAGES; page += 1) {
+    const cursor = after ? `&after=${encodeURIComponent(after)}` : '';
+    const url = `${BASE_URL}/subreddits/mine/subscriber.json?limit=${SUBSCRIPTIONS_PAGE_SIZE}&raw_json=1${cursor}`;
+    // The pages have to be requested one after another, each one gives the cursor for the next.
+    // eslint-disable-next-line no-await-in-loop
+    const response = await fetchFn(url, { credentials: 'include' });
+    if (!response.ok) {
+      throw new Error(`Failed to load subscriptions: ${response.status}`);
+    }
+
+    // eslint-disable-next-line no-await-in-loop
+    const listing = await response.json();
+    if (!listing || !listing.data || !Array.isArray(listing.data.children)) {
+      throw new Error('Unexpected subscriptions response');
+    }
+
+    listing.data.children.forEach(child => {
+      const name = child && child.data ? child.data.display_name : '';
+      if (name && !name.startsWith('u_')) {
+        names.push(name);
+      }
+    });
+
+    after = listing.data.after;
+    if (!after) {
+      break;
+    }
+  }
+
+  return parseSubreddits(names.join(' ')).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+};

@@ -11,6 +11,10 @@
       spellcheck="false"
     />
     <div class="rd-settings-hint">Separate names with commas or spaces.</div>
+    <button type="button" class="rd-settings-button rd-settings-import round-borders" :disabled="importing" @click="importSubscriptions">
+      {{ importing ? 'Importing…' : 'Import from my account' }}
+    </button>
+    <div v-if="importMessage" class="rd-settings-hint rd-settings-import-message" role="status">{{ importMessage }}</div>
 
     <label class="rd-settings-label rd-settings-sort-label" :for="sortId">Sort by</label>
     <select :id="sortId" class="rd-settings-input rd-settings-sort round-borders" v-model="sort">
@@ -28,7 +32,9 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { parseSubreddits, SORTS } from '@/components/Reddit/reddit';
+import {
+  parseSubreddits, fetchSubscribedSubreddits, SORTS, IMPORT_LIMIT,
+} from '@/components/Reddit/reddit';
 
 let instanceCount = 0;
 
@@ -45,6 +51,8 @@ export default {
       sort: this.$store.state.reddit.settings.sort,
       sorts: SORTS,
       error: '',
+      importing: false,
+      importMessage: '',
     };
   },
   methods: {
@@ -57,6 +65,27 @@ export default {
 
       this.setRedditSettings({ subreddits, sort: this.sort });
       this.$emit('saved');
+    },
+
+    async importSubscriptions() {
+      this.importing = true;
+      this.importMessage = '';
+      try {
+        const subreddits = await fetchSubscribedSubreddits();
+        if (subreddits.length === 0) {
+          this.importMessage = 'Your account has no subreddit subscriptions.';
+        } else {
+          this.subredditsText = subreddits.slice(0, IMPORT_LIMIT).join(', ');
+          this.error = '';
+          this.importMessage = subreddits.length > IMPORT_LIMIT
+            ? `Imported the first ${IMPORT_LIMIT} of ${subreddits.length} subreddits. Press Save to use them.`
+            : `Imported ${subreddits.length} subreddits. Press Save to use them.`;
+        }
+      } catch (error) {
+        this.importMessage = 'Could not read your subscriptions. Sign in to reddit.com in this browser and try again.';
+      } finally {
+        this.importing = false;
+      }
     },
 
     ...mapActions(['setRedditSettings']),
@@ -130,6 +159,15 @@ export default {
 
 .rd-settings-button:hover {
   background: #f5f7fa;
+}
+
+.rd-settings-button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.rd-settings-import {
+  margin-top: 10px;
 }
 
 .rd-settings-button.primary,

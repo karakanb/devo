@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 
-import { parseSubreddits, buildUrl, toItems } from '@/components/Reddit/reddit';
+import {
+  parseSubreddits, buildUrl, toItems, fetchSubscribedSubreddits,
+} from '@/components/Reddit/reddit';
 
 describe('reddit.js', () => {
   it('parses subreddit names from free text', () => {
@@ -66,6 +68,31 @@ describe('reddit.js', () => {
       is_self: false,
       domain: 'pijul.org',
     }]);
+  });
+
+  it('loads every page of the subscribed subreddits', async () => {
+    const pages = {
+      '': { data: { after: 't5_next', children: [{ data: { display_name: 'vuejs' } }, { data: { display_name: 'u_someone' } }] } },
+      t5_next: { data: { after: null, children: [{ data: { display_name: 'Rust' } }] } },
+    };
+    const requests = [];
+    const fetchFn = async (url, options) => {
+      requests.push({ url, options });
+      const after = new URL(url).searchParams.get('after') || '';
+      return { ok: true, json: async () => pages[after] };
+    };
+
+    expect(await fetchSubscribedSubreddits(fetchFn)).to.deep.equal(['Rust', 'vuejs']);
+    expect(requests).to.have.lengthOf(2);
+    expect(requests[0].url).to.equal('https://www.reddit.com/subreddits/mine/subscriber.json?limit=100&raw_json=1');
+    expect(requests[0].options).to.deep.equal({ credentials: 'include' });
+  });
+
+  it('fails when the subscriptions can not be read', async () => {
+    const outcome = fetchFn => fetchSubscribedSubreddits(fetchFn).then(() => 'resolved', () => 'rejected');
+
+    expect(await outcome(async () => ({ ok: false, status: 403 }))).to.equal('rejected');
+    expect(await outcome(async () => ({ ok: true, json: async () => ({ error: 403 }) }))).to.equal('rejected');
   });
 
   it('returns no items for an unexpected response', () => {
