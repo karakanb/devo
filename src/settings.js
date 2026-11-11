@@ -4,6 +4,7 @@ import ThreeColumns from './layouts/ThreeColumns.vue';
 import TwoLeftOneRight from './layouts/TwoLeftOneRight.vue';
 import OneLeftTwoRight from './layouts/OneLeftTwoRight.vue';
 import TwoRowsTwoColumns from './layouts/TwoRowsTwoColumns.vue';
+import { buildUrl, toItems, BASE_URL } from './components/Reddit/reddit';
 
 const DEFAULT_NIGHTMODE_BACKGROUND = '31363e';
 
@@ -130,6 +131,27 @@ export default {
         titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
         titleFontColor: '8eb5e3',
         loadingColor: '8eb5e3',
+      },
+    },
+    reddit: {
+      dataUrl: state => buildUrl(state.reddit.settings),
+      transform: toItems,
+      // reddit rejects anonymous requests, the listing is loaded with the user's reddit.com session.
+      fetchOptions: { credentials: 'include' },
+      title: 'Reddit',
+      icon: ['fab', 'reddit-alien'],
+      titleFontColor: 'ffffff',
+      titleBackgroundColor: 'ff4500',
+      loadingColor: 'ff4500',
+
+      externalLink: BASE_URL,
+      bodyComponentName: 'RedditBody',
+      settingsComponentName: 'RedditSettings',
+
+      nightMode: {
+        titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
+        titleFontColor: 'ff8b60',
+        loadingColor: 'ff8b60',
       },
     },
   },

@@ -1,5 +1,8 @@
 import { createStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
+import {
+  parseSubreddits, normalizeSort, normalizeSubredditPlacement, DEFAULT_SUBREDDITS, DEFAULT_SORT, DEFAULT_SUBREDDIT_PLACEMENT,
+} from './components/Reddit/reddit';
 
 const GITHUB = 'github';
 const HACKERNEWS = 'hackernews';
@@ -101,6 +104,16 @@ export default createStore({
       cache: 5 * 60000,
       data: [],
     },
+    reddit: {
+      updated_at: 0,
+      cache: 5 * 60000,
+      data: [],
+      settings: {
+        subreddits: [...DEFAULT_SUBREDDITS],
+        sort: DEFAULT_SORT,
+        subredditPlacement: DEFAULT_SUBREDDIT_PLACEMENT,
+      },
+    },
   },
   mutations: {
     set24HourFormat(state, is24HourFormat) {
@@ -115,6 +128,21 @@ export default createStore({
     },
     setLayout(state, layout) {
       state.settings.layout = layout;
+    },
+    setRedditSettings(state, { subreddits, sort, subredditPlacement }) {
+      const names = parseSubreddits((subreddits || []).join(' '));
+      const previous = state.reddit.settings;
+      const next = {
+        subreddits: names.length > 0 ? names : [...DEFAULT_SUBREDDITS],
+        sort: normalizeSort(sort),
+        subredditPlacement: normalizeSubredditPlacement(subredditPlacement),
+      };
+      state.reddit.settings = next;
+      // the cache belongs to the previous listing, the next update has to fetch again.
+      // The subreddit placement only changes how posts are shown, so it keeps the cache.
+      if (next.sort !== previous.sort || next.subreddits.join('+') !== previous.subreddits.join('+')) {
+        state.reddit.updated_at = 0;
+      }
     },
     setPlatformData(state, { platform, data }) {
       state[platform].data = data;
@@ -138,17 +166,31 @@ export default createStore({
       context.commit('setLayout', layout);
     },
 
-    async updatePlatformData({ state, commit }, { platform, forced, url }) {
+    setRedditSettings(context, redditSettings) {
+      context.commit('setRedditSettings', redditSettings);
+    },
+
+    async updatePlatformData({ state, commit }, {
+      platform, forced, url, transform, fetchOptions,
+    }) {
       const platformConfig = state[platform];
       const threshold = platformConfig.cache;
       const lastUpdate = platformConfig.updated_at;
       const now = new Date();
 
       if (!lastUpdate || now - lastUpdate > threshold || forced) {
-        const response = await fetch(url);
+        const response = await fetch(url, fetchOptions);
+        if (!response.ok) {
+          throw new Error(`Failed to load ${platform}: ${response.status}`);
+        }
+
         let data = await response.json();
         if ('responseDataKey' in platformConfig) {
           data = data[platformConfig.responseDataKey];
+        }
+
+        if (typeof transform === 'function') {
+          data = transform(data);
         }
         commit('setPlatformData', { platform, data });
       }

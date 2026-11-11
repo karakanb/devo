@@ -9,6 +9,9 @@
             <font-awesome-icon :icon="['fas', 'external-link-alt']"></font-awesome-icon>
           </a>
         </div>
+        <div v-if="settingsOnClick" class="title-icon settings-icon" :style="iconStyle" title="Settings" @click="settingsOnClick">
+          <font-awesome-icon :icon="['fas', 'cog']"></font-awesome-icon>
+        </div>
         <div class="title-icon refresh-icon" :style="iconStyle" @click="iconOnClick">
           <font-awesome-icon class="fa-refresh-icon" :icon="['fas', 'sync-alt']"> </font-awesome-icon>
         </div>
@@ -46,6 +49,10 @@ export default {
     externalLink: {
       type: String,
       required: true,
+    },
+    settingsOnClick: {
+      type: Function,
+      default: null,
     },
   },
 
@@ -135,6 +142,7 @@ svg,
 }
 
 .refresh-icon:hover,
+.settings-icon:hover,
 .external-icon:hover {
   cursor: pointer;
   color: #ffffff !important;

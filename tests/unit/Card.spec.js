@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faSyncAlt, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSyncAlt, faExternalLinkAlt, faCog } from '@fortawesome/free-solid-svg-icons';
 
 import Card from '@/components/Card.vue';
 
-library.add(faGithub, faSyncAlt, faExternalLinkAlt);
+library.add(faGithub, faSyncAlt, faExternalLinkAlt, faCog);
 
 const objectProps = {
   title: 'test title',
@@ -56,5 +56,17 @@ describe('Card.vue', () => {
     const refreshIcon = wrapper.find('.fa-refresh-icon');
     refreshIcon.trigger('click');
     expect(objectProps.iconOnClick).toHaveBeenCalledOnce();
+  });
+
+  it('settings icon is rendered only when there is a settings action', () => {
+    const global = { components: { 'font-awesome-icon': FontAwesomeIcon } };
+    const settingsOnClick = vi.fn();
+
+    const withoutSettings = mount(Card, { props: objectProps, global });
+    expect(withoutSettings.find('.settings-icon').exists()).toBe(false);
+
+    const withSettings = mount(Card, { props: { ...objectProps, settingsOnClick }, global });
+    withSettings.find('.settings-icon').trigger('click');
+    expect(settingsOnClick).toHaveBeenCalledOnce();
   });
 });
