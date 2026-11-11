@@ -6,12 +6,19 @@
     :externalLink="options.externalLink"
     :title="options.title"
     :iconOnClick="updateData"
+    :settingsOnClick="hasSettings ? toggleSettings : null"
   >
     <template #card-title>
       <custom-select :cardIndex="cardIndex"></custom-select>
     </template>
     <template #card-body>
-      <loading :color="loadingColorBasedOnMode" v-if="loading"></loading>
+      <component
+        v-if="hasSettings && settingsVisible"
+        :is="options.settingsComponentName"
+        @close="closeSettings"
+        @saved="onSettingsSaved"
+      ></component>
+      <loading :color="loadingColorBasedOnMode" v-else-if="loading"></loading>
       <div v-else-if="failed" class="load-error">Could not load {{ options.title }}. Try refreshing.</div>
       <slot v-else name="card-body">
         <component :is="options.bodyComponentName"></component>
@@ -46,6 +53,7 @@ export default {
     return {
       loading: true,
       failed: false,
+      settingsVisible: false,
     };
   },
   async created() {
@@ -67,6 +75,19 @@ export default {
       } finally {
         this.loading = false;
       }
+    },
+
+    toggleSettings() {
+      this.settingsVisible = !this.settingsVisible;
+    },
+
+    closeSettings() {
+      this.settingsVisible = false;
+    },
+
+    onSettingsSaved() {
+      this.settingsVisible = false;
+      this.updateData(true);
     },
 
     ...mapActions(['updatePlatformData']),
@@ -93,6 +114,10 @@ export default {
       return settings.platforms[this.platform];
     },
 
+    hasSettings() {
+      return Boolean(this.options.settingsComponentName);
+    },
+
     ...mapState({
       isNightMode: state => state.settings.isNightMode,
     }),
@@ -102,6 +127,7 @@ export default {
 
   watch: {
     platform() {
+      this.settingsVisible = false;
       this.updateData(false);
     },
   },
