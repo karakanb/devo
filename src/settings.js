@@ -134,7 +134,7 @@ export default {
       },
     },
     reddit: {
-      dataUrl: () => buildUrl({ subreddits: ['programming'], sort: 'hot' }),
+      dataUrl: state => buildUrl(state.reddit.settings),
       transform: toItems,
       title: 'Reddit',
       icon: ['fab', 'reddit-alien'],

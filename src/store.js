@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
+import { parseSubreddits, DEFAULT_SUBREDDITS, DEFAULT_SORT, SORTS } from './components/Reddit/reddit';
 
 const GITHUB = 'github';
 const HACKERNEWS = 'hackernews';
@@ -105,6 +106,10 @@ export default createStore({
       updated_at: 0,
       cache: 5 * 60000,
       data: [],
+      settings: {
+        subreddits: [...DEFAULT_SUBREDDITS],
+        sort: DEFAULT_SORT,
+      },
     },
   },
   mutations: {
@@ -120,6 +125,13 @@ export default createStore({
     },
     setLayout(state, layout) {
       state.settings.layout = layout;
+    },
+    setRedditSettings(state, { subreddits, sort }) {
+      const names = parseSubreddits((subreddits || []).join(' '));
+      state.reddit.settings = {
+        subreddits: names.length > 0 ? names : [...DEFAULT_SUBREDDITS],
+        sort: SORTS.some(item => item.value === sort) ? sort : DEFAULT_SORT,
+      };
     },
     setPlatformData(state, { platform, data }) {
       state[platform].data = data;
@@ -141,6 +153,10 @@ export default createStore({
 
     setLayout(context, layout) {
       context.commit('setLayout', layout);
+    },
+
+    setRedditSettings(context, redditSettings) {
+      context.commit('setRedditSettings', redditSettings);
     },
 
     async updatePlatformData({ state, commit }, {
