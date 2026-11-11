@@ -20,7 +20,8 @@
     "service_worker": "background.js"
   },
   "host_permissions": [
-    "https://lobste.rs/*"
+    "https://lobste.rs/*",
+    "https://www.reddit.com/*"
   ],
   "permissions": [
     "storage"

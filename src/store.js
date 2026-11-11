@@ -101,6 +101,11 @@ export default createStore({
       cache: 5 * 60000,
       data: [],
     },
+    reddit: {
+      updated_at: 0,
+      cache: 5 * 60000,
+      data: [],
+    },
   },
   mutations: {
     set24HourFormat(state, is24HourFormat) {
