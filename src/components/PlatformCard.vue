@@ -34,11 +34,13 @@ import Card from '@/components/Card.vue';
 import Loading from '@/components/Loading.vue';
 import CustomSelect from '@/components/PlatformSelect.vue';
 import * as BodyComponents from '@/components/bodies';
+import * as SettingsComponents from '@/components/settingsPanels';
 
 export default {
   name: 'PlatformCard',
   components: {
     ...BodyComponents,
+    ...SettingsComponents,
     Loading,
     Card,
     CustomSelect,

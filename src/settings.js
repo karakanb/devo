@@ -144,6 +144,7 @@ export default {
 
       externalLink: BASE_URL,
       bodyComponentName: 'RedditBody',
+      settingsComponentName: 'RedditSettings',
 
       nightMode: {
         titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
