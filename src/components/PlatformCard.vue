@@ -58,7 +58,8 @@ export default {
       try {
         await this.updatePlatformData({
           platform: this.platform,
-          url: this.options.dataUrl instanceof Function ? this.options.dataUrl() : this.options.dataUrl,
+          url: this.options.dataUrl instanceof Function ? this.options.dataUrl(this.$store.state) : this.options.dataUrl,
+          transform: this.options.transform,
           forced,
         });
       } catch (error) {

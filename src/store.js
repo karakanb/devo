@@ -138,7 +138,9 @@ export default createStore({
       context.commit('setLayout', layout);
     },
 
-    async updatePlatformData({ state, commit }, { platform, forced, url }) {
+    async updatePlatformData({ state, commit }, {
+      platform, forced, url, transform,
+    }) {
       const platformConfig = state[platform];
       const threshold = platformConfig.cache;
       const lastUpdate = platformConfig.updated_at;
@@ -153,6 +155,10 @@ export default createStore({
         let data = await response.json();
         if ('responseDataKey' in platformConfig) {
           data = data[platformConfig.responseDataKey];
+        }
+
+        if (typeof transform === 'function') {
+          data = transform(data);
         }
         commit('setPlatformData', { platform, data });
       }
