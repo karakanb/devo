@@ -1,6 +1,7 @@
 <template>
   <div class="rd-list">
     <row v-for="item in lines" :key="item.id" :item="item"></row>
+    <div v-if="lines.length === 0" class="rd-empty">No posts found. Check the subreddit names in the settings.</div>
   </div>
 </template>
 
@@ -22,5 +23,11 @@ export default {
 <style>
 .rd-list > :last-child {
   border: none;
+}
+
+.rd-empty {
+  padding: 16px 0;
+  text-align: left;
+  color: rgb(130, 130, 130);
 }
 </style>
