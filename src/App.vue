@@ -190,8 +190,9 @@ body {
   transition: height 0.35s ease, opacity 0.35s ease;
 }
 
+/* the top bar keeps a small gap so the cards do not touch the top edge */
 .focus-mode .top-bar {
-  height: 0;
+  height: 2vh;
   opacity: 0;
   overflow: hidden;
 }
@@ -338,7 +339,7 @@ footer a:hover {
   }
 
   .focus-mode .cards-wrapper {
-    height: 94vh;
+    height: 92vh;
   }
 }
 
