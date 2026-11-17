@@ -64,6 +64,7 @@ export default createStore({
       isNightMode: getIsNightMode(),
       cards: [GITHUB, HACKERNEWS, PRODUCTHUNT, DESIGNERNEWS],
       layout: 'OneLeftTwoRight',
+      isFocusMode: false,
     },
     github: {
       updated_at: 0,
@@ -110,6 +111,9 @@ export default createStore({
       state.settings.isNightMode = isNightMode;
       localStorage.setItem(SETTINGS_ISNIGHTMODE, isNightMode);
     },
+    setFocusMode(state, isFocusMode) {
+      state.settings.isFocusMode = isFocusMode;
+    },
     setCardPlatform(state, { index, platform }) {
       state.settings.cards[index] = platform;
     },
@@ -128,6 +132,10 @@ export default createStore({
 
     setNightMode(context, isNightMode) {
       context.commit('setNightMode', isNightMode);
+    },
+
+    setFocusMode(context, isFocusMode) {
+      context.commit('setFocusMode', isFocusMode);
     },
 
     setCardPlatform(context, payload) {

@@ -1,8 +1,8 @@
 <template>
   <div id="app" :class="{ 'night-mode': isNightMode }">
     <!-- <div class="app-card-container"> -->
-    <div class="app-card-container">
-      <div class="date-time-wrapper">
+    <div class="app-card-container" :class="{ 'focus-mode': isFocusMode }">
+      <div class="date-time-wrapper top-bar">
         <div class="col-xs date-time grey-text">
           <div class="time inline-block" @click="toggle24HourFormat">
             {{ now }}
@@ -13,19 +13,30 @@
       <div class="cards-wrapper">
         <component :is="this.layout"></component>
       </div>
-      <div class="date-time-wrapper">
+      <div class="date-time-wrapper bottom-bar">
         <footer class="col-xs grey-text light">
-          <span class="pull-left"> <span class="semi-bold">devo</span> is an <a href="https://github.com/karakanb/devo">open-source extension</a>. </span>
+          <span class="pull-left focus-hideable"> <span class="semi-bold">devo</span> is an <a href="https://github.com/karakanb/devo">open-source extension</a>. </span>
 
           <div class="pull-right day-night-toggle flex items-center">
-            <div style="margin-right: 12px">
-              <layout-select></layout-select>
+            <div class="flex items-center focus-hideable">
+              <div style="margin-right: 12px">
+                <layout-select></layout-select>
+              </div>
+              <div class="flex items-center">
+                <font-awesome-icon :icon="['fas', 'sun']"></font-awesome-icon>
+                <toggle-switch v-model="nightModeToggle" style="margin-right: 8px"></toggle-switch>
+                <font-awesome-icon :icon="['fas', 'moon']" style="margin: 0"></font-awesome-icon>
+              </div>
             </div>
-            <div class="flex items-center">
-              <font-awesome-icon :icon="['fas', 'sun']"></font-awesome-icon>
-              <toggle-switch v-model="nightModeToggle" style="margin-right: 8px"></toggle-switch>
-              <font-awesome-icon :icon="['fas', 'moon']" style="margin: 0"></font-awesome-icon>
-            </div>
+            <a class="focus-devo semi-bold" href="https://github.com/karakanb/devo" :tabindex="isFocusMode ? 0 : -1">devo</a>
+            <button
+              type="button"
+              class="focus-toggle"
+              :title="isFocusMode ? 'Show extras' : 'Hide extras'"
+              @click="toggleFocusMode"
+            >
+              <font-awesome-icon :icon="['fas', isFocusMode ? 'eye-slash' : 'eye']"></font-awesome-icon>
+            </button>
           </div>
         </footer>
       </div>
@@ -86,6 +97,7 @@ export default {
       isNightMode: (state) => state.settings.isNightMode,
       is24HourFormat: (state) => state.settings.is24HourFormat,
       layout: (state) => state.settings.layout,
+      isFocusMode: (state) => state.settings.isFocusMode,
     }),
     nightModeToggle: {
       get() {
@@ -109,7 +121,10 @@ export default {
     toggle24HourFormat() {
       this.set24HourFormat(!this.is24HourFormat);
     },
-    ...mapActions(['setNightMode', 'set24HourFormat']),
+    toggleFocusMode() {
+      this.setFocusMode(!this.isFocusMode);
+    },
+    ...mapActions(['setNightMode', 'set24HourFormat', 'setFocusMode']),
   },
 };
 </script>
@@ -160,6 +175,79 @@ body {
   flex-basis: 83.33333333%;
   max-width: 83.33333333%;
   margin-left: 8.33333333%;
+  transition: flex-basis 0.35s ease, max-width 0.35s ease, margin-left 0.35s ease;
+}
+
+.app-card-container.focus-mode {
+  flex-basis: 97%;
+  max-width: 97%;
+  margin-left: 1.5%;
+}
+
+/* Focus mode: hide the clock, the footer caption and the controls, give the cards the room. */
+.top-bar,
+.bottom-bar {
+  transition: height 0.35s ease, opacity 0.35s ease;
+}
+
+/* the top bar keeps a small gap so the cards do not touch the top edge */
+.focus-mode .top-bar {
+  height: 2vh;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.focus-mode .bottom-bar {
+  height: 6vh;
+}
+
+.focus-hideable {
+  transition: opacity 0.35s ease, visibility 0.35s;
+}
+
+.focus-mode .focus-hideable {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.focus-devo {
+  margin: 0 8px 0 12px;
+  opacity: 0;
+  transform: translateX(8px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.focus-mode .focus-devo {
+  opacity: 0.35;
+  transform: none;
+  pointer-events: auto;
+}
+
+.focus-mode .focus-devo:hover {
+  opacity: 0.7;
+}
+
+.focus-toggle {
+  background: none;
+  border: none;
+  padding: 4px;
+  margin: 0;
+  color: inherit;
+  font-size: larger;
+  line-height: 0;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.focus-toggle:hover {
+  opacity: 1;
+}
+
+.focus-toggle svg {
+  margin: 0;
 }
 
 .flex {
@@ -247,6 +335,11 @@ footer a:hover {
 
   .cards-wrapper {
     height: 80vh;
+    transition: height 0.35s ease;
+  }
+
+  .focus-mode .cards-wrapper {
+    height: 92vh;
   }
 }
 
