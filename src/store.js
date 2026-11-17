@@ -3,6 +3,7 @@ import createPersistedState from 'vuex-persistedstate';
 import {
   parseSubreddits, normalizeSort, normalizeSubredditPlacement, DEFAULT_SUBREDDITS, DEFAULT_SORT, DEFAULT_SUBREDDIT_PLACEMENT,
 } from './components/Reddit/reddit';
+import { DEFAULT_SETTINGS as HUGGINGFACE_DEFAULT_SETTINGS, buildUrl as buildHuggingFaceUrl, normalizeSettings } from './components/HuggingFace/huggingface';
 
 const GITHUB = 'github';
 const HACKERNEWS = 'hackernews';
@@ -114,6 +115,12 @@ export default createStore({
         subredditPlacement: DEFAULT_SUBREDDIT_PLACEMENT,
       },
     },
+    huggingface: {
+      updated_at: 0,
+      cache: 15 * 60000,
+      data: [],
+      settings: { ...HUGGINGFACE_DEFAULT_SETTINGS },
+    },
   },
   mutations: {
     set24HourFormat(state, is24HourFormat) {
@@ -144,6 +151,15 @@ export default createStore({
         state.reddit.updated_at = 0;
       }
     },
+    setHuggingFaceSettings(state, settings) {
+      const previousUrl = buildHuggingFaceUrl(state.huggingface.settings);
+      state.huggingface.settings = normalizeSettings(settings);
+      // the cache belongs to the previous listing, the next update has to fetch again.
+      if (buildHuggingFaceUrl(state.huggingface.settings) !== previousUrl) {
+        state.huggingface.updated_at = 0;
+        state.huggingface.data = [];
+      }
+    },
     setPlatformData(state, { platform, data }) {
       state[platform].data = data;
       state[platform].updated_at = Date.now();
@@ -170,6 +186,10 @@ export default createStore({
       context.commit('setRedditSettings', redditSettings);
     },
 
+    setHuggingFaceSettings(context, settings) {
+      context.commit('setHuggingFaceSettings', settings);
+    },
+
     async updatePlatformData({ state, commit }, {
       platform, forced, url, transform, fetchOptions,
     }) {
@@ -190,7 +210,7 @@ export default createStore({
         }
 
         if (typeof transform === 'function') {
-          data = transform(data);
+          data = transform(data, state);
         }
         commit('setPlatformData', { platform, data });
       }
