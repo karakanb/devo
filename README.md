@@ -38,6 +38,8 @@ Devo currently supports:
 - [DEV Community](https://dev.to/)
 - [Lobsters](https://lobste.rs/)
 - [TabNews](https://www.tabnews.com.br/)
+- [Reddit](https://www.reddit.com/), with your own subreddits and sort order. Use the settings button in the card title to type the subreddits in, or to import the ones you are subscribed to. Reddit blocks anonymous requests, so the card needs you to be signed in to reddit.com in the same browser.
+- [Hugging Face](https://huggingface.co/), trending models, spaces, datasets, daily papers or collections. Use the settings button in the card title to pick the section, the sort order and filters such as a search term, an author or a task.
 
 ### Adding a new platform
 Adding a new platform is super easy. All you need to do is:

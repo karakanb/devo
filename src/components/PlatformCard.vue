@@ -6,12 +6,20 @@
     :externalLink="options.externalLink"
     :title="options.title"
     :iconOnClick="updateData"
+    :settingsOnClick="hasSettings ? toggleSettings : null"
   >
     <template #card-title>
       <custom-select :cardIndex="cardIndex"></custom-select>
     </template>
     <template #card-body>
-      <loading :color="loadingColorBasedOnMode" v-if="loading"></loading>
+      <component
+        v-if="hasSettings && settingsVisible"
+        :is="options.settingsComponentName"
+        @close="closeSettings"
+        @saved="onSettingsSaved"
+      ></component>
+      <loading :color="loadingColorBasedOnMode" v-else-if="loading"></loading>
+      <div v-else-if="failed" class="load-error">Could not load {{ options.title }}. Try refreshing.</div>
       <slot v-else name="card-body">
         <component :is="options.bodyComponentName"></component>
       </slot>
@@ -26,11 +34,13 @@ import Card from '@/components/Card.vue';
 import Loading from '@/components/Loading.vue';
 import CustomSelect from '@/components/PlatformSelect.vue';
 import * as BodyComponents from '@/components/bodies';
+import * as SettingsComponents from '@/components/settingsPanels';
 
 export default {
   name: 'PlatformCard',
   components: {
     ...BodyComponents,
+    ...SettingsComponents,
     Loading,
     Card,
     CustomSelect,
@@ -44,6 +54,8 @@ export default {
   data() {
     return {
       loading: true,
+      failed: false,
+      settingsVisible: false,
     };
   },
   async created() {
@@ -52,12 +64,33 @@ export default {
   methods: {
     async updateData(forced = true) {
       this.loading = true;
-      await this.updatePlatformData({
-        platform: this.platform,
-        url: this.options.dataUrl instanceof Function ? this.options.dataUrl() : this.options.dataUrl,
-        forced,
-      });
-      this.loading = false;
+      this.failed = false;
+      try {
+        await this.updatePlatformData({
+          platform: this.platform,
+          url: this.options.dataUrl instanceof Function ? this.options.dataUrl(this.$store.state) : this.options.dataUrl,
+          transform: this.options.transform,
+          fetchOptions: this.options.fetchOptions,
+          forced,
+        });
+      } catch (error) {
+        this.failed = true;
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    toggleSettings() {
+      this.settingsVisible = !this.settingsVisible;
+    },
+
+    closeSettings() {
+      this.settingsVisible = false;
+    },
+
+    onSettingsSaved() {
+      this.settingsVisible = false;
+      this.updateData(true);
     },
 
     ...mapActions(['updatePlatformData']),
@@ -84,6 +117,10 @@ export default {
       return settings.platforms[this.platform];
     },
 
+    hasSettings() {
+      return Boolean(this.options.settingsComponentName);
+    },
+
     ...mapState({
       isNightMode: state => state.settings.isNightMode,
     }),
@@ -93,8 +130,17 @@ export default {
 
   watch: {
     platform() {
+      this.settingsVisible = false;
       this.updateData(false);
     },
   },
 };
 </script>
+
+<style scoped>
+.load-error {
+  padding: 16px 0;
+  text-align: left;
+  color: rgb(130, 130, 130);
+}
+</style>

@@ -19,3 +19,5 @@ export { default as DesignerNewsBody } from './DesignerNews/Body.vue';
 export { default as DevtoBody } from './Devto/Body.vue';
 export { default as LobstersBody } from './Lobsters/Body.vue';
 export { default as TabNewsBody } from './TabNews/Body.vue';
+export { default as RedditBody } from './Reddit/Body.vue';
+export { default as HuggingFaceBody } from './HuggingFace/Body.vue';
