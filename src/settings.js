@@ -5,6 +5,7 @@ import TwoLeftOneRight from './layouts/TwoLeftOneRight.vue';
 import OneLeftTwoRight from './layouts/OneLeftTwoRight.vue';
 import TwoRowsTwoColumns from './layouts/TwoRowsTwoColumns.vue';
 import { buildUrl, toItems, BASE_URL } from './components/Reddit/reddit';
+import * as huggingface from './components/HuggingFace/huggingface';
 
 const DEFAULT_NIGHTMODE_BACKGROUND = '31363e';
 
@@ -152,6 +153,25 @@ export default {
         titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
         titleFontColor: 'ff8b60',
         loadingColor: 'ff8b60',
+      },
+    },
+    huggingface: {
+      dataUrl: state => huggingface.buildUrl(state.huggingface.settings),
+      transform: (data, state) => huggingface.toItems(data, state.huggingface.settings.section),
+      title: 'Hugging Face',
+      icon: ['fas', 'face-smile'],
+      titleFontColor: '1f2328',
+      titleBackgroundColor: 'ffd21e',
+      loadingColor: 'ff9d00',
+
+      externalLink: huggingface.BASE_URL,
+      bodyComponentName: 'HuggingFaceBody',
+      settingsComponentName: 'HuggingFaceSettings',
+
+      nightMode: {
+        titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
+        titleFontColor: 'ffd21e',
+        loadingColor: 'ffd21e',
       },
     },
   },
