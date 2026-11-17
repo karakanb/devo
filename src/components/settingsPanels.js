@@ -8,3 +8,4 @@
  * The panel emits `saved` once the settings are stored, which reloads the platform data, or `close` to be dismissed.
  */
 export { default as RedditSettings } from './Reddit/Settings.vue';
+export { default as HuggingFaceSettings } from './HuggingFace/Settings.vue';
