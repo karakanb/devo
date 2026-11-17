@@ -38,6 +38,7 @@ Devo currently supports:
 - [DEV Community](https://dev.to/)
 - [Lobsters](https://lobste.rs/)
 - [TabNews](https://www.tabnews.com.br/)
+- [YC Launches](https://www.ycombinator.com/launches), new launches from Y Combinator startups.
 
 ### Adding a new platform
 Adding a new platform is super easy. All you need to do is:

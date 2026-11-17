@@ -132,6 +132,23 @@ export default {
         loadingColor: '8eb5e3',
       },
     },
+    yclaunches: {
+      dataUrl: 'https://www.ycombinator.com/launches.json',
+      title: 'YC Launches',
+      icon: ['fab', 'y-combinator'],
+      titleFontColor: 'ffffff',
+      titleBackgroundColor: 'f26522',
+      loadingColor: 'f26522',
+
+      externalLink: 'https://www.ycombinator.com/launches',
+      bodyComponentName: 'YCLaunchesBody',
+
+      nightMode: {
+        titleBackgroundColor: DEFAULT_NIGHTMODE_BACKGROUND,
+        titleFontColor: 'f26522',
+        loadingColor: 'f26522',
+      },
+    },
   },
   layouts: [
     {

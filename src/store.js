@@ -101,6 +101,12 @@ export default createStore({
       cache: 5 * 60000,
       data: [],
     },
+    yclaunches: {
+      updated_at: 0,
+      cache: 15 * 60000,
+      data: [],
+      responseDataKey: 'hits',
+    },
   },
   mutations: {
     set24HourFormat(state, is24HourFormat) {
