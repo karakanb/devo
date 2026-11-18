@@ -69,6 +69,15 @@ export default {
       this.nowTime = new Date();
     }, 1000);
   },
+  watch: {
+    // keep the page background (first painted by public/theme.js) in step with the theme toggle
+    isNightMode: {
+      immediate: true,
+      handler(isNight) {
+        document.documentElement.style.backgroundColor = isNight ? '#25292f' : '#f5f7fa';
+      },
+    },
+  },
   computed: {
     today() {
       return this.formatDate(this.nowTime);
