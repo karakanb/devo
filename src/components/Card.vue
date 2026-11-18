@@ -96,6 +96,12 @@ export default {
   scrollbar-width: thin;
 }
 
+/* skip layout and paint for rows scrolled out of view; they still exist and stay searchable */
+.card-body :is(.gh-item, .hn-item, .ph-item, .dn-item, .devto-item, .lr-item, .tn-item) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 80px;
+}
+
 .night-mode .card-body {
   background-color: #31363e;
   color: #c5c8ca;
