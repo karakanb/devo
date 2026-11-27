@@ -21,10 +21,20 @@
             <div style="margin-right: 12px">
               <layout-select></layout-select>
             </div>
-            <div class="flex items-center">
-              <font-awesome-icon :icon="['fas', 'sun']"></font-awesome-icon>
-              <toggle-switch v-model="nightModeToggle" style="margin-right: 8px"></toggle-switch>
-              <font-awesome-icon :icon="['fas', 'moon']" style="margin: 0"></font-awesome-icon>
+            <div class="theme-select flex items-center" role="radiogroup" aria-label="Theme">
+              <button
+                v-for="option in themeOptions"
+                :key="option.value"
+                type="button"
+                role="radio"
+                class="theme-option"
+                :class="{ selected: themeMode === option.value }"
+                :aria-checked="themeMode === option.value"
+                :title="option.label"
+                @click="setThemeMode(option.value)"
+              >
+                <font-awesome-icon :icon="option.icon"></font-awesome-icon>
+              </button>
             </div>
           </div>
         </footer>
@@ -36,8 +46,8 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import { THEME_SYSTEM, THEME_LIGHT, THEME_DARK } from './store';
 import Card from './components/Card.vue';
-import ToggleSwitch from './components/ToggleSwitch.vue';
 import LayoutSelect from './components/LayoutSelect.vue';
 import SingleColumn from './layouts/SingleColumn.vue';
 import TwoColumns from './layouts/TwoColumns.vue';
@@ -50,7 +60,6 @@ export default {
   name: 'app',
   components: {
     Card,
-    ToggleSwitch,
     LayoutSelect,
     SingleColumn,
     TwoColumns,
@@ -62,6 +71,11 @@ export default {
   data() {
     return {
       nowTime: new Date(),
+      themeOptions: [
+        { value: THEME_LIGHT, label: 'Light', icon: ['fas', 'sun'] },
+        { value: THEME_SYSTEM, label: 'System', icon: ['fas', 'desktop'] },
+        { value: THEME_DARK, label: 'Dark', icon: ['fas', 'moon'] },
+      ],
     };
   },
   created() {
@@ -84,17 +98,10 @@ export default {
     },
     ...mapState({
       isNightMode: (state) => state.settings.isNightMode,
+      themeMode: (state) => state.settings.themeMode,
       is24HourFormat: (state) => state.settings.is24HourFormat,
       layout: (state) => state.settings.layout,
     }),
-    nightModeToggle: {
-      get() {
-        return this.isNightMode;
-      },
-      set(value) {
-        this.setNightMode(value);
-      },
-    },
   },
   methods: {
     formatDate(date) {
@@ -109,7 +116,7 @@ export default {
     toggle24HourFormat() {
       this.set24HourFormat(!this.is24HourFormat);
     },
-    ...mapActions(['setNightMode', 'set24HourFormat']),
+    ...mapActions(['setThemeMode', 'set24HourFormat']),
   },
 };
 </script>
@@ -150,6 +157,45 @@ body {
 .day-night-toggle svg {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.theme-select {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.06);
+  padding: 2px;
+}
+
+.night-mode .theme-select {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.theme-option:hover {
+  opacity: 1;
+}
+
+.theme-option.selected {
+  opacity: 1;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.night-mode .theme-option.selected {
+  background-color: #4a515c;
 }
 
 .app-card-container {
