@@ -12,6 +12,10 @@
     </template>
     <template #card-body>
       <loading :color="loadingColorBasedOnMode" v-if="loading"></loading>
+      <div v-else-if="loadError" class="load-error grey-text">
+        Couldn't load {{ options.title }}.
+        <a href="#" @click.prevent="updateData()">Retry</a>
+      </div>
       <slot v-else name="card-body">
         <component :is="options.bodyComponentName"></component>
       </slot>
@@ -44,6 +48,7 @@ export default {
   data() {
     return {
       loading: true,
+      loadError: false,
     };
   },
   async created() {
@@ -52,12 +57,20 @@ export default {
   methods: {
     async updateData(forced = true) {
       this.loading = true;
-      await this.updatePlatformData({
-        platform: this.platform,
-        url: this.options.dataUrl instanceof Function ? this.options.dataUrl() : this.options.dataUrl,
-        forced,
-      });
-      this.loading = false;
+      this.loadError = false;
+      try {
+        await this.updatePlatformData({
+          platform: this.platform,
+          url: this.options.dataUrl instanceof Function ? this.options.dataUrl() : this.options.dataUrl,
+          forced,
+        });
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.warn(`Failed to load ${this.platform}:`, error);
+        this.loadError = true;
+      } finally {
+        this.loading = false;
+      }
     },
 
     ...mapActions(['updatePlatformData']),
@@ -98,3 +111,17 @@ export default {
   },
 };
 </script>
+
+<style>
+.load-error {
+  padding: 24px 16px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.load-error a {
+  color: inherit;
+  text-decoration: underline;
+  margin-left: 4px;
+}
+</style>
